@@ -1,0 +1,54 @@
+*** Keywords ***
+Open Intranet and Login
+	Open Browser	${urlOFIntranet}		${browser}		#remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
+	Maximize Browser Window
+	Wait Until Element Is Visible		${EnterUsername}
+	Input Text			${EnterUsername}		${username}
+	Input Text			${EnterPassword}		${password}	
+	Click Element		${LoginButton}
+	
+Logout And Close Browser
+	Click Element		${LogoutLink}
+	Close Browser
+	
+Verify Column According to Order		
+	[Arguments]			${OderButtonImage}			${letterList}		${TableCell}
+	Click Element		${OderButtonImage}
+	Wait Until Element Is Visible		${TableRows}	
+	${index}=	Set Variable	${0}	
+	: For		${page}		IN RANGE		500
+	\	Log			${index}
+	\	${index}=		Verify Ascending And Descending For All Rows		${index}		${letterList}		${TableCell}
+	\	${status}=		Run Keyword And Return Status		Wait Until Element Is Visible		${NextButtonLink}
+	\	Run Keyword If		${status}==True			Click Element		${NextButtonLink}
+	\	...		ELSE		Exit For Loop
+	\	Wait Until Element Is Visible		${TableRows}
+	\	${page}=		Evaluate		${page}+1
+
+
+Verify Ascending And Descending For All Rows	
+	[Arguments]			${index}		${letterList}		${TableCell}
+	Log			${index}
+	${TotalRows}=		Get Element Count		${TableRows}
+	: FOR		${row}		IN RANGE		1		${TotalRows}+1
+	\	${rowNumber}=		Convert To String		${row}
+	\	${TableCell}=		Replace String			${TableCell}		ROW			${rowNumber}
+	\	${CellValue}=		Get Text		${TableCell}
+	\	${CellValue}=		Convert To Lowercase		${CellValue}
+	\	@{firstCharactor}=		Split String To Characters		${CellValue}
+	\	${status}=		Run Keyword And Return Status		Should Be Equal		${firstCharactor[0]}	${letterList[${index}]}
+	\	${index}=		Increase List Index			${index}		${status}		${firstCharactor[0]}		${letterList}
+	\	${TableCell}=		Replace String			${TableCell}		${rowNumber}		ROW		count=1
+	Return From Keyword    	${index}
+	
+	
+Increase List Index	
+	[Arguments]			${index}		${status}		${firstCharactor[0]}		${letterList}
+	Run Keyword If    ${status}==True	    Return From Keyword    	${index}
+	${index} =    Set Variable    ${index + 1}
+	${status1}=		Run Keyword And Return Status		Should Be Equal		${firstCharactor[0]}	${letterList[${index}]}
+	Run Keyword If    ${status1}==True	    Return From Keyword    	${index}
+	${index} =    Set Variable    ${index + 1}
+	Should Be Equal		${firstCharactor[0]}	${letterList[${index}]}
+	Return From Keyword    	${index}
+	

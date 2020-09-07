@@ -1,0 +1,47 @@
+*** Variables ***
+
+${EnterUsername}=		css=#username
+${EnterPassword}=		css=#password
+${LoginButton}=			css=button[class*="submit"]
+${HomeButton}=			Link=Home
+${PhonebookButton}=		css=div#ul_child_0 li[class*="subMenuBtn"]:nth-child(2)
+${LogoutLink}=			Link=Logout	
+${NameDescendingButtonImage}=		css=tr th:nth-child(2) img[src*="sort_down.png"]
+${NameAscendingButtonImage}=		css=tr th:nth-child(2) img[src*="sort_top.png"]
+${RANameDescendingButtonImage}=		css=tr th:nth-child(3) img[src*="sort_down.png"]
+${RANameAscendingButtonImage}=		css=tr th:nth-child(3) img[src*="sort_top.png"]
+${DesignationDescendingButtonImage}=		css=tr th:nth-child(4) img[src*="sort_down.png"]
+${DesignationAscendingButtonImage}=		css=tr th:nth-child(4) img[src*="sort_top.png"]
+${DepartmentDescendingButtonImage}=		css=tr th:nth-child(8) img[src*="sort_down.png"]
+${DepartmentAscendingButtonImage}=		css=tr th:nth-child(8) img[src*="sort_top.png"]
+${EmailIdDescendingButtonImage}=		css=tr th:nth-child(9) img[src*="sort_down.png"]
+${EmailIdAscendingButtonImage}=		css=tr th:nth-child(9) img[src*="sort_top.png"]
+${LocatonDescendingButtonImage}=		css=tr th:nth-child(10) img[src*="sort_down.png"]
+${LocatonAscendingButtonImage}=		css=tr th:nth-child(10) img[src*="sort_top.png"]
+${SkillsDescendingButtonImage}=		css=tr th:nth-child(11) img[src*="sort_down.png"]
+${SkillsAscendingButtonImage}=		css=tr th:nth-child(11) img[src*="sort_top.png"]
+
+${TableHeaders}=		css=table[class*="table"] tr th
+${TableRows}=			css=table[class*="table"] tbody tr
+${NameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Name"]
+${RANameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Reporting"]
+${DesignationTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Designation"]
+${ExperienceTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Experience"]
+${PhoneNumberTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Phone Number"]
+${ExtNoTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Ext. No."]
+${DepartmentTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Department"]
+${EmailIdTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Email Id"]
+${LocatonTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Location"]
+${SkillsTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Skills"]
+
+
+${NextButtonLink}=		Link=Next >>
+
+${BirthdayEmployeeList}=		css=div.panel-body ul.demo1 li
+${WishingYouSection}=		css=#s5_right_column_wrap:nth-child(5)
+${BirthdayEmployeeName}=		css=ul.demo1 li:nth-child(1) tr:nth-child(1)
+
+${EyeIcon}=				css=table[class*="table"] tbody tr:nth-child(ROW) span[class*="eye"]
+
+
+ 
