@@ -19,4 +19,27 @@ Open Phonebook And Verify All Eployee Details From Eye Icon
 	: FOR		${row}		IN RANGE		1		${TotalRows}+1
 	\	${rowNumber}=		Convert To String		${row}
 	\	${EyeIcon}=		Replace String			${EyeIcon}		ROW			${rowNumber}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		ROW			${rowNumber}			
+	\	${TableCellValues}, ${columnsDict},${col},${headerName}=			Get Data From All Columns And Verify		${TableCellValues}
+	\	Wait Until Element Is Visible		${TableRows}
 	\	Click Element		${EyeIcon}
+	\	Wait Until Element Is Visible		${EmployeeDetailBox}
+	\	Element Should Contain			${EmployeeDetailBox}		${columnsDict['${headerName[${col}]}']}		
+	\	${EyeIcon}=		Replace String			${EyeIcon}		${rowNumber}		ROW	
+	\	${TableCellValues}=		Replace String			${TableCellValues}		${rowNumber}		ROW
+
+
+*** Keywords ***
+Get Data From All Columns And Verify
+	[Arguments]			${TableCellValues}
+	&{columnsDict}=		Create Dictionary
+	Log		${columnsDict}	
+	${length}=		Get Length		${headerName}	
+	: FOR		${col}		IN RANGE		${length}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		VALUE			${headerName[${col}]}
+	\	${cellValue}=		Get Text		${TableCellValues}
+	\	Set To Dictionary			${columnsDict}		${headerName[${col}]}		${cellValue}
+	\	Log				${columnsDict}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		${headerName[${col}]}		VALUE
+	Return From Keyword			${TableCellValues}		${columnsDict}		${col}		${headerName}
+	

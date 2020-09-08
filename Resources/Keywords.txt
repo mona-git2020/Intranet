@@ -1,6 +1,6 @@
 *** Keywords ***
 Open Intranet and Login
-	Open Browser	${urlOFIntranet}		${browser}		#remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
+	Open Browser	${urlOfIntranet}		${browser}		remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
 	Maximize Browser Window
 	Wait Until Element Is Visible		${EnterUsername}
 	Input Text			${EnterUsername}		${username}
@@ -34,21 +34,43 @@ Verify Ascending And Descending For All Rows
 	\	${rowNumber}=		Convert To String		${row}
 	\	${TableCell}=		Replace String			${TableCell}		ROW			${rowNumber}
 	\	${CellValue}=		Get Text		${TableCell}
-	\	${CellValue}=		Convert To Lowercase		${CellValue}
-	\	@{firstCharactor}=		Split String To Characters		${CellValue}
-	\	${status}=		Run Keyword And Return Status		Should Be Equal		${firstCharactor[0]}	${letterList[${index}]}
-	\	${index}=		Increase List Index			${index}		${status}		${firstCharactor[0]}		${letterList}
+	\	${typeValue}=		Evaluate		type(${CellValue})
+	\	Log		${typeValue}
+	\	${CellValue}=		Run Keyword If		Should Contain		${typeValue}	float		Convert To Number		${CellValue}
+	\	Log			${CellValue}
+	\	${statusString}=		Run Keyword And Return Status		Should Be String		${CellValue}   
+	\	${index}=		Run Keyword If		${statusString}==True		Verify Ascending And Descending For Strings			${CellValue}		${letterList}		${index}	
+	\	${TableCell}=	Run Keyword If		${statusString}==True		Verify Ascending And Descending For Integers		${CellValue}		${index}		${row}		${rowNumber}		${TableCell}
 	\	${TableCell}=		Replace String			${TableCell}		${rowNumber}		ROW		count=1
 	Return From Keyword    	${index}
 	
-	
-Increase List Index	
-	[Arguments]			${index}		${status}		${firstCharactor[0]}		${letterList}
-	Run Keyword If    ${status}==True	    Return From Keyword    	${index}
-	${index} =    Set Variable    ${index + 1}
-	${status1}=		Run Keyword And Return Status		Should Be Equal		${firstCharactor[0]}	${letterList[${index}]}
-	Run Keyword If    ${status1}==True	    Return From Keyword    	${index}
-	${index} =    Set Variable    ${index + 1}
-	Should Be Equal		${firstCharactor[0]}	${letterList[${index}]}
+
+Verify Ascending And Descending For Strings
+	[Arguments]			${CellValue}		${letterList}		${index}
+	${CellValue}=		Convert To Lowercase		${CellValue}
+	@{firstCharactor}=		Split String To Characters		${CellValue}
+	: FOR		${char}		IN RANGE		10		
+	\	${status}=		Run Keyword And Return Status		Should Be Equal		${firstCharactor[0]}	${letterList[${index}]}
+	\	Run Keyword If    ${status}==True	    Return From Keyword    	${index}	
+	\	${index} =    Set Variable    ${index + 1}
 	Return From Keyword    	${index}
+	
+Verify Ascending And Descending For Integers
+	[Arguments]			${CellValue}		${index}		${row}		${rowNumber}		${TableCell}
+	${previuosRowNum}=		Evaluate		${row}-1
+	${TableCell}=		Replace String			${TableCell}		${rowNumber}		ROW		count=1
+	${previuosRow}=		Replace String		${TableCell}		ROW			${previuosRowNum}
+	${previuosCellValue}=		Get Text		${TableCell}
+	${typeValue}=		Evaluate		type(${previuosCellValue})
+	Log		${typeValue}
+	${previuosCellValue}=		Run Keyword If		Should Contain		${typeValue}	float		Convert To Number		${previuosCellValue}
+	Log			${previuosCellValue}
+	${statusLength}=		Run Keyword And Return Status		Length Should Be		${previuosCellValue}		0		
+	Run Keyword If			${statusLength}==False			Should Be True		${previuosCellValue}>=${CellValue}
+	${previuosRow}=		Replace String		${TableCell}		${previuosRowNum}			ROW			count=1
+	${TableCell}=		Replace String			${TableCell}		ROW			${rowNumber}
+	[Return]		${TableCell}
+
+
+
 	

@@ -11,5 +11,22 @@ Suite Teardown	Logout And Close Browser
 *** Test Cases ***
 Check Wishing You Section With Employees Birthday
 	Wait Until Element Is Visible		${HomeButton}
+	@{List}=		Create List
 	${totalBirthdayList}=		Get Element Count		${BirthdayEmployeeList}
-	Click Element		${BirthdayEmployeeName}
+	: FOR		${numBirthday}		IN RANGE		1		${totalBirthdayList}+1
+	\	${num}=		Convert To String		${numBirthday}
+	\	${BirthdayEmployeePhoto}=		Replace String			${BirthdayEmployeePhoto}			NUM		${num}	
+	\	${date}=		Get Time		day
+	\	Wait Until Element Is Visible		${BirthdayEmployeePhoto}		timeout=10s	
+	\	${name}=		Get Text		${BirthdayEmployeePhoto}		
+	\	Append To List			${List}			${name}
+	\	Log		${List}	
+	\	${List1}=		Get WebElements		${BirthdayEmployeeName}	
+	\	Wait Until Element Is Visible		${List[0]}			timeout=10s
+	\	Click Element		Link=${name}
+	\	Click Element		${BirthdayEmployeeName}
+	\	Wait Until Element Is Visible		${EmployeeDetailBox}
+	\	Element Should Contain			${EmployeeBirthday}			${date}
+	\	Go Back
+	\	Wait Until Element Is Visible		${BirthdayEmployeePhoto}	
+	\	${BirthdayEmployeePhoto}=		Replace String			${BirthdayEmployeePhoto}			${num}		NUM		count=1		

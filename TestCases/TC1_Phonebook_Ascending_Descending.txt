@@ -48,5 +48,14 @@ Verify Skills Column According to Ascending and Descending
 	Verify Column According to Order			${SkillsAscendingButtonImage}		${AscendingLetters}			${SkillsTableCell}
 	Verify Column According to Order			${SkillsDescendingButtonImage}		${letters}					${SkillsTableCell}
 
-
+Verify Experience Column According to Ascending and Descending
+	Verify Column According to Order			${ExperienceAscendingButtonImage}		${AscendingLetters}			${ExperienceTableCell}
+	Verify Column According to Order			${ExperienceDescendingButtonImage}		${letters}					${ExperienceTableCell}
 	
+Verify PhoneNumber Column According to Ascending and Descending
+	Verify Column According to Order			${PhoneNumberAscendingButtonImage}		${AscendingLetters}			${PhoneNumberTableCell}
+	Verify Column According to Order			${PhoneNumberDescendingButtonImage}		${letters}					${PhoneNumberTableCell}
+
+Verify ExtNo Column According to Ascending and Descending
+	Verify Column According to Order			${ExtNoAscendingButtonImage}		${AscendingLetters}			${ExtNoTableCell}
+	Verify Column According to Order			${ExtNoDescendingButtonImage}		${letters}					${ExtNoTableCell}
