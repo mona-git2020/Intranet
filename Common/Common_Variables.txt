@@ -4,7 +4,10 @@ ${EnterUsername}=		css=#username
 ${EnterPassword}=		css=#password
 ${LoginButton}=			css=button[class*="submit"]
 ${HomeButton}=			Link=Home
-${PhonebookButton}=		css=div#ul_child_0 li[class*="subMenuBtn"]:nth-child(2)
+${ElPulseButton}=			css=a[href*="HR-Newsletter/"]
+${PhonebookButton}=		css=li.subMenuBtn a[href*="phonebook"]
+${AnniversaryButtonMenu}=		css=li.subMenuBtn a[href*="anniversary"]
+${BirthdayButtonMenu}=		css=li.subMenuBtn a[href*="birthday"]
 ${LogoutLink}=			Link=Logout	
 ${NameDescendingButtonImage}=		css=tr th:nth-child(2) img[src*="sort_down.png"]
 ${NameAscendingButtonImage}=		css=tr th:nth-child(2) img[src*="sort_top.png"]
@@ -51,9 +54,12 @@ ${WishingYouSection}=		css=#s5_right_column_wrap:nth-child(5)
 ${BirthdayEmployeeName}=		css=ul[class*='demo'] li:nth-child(NUM) tr:nth-child(1) td span
 ${BirthdayEmployeePhoto}=		css=ul[class*='demo'] li:nth-child(NUM) tr:nth-child(2) td:nth-child(2) span
 ${EmployeeBirthday}=			css=div.span4:nth-child(4) dl dd:nth-child(2)
-${EmployeeDetailBox}=			css=div.span4
+${EmployeeDetailBox}=			css=div#s5_component_wrap_inner
 
 ${EyeIcon}=				css=table[class*="table"] tbody tr:nth-child(ROW) span[class*="eye"]
 
-
+${SearchDateList}=		css=select[class*="input-small"]
+${SelectDateOptionSuggestions}=		css=select[class*="input-small"] option
+${SelectDateOption}=		css=select[class*="input-small"] option:nth-child(NUM)
+${AnniversaryDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Anniversary"]
  
