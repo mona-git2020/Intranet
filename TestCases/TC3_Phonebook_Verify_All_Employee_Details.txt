@@ -16,7 +16,7 @@ Open Phonebook And Verify All Eployee Details From Eye Icon
 	Click Element	${PhonebookButton}
 	Wait Until Element Is Visible		${TableRows}
 	: For		${page}		IN RANGE		500	
-	\	Verify Employee Details For all Rows		
+	\	Verify All Columns Data From Employee Details For all Rows		
 	\	${status}=		Run Keyword And Return Status		Wait Until Element Is Visible		${NextButtonLink}
 	\	Run Keyword If		${status}==True			Click Element		${NextButtonLink}
 	\	...		ELSE		Exit For Loop
@@ -25,41 +25,3 @@ Open Phonebook And Verify All Eployee Details From Eye Icon
 
 
 
-*** Keywords ***
-Verify Employee Details For all Rows
-	${TotalRows}=		Get Element Count		${TableRows}
-	: FOR		${row}		IN RANGE		1		${TotalRows}+1
-	\	${rowNumber}=		Convert To String		${row}
-	\	Get Data From All Columns And Verify		${TableCellValues}		${rowNumber}
-	\	Wait Until Element Is Visible		${TableRows}
-
-
-Get Data From All Columns And Verify
-	[Arguments]			${TableCellValues}		${rowNumber}
-	${EyeIcon}=		Replace String			${EyeIcon}		ROW			${rowNumber}
-	${TableCellValues}=		Replace String			${TableCellValues}		ROW			${rowNumber}
-	&{columnsDict}=		Create Dictionary
-	Log		${columnsDict}	
-	${length}=		Get Length		${headerName}	
-	: FOR		${col}		IN RANGE		${length}
-	\	${TableCellValues}=		Replace String			${TableCellValues}		VALUE			${headerName[${col}]}
-	\	${cellValue}=		Get Text		${TableCellValues}
-	\	Set To Dictionary			${columnsDict}		${headerName[${col}]}		${cellValue}
-	\	Log				${columnsDict}
-	\	${TableCellValues}=		Replace String			${TableCellValues}		${headerName[${col}]}		VALUE
-	Click Element		${EyeIcon}
-	Wait Until Element Is Visible		${EmployeeDetailBox}
-	: FOR		${num}		IN RANGE		${length}	
-	\	${status}=		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${columnsDict['${headerName[${num}]}']}
-	\	${splitList}=		Split String		${columnsDict['${headerName[${num}]}']}			${SPACE}
-	\	${status1}=		Run Keyword If		${status}==False		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${splitList[0]}	
-	\	${splitList1}=		Split String		${columnsDict['${headerName[${num}]}']}			.
-	\	${status2}=		Run Keyword If		${status}==False and ${status1}==False		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${splitList1[0]}
-	\	${splitList2}=		Split String		${columnsDict['${headerName[${num}]}']}			\n
-	\	${status3}=			Run Keyword If		${status}==False and ${status1}==False and ${status2}==False		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${splitList2[0]}
-	\	${splitList3}=		Split String		${columnsDict['${headerName[${num}]}']}			,
-	\	Run Keyword If		${status}==False and ${status1}==False and ${status2}==False and ${status3}==False		Element Should Contain			${EmployeeDetailBox}		${splitList3[0]}
-	Go Back
-	Wait Until Element Is Visible		${TableRows}
-	${EyeIcon}=		Replace String			${EyeIcon}		${rowNumber}		ROW	
-	${TableCellValues}=		Replace String			${TableCellValues}		${rowNumber}		ROW

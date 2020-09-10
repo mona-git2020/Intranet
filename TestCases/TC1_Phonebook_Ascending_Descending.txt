@@ -22,7 +22,7 @@ Open Phonebook And Verify All Columns According to Ascending and Descending
 Verify Name Column According to Ascending and Descending
 	Verify Column According to Order			${NameAscendingButtonImage}			${AscendingLetters}		${NameTableCell}
 	Verify Column According to Order			${NameDescendingButtonImage}		${letters}				${NameTableCell}
-	
+
 
 Verify RA Name Column According to Ascending and Descending	
 	Verify Column According to Order			${RANameAscendingButtonImage}		${AscendingLetters}		${RANameTableCell}	

@@ -9,24 +9,24 @@ Suite Teardown	Logout And Close Browser
 
 
 *** Test Cases ***
-Check Wishing You Section With Employees Birthday
+Check Wishing You Section For Employees Birthday or Anniversary
 	Wait Until Element Is Visible		${HomeButton}
 	@{List}=		Create List
 	${totalBirthdayList}=		Get Element Count		${BirthdayEmployeeList}
 	: FOR		${numBirthday}		IN RANGE		1		${totalBirthdayList}+1
 	\	${num}=		Convert To String		${numBirthday}
-	\	${BirthdayEmployeePhoto}=		Replace String			${BirthdayEmployeePhoto}			NUM		${num}	
 	\	${date}=		Get Time		day
-	\	Wait Until Element Is Visible		${BirthdayEmployeePhoto}		timeout=10s	
-	\	${name}=		Get Text		${BirthdayEmployeePhoto}		
+	\	Wait Until Element Is Visible		${BirthdayEmployeeName}		timeout=3s	
+	\	${name}=		Get Text		${BirthdayEmployeeName}		
 	\	Append To List			${List}			${name}
 	\	Log		${List}	
-	\	${List1}=		Get WebElements		${BirthdayEmployeeName}	
-	\	Wait Until Element Is Visible		${List[0]}			timeout=10s
-	\	Click Element		Link=${name}
-	\	Click Element		${BirthdayEmployeeName}
+	\	Wait Until Element Is Not Visible		Link=${name}
+	
+	: FOR		${name}		IN		@{List}
+	\	Wait Until Element Is Visible			Link=${name}			timeout=10s
+	\	Click Element			${BirthdayEmployeeName}
 	\	Wait Until Element Is Visible		${EmployeeDetailBox}
-	\	Element Should Contain			${EmployeeBirthday}			${date}
+	\	${status}=		Run Keyword And Return Status		Element Should Contain			${EmployeeBirthdayTilte}		Birthdate
+	\	Run Keyword If		${status}==True			Element Should Contain			${EmployeeBirthday}			${date}
 	\	Go Back
-	\	Wait Until Element Is Visible		${BirthdayEmployeePhoto}	
-	\	${BirthdayEmployeePhoto}=		Replace String			${BirthdayEmployeePhoto}			${num}		NUM		count=1		
+	\	Wait Until Element Is Visible		${BirthdayEmployeeName}	

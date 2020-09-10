@@ -51,8 +51,9 @@ ${NextButtonLink}=		Link=Next >>
 
 ${BirthdayEmployeeList}=		css=div.panel-body ul.demo1 li
 ${WishingYouSection}=		css=#s5_right_column_wrap:nth-child(5)
-${BirthdayEmployeeName}=		css=ul[class*='demo'] li:nth-child(NUM) tr:nth-child(1) td span
+${BirthdayEmployeeName}=		css=ul[class*='demo'] li:nth-child(1) tr:nth-child(1) td span
 ${BirthdayEmployeePhoto}=		css=ul[class*='demo'] li:nth-child(NUM) tr:nth-child(2) td:nth-child(2) span
+${EmployeeBirthdayTilte}=		css=div.span4:nth-child(4) dl dt
 ${EmployeeBirthday}=			css=div.span4:nth-child(4) dl dd:nth-child(2)
 ${EmployeeDetailBox}=			css=div#s5_component_wrap_inner
 
