@@ -6,6 +6,7 @@ ${LoginButton}=			css=button[class*="submit"]
 ${HomeButton}=			Link=Home
 ${ElPulseButton}=			css=a[href*="HR-Newsletter/"]
 ${PhonebookButton}=		css=li.subMenuBtn a[href*="phonebook"]
+${HolidayListMenu}=		css=li.subMenuBtn a[href*="holidaylist"]
 ${AnniversaryButtonMenu}=		css=li.subMenuBtn a[href*="anniversary"]
 ${BirthdayButtonMenu}=		css=li.subMenuBtn a[href*="birthday"]
 ${LogoutLink}=			Link=Logout	
@@ -45,8 +46,6 @@ ${LocatonTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data
 ${SkillsTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Skills"]
 
 ${TableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="VALUE"]
-
-
 ${NextButtonLink}=		Link=Next >>
 
 ${BirthdayEmployeeList}=		css=div.panel-body ul.demo1 li
@@ -63,4 +62,25 @@ ${SearchDateList}=		css=select[class*="input-small"]
 ${SelectDateOptionSuggestions}=		css=select[class*="input-small"] option
 ${SelectDateOption}=		css=select[class*="input-small"] option:nth-child(NUM)
 ${AnniversaryDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Anniversary"]
- 
+
+${SelectYear}=			css=#holiday_year
+${SelectBranch}=		css=#branch_id
+${SelectMonth}=			css=#month_id
+${SubmitButton}=		css=button[id*='submit']
+${TotalPagePagination}=			css=ul[class*="pagination"]>li
+${SinglePagePagination}=		css=ul[class*="pagination"]>li:nth-child(1)>a  
+${SelectYearOption}=			css=option[value="2020"]
+${SelectBranchOption}=			css=option[value="AHM"]
+${SelectMonthOption}=			css=option[value="9"]
+${BranchNameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Brabch Name"]
+${DateTableCell}=				css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Date"]
+
+
+${CongratulationsEmployeeList}=			css=ul[class='demo'] li
+${CongratulationsEmployeeName}=			css=ul[class='demo'] li:nth-child(1) tr:nth-child(1) td:nth-child(2) a
+${CongratulationsEmployeeDetail}=			css=ul[class='demo'] li:nth-child(1) tr:nth-child(1) td:nth-child(2) p
+${CongratulationsJoiningDate}=					css=div.span4:nth-child(2) dl dd:nth-child(2)
+${CongratulationsJoiningDateTilte}=			css=div.span4:nth-child(2) dl dt
+${CongratulationsCertification}=			css=a[onclick*="certification"]
+${CertifivationTable}=			css=table[class*='table'] tbody
+${CloseButton}=					css=#cboxClose
