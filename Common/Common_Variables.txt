@@ -34,17 +34,6 @@ ${SkillsAscendingButtonImage}=		css=tr th:nth-child(11) img[src*="sort_top.png"]
 
 ${TableHeaders}=		css=table[class*="table"] tr th
 ${TableRows}=			css=table[class*="table"] tbody tr
-${NameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Name"]
-${RANameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Reporting"]
-${DesignationTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Designation"]
-${ExperienceTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Experience"]
-${PhoneNumberTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Phone Number"]
-${ExtNoTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Ext. No."]
-${DepartmentTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Department"]
-${EmailIdTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Email Id"]
-${LocatonTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Location"]
-${SkillsTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Skills"]
-
 ${TableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="VALUE"]
 ${NextButtonLink}=		Link=Next >>
 
@@ -55,7 +44,6 @@ ${BirthdayEmployeePhoto}=		css=ul[class*='demo'] li:nth-child(NUM) tr:nth-child(
 ${EmployeeBirthdayTilte}=		css=div.span4:nth-child(4) dl dt
 ${EmployeeBirthday}=			css=div.span4:nth-child(4) dl dd:nth-child(2)
 ${EmployeeDetailBox}=			css=div#s5_component_wrap_inner
-
 ${EyeIcon}=				css=table[class*="table"] tbody tr:nth-child(ROW) span[class*="eye"]
 
 ${SearchDateList}=		css=select[class*="input-small"]

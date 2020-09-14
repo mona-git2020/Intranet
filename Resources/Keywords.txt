@@ -12,42 +12,45 @@ Logout And Close Browser
 	Close Browser
 	
 Verify Column According to Order		
-	[Arguments]			${OderButtonImage}			${letterList}		${TableCell}
+	[Arguments]			${OderButtonImage}			${letterList}		${headerTitle}
+	${TableCellValues}=			Replace String			${TableCellValues}		VALUE		${headerTitle}		
 	Click Element		${OderButtonImage}
 	Wait Until Element Is Visible		${TableRows}	
 	${index}=	Set Variable	${0}	
 	: For		${page}		IN RANGE		500
 	\	Log			${index}
-	\	${index}=		Verify Ascending And Descending For All Rows		${index}		${letterList}		${TableCell}
+	\	${index}=		Verify Ascending And Descending For All Rows		${index}		${letterList}		${TableCellValues}
 	\	${status}=		Run Keyword And Return Status		Wait Until Element Is Visible		${NextButtonLink}
 	\	Run Keyword If		${status}==True			Click Element		${NextButtonLink}
 	\	...		ELSE		Exit For Loop
 	\	Wait Until Element Is Visible		${TableRows}
 	\	${page}=		Evaluate		${page}+1
+	${TableCellValues}=			Replace String			${TableCellValues}		${headerTitle}		VALUE
 
 
 Verify Ascending And Descending For All Rows	
-	[Arguments]			${index}		${letterList}		${TableCell}
+	[Arguments]			${index}		${letterList}		${TableCellValues}
 	Log			${index}
 	${TotalRows}=		Get Element Count		${TableRows}
 	: FOR		${row}		IN RANGE		1		${TotalRows}+1
 	\	${rowNumber}=		Convert To String		${row}
-	\	${TableCell}=		Replace String			${TableCell}		ROW			${rowNumber}
-	\	${CellValue}=		Get Text		${TableCell}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		ROW			${rowNumber}
+	\	${CellValue}=		Get Text		${TableCellValues}
 	\	Continue For Loop If		'${CellValue}'==' '			
 	\	${result}    ${newValue}=    Run Keyword And Ignore Error    Convert To Number    ${CellValue}
-	\	${statusString}=		Run Keyword And Return Status    Should Be Equal As Strings    ${CellValue}    ${newValue}
+	\	log		${CellValue}
+	\	${statusString}=		Run Keyword And Return Status    Should Be Equal As Numbers    ${CellValue}    ${newValue}
 	\	Log			${newValue}
-	\	${index}=		Run Keyword If		${statusString}==True		Verify Ascending And Descending For Strings			${newValue}		${letterList}		${index}	
-	\	${TableCell}=	Run Keyword If		${statusString}==False		Verify Ascending And Descending For Integers		${newValue}		${index}		${row}		${rowNumber}		${TableCell}
-	\	${TableCell}=		Replace String			${TableCell}		${rowNumber}		ROW		count=1
+	\	${index}=		Run Keyword If		${statusString}==False		Verify Ascending And Descending For Strings			${CellValue}		${letterList}		${index}	
+	\	Run Keyword If		${statusString}==True		Verify Ascending And Descending For Integers		${newValue}		${index}		${row}		${rowNumber}		${TableCellValues}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		${rowNumber}		ROW		
 	Return From Keyword    	${index}
 	
 
 Verify Ascending And Descending For Strings
-	[Arguments]			${newValue}		${letterList}		${index}
-	${newValue}=		Convert To Lowercase		${newValue}
-	@{firstCharactor}=		Split String To Characters		${newValue}
+	[Arguments]			${CellValue}		${letterList}		${index}
+	${CellValue}=		Convert To Lowercase		${CellValue}
+	@{firstCharactor}=		Split String To Characters		${CellValue}
 	: FOR		${char}		IN RANGE		10		
 	\	${status}=		Run Keyword And Return Status		Should Be Equal		${firstCharactor[0]}	${letterList[${index}]}
 	\	Run Keyword If    ${status}==True	    Return From Keyword    	${index}	
@@ -55,21 +58,21 @@ Verify Ascending And Descending For Strings
 	Return From Keyword    	${index}
 	
 Verify Ascending And Descending For Integers
-	[Arguments]			${newValue}		${index}		${row}		${rowNumber}		${TableCell}
+	[Arguments]			${newValue}		${index}		${row}		${rowNumber}		${TableCellValues}
 	${previuosRowNum}=		Evaluate		${row}-1
-	Run Keyword If		${previuosRowNum}==0		Return From Keyword			${TableCell}	
+	Run Keyword If		${previuosRowNum}==0		Return From Keyword			${TableCellValues}	
 	${previuosRowNum}=		Convert To String		${previuosRowNum}
-	${TableCell}=		Replace String			${TableCell}		${rowNumber}		ROW		count=1
-	${previuosRow}=		Replace String		${TableCell}		ROW			${previuosRowNum}
+	${TableCellValues}=		Replace String			${TableCellValues}		${rowNumber}		ROW		count=1
+	${previuosRow}=		Replace String		${TableCellValues}		ROW			${previuosRowNum}
 	${previuosCellValue}=		Get Text		${previuosRow}
-	Run Keyword If		'${previuosCellValue}'==' '		Return From Keyword			${TableCell}	
+	Run Keyword If		'${previuosCellValue}'==' '		Return From Keyword			${TableCellValues}	
 	${previuosCellValue}=		Convert To Number		${previuosCellValue}
 	Log			${previuosCellValue}
 	${statusLength}=		Run Keyword And Return Status		Length Should Be		${previuosCellValue}		0		
 	Run Keyword If			${statusLength}==False			Should Be True		${previuosCellValue}<=${newValue}
-	${previuosRow}=		Replace String		${TableCell}		${previuosRowNum}			ROW			count=1
-	${TableCell}=		Replace String			${TableCell}		ROW			${rowNumber}
-	[Return]		${TableCell}
+	${previuosRow}=		Replace String		${TableCellValues}		${previuosRowNum}			ROW			count=1
+	${TableCellValues}=		Replace String			${TableCellValues}		ROW			${rowNumber}
+	[Return]		${TableCellValues}
 
 Verify All Dates Of This Month
 	[Arguments]			${buttonValue}

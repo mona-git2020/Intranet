@@ -19,43 +19,43 @@ Open Phonebook And Verify All Columns According to Ascending and Descending
 	Log			${letters}
 	
 	
-Verify Name Column According to Ascending and Descending
-	Verify Column According to Order			${NameAscendingButtonImage}			${AscendingLetters}		${NameTableCell}
-	Verify Column According to Order			${NameDescendingButtonImage}		${letters}				${NameTableCell}
+#Verify Name Column According to Ascending and Descending
+#	Verify Column According to Order			${NameAscendingButtonImage}			${AscendingLetters}		${headerName[0]}
+#	Verify Column According to Order			${NameDescendingButtonImage}		${letters}				${headerName[0]}
 
 
-Verify RA Name Column According to Ascending and Descending	
-	Verify Column According to Order			${RANameAscendingButtonImage}		${AscendingLetters}		${RANameTableCell}	
-	Verify Column According to Order			${RANameDescendingButtonImage}		${letters}				${RANameTableCell}
+#Verify RA Name Column According to Ascending and Descending	
+#	Verify Column According to Order			${RANameAscendingButtonImage}		${AscendingLetters}		${headerName[1]}	
+#	Verify Column According to Order			${RANameDescendingButtonImage}		${letters}				${headerName[1]}
 
-Verify Designation Column According to Ascending and Descending	
-	Verify Column According to Order			${DesignationAscendingButtonImage}		${AscendingLetters}		${DesignationTableCell}
-	Verify Column According to Order			${DesignationDescendingButtonImage}		${letters}				${DesignationTableCell}
+#Verify Designation Column According to Ascending and Descending	
+#	Verify Column According to Order			${DesignationAscendingButtonImage}		${AscendingLetters}		${headerName[2]}
+#	Verify Column According to Order			${DesignationDescendingButtonImage}		${letters}				${headerName[2]}
 	
-Verify Department Column According to Ascending and Descending	
-	Verify Column According to Order			${DepartmentAscendingButtonImage}		${AscendingLetters}		${DepartmentTableCell}
-	Verify Column According to Order			${DepartmentDescendingButtonImage}		${letters}				${DepartmentTableCell}
+#Verify Department Column According to Ascending and Descending	
+#	Verify Column According to Order			${DepartmentAscendingButtonImage}		${AscendingLetters}		${headerName[6]}
+#	Verify Column According to Order			${DepartmentDescendingButtonImage}		${letters}				${headerName[6]}
 
-Verify EmailId Column According to Ascending and Descending	
-	Verify Column According to Order			${EmailIdAscendingButtonImage}		${AscendingLetters}			${EmailIdTableCell}
-	Verify Column According to Order			${EmailIdDescendingButtonImage}		${letters}					${EmailIdTableCell}
+#Verify EmailId Column According to Ascending and Descending	
+#	Verify Column According to Order			${EmailIdAscendingButtonImage}		${AscendingLetters}			${headerName[7]}
+#	Verify Column According to Order			${EmailIdDescendingButtonImage}		${letters}					${headerName[7]}
 
-Verify Locaton Column According to Ascending and Descending	
-	Verify Column According to Order			${LocatonAscendingButtonImage}		${AscendingLetters}			${LocationTableCell}
-	Verify Column According to Order			${LocatonDescendingButtonImage}		${letters}					${LocationTableCell}
+#Verify Locaton Column According to Ascending and Descending	
+#	Verify Column According to Order			${LocatonAscendingButtonImage}		${AscendingLetters}			${headerName[8]}
+#	Verify Column According to Order			${LocatonDescendingButtonImage}		${letters}					${headerName[8]}
 
-Verify Skills Column According to Ascending and Descending	
-	Verify Column According to Order			${SkillsAscendingButtonImage}		${AscendingLetters}			${SkillsTableCell}
-	Verify Column According to Order			${SkillsDescendingButtonImage}		${letters}					${SkillsTableCell}
+#Verify Skills Column According to Ascending and Descending	
+#	Verify Column According to Order			${SkillsAscendingButtonImage}		${AscendingLetters}			${headerName[9]}
+#	Verify Column According to Order			${SkillsDescendingButtonImage}		${letters}					${headerName[9]}
 
 Verify Experience Column According to Ascending and Descending
-	Verify Column According to Order			${ExperienceAscendingButtonImage}		${AscendingLetters}			${ExperienceTableCell}
-	Verify Column According to Order			${ExperienceDescendingButtonImage}		${letters}					${ExperienceTableCell}
+	Verify Column According to Order			${ExperienceAscendingButtonImage}		${AscendingLetters}			${headerName[3]}
+	Verify Column According to Order			${ExperienceDescendingButtonImage}		${letters}					${headerName[3]}
 	
 Verify PhoneNumber Column According to Ascending and Descending
-	Verify Column According to Order			${PhoneNumberAscendingButtonImage}		${AscendingLetters}			${PhoneNumberTableCell}
-	Verify Column According to Order			${PhoneNumberDescendingButtonImage}		${letters}					${PhoneNumberTableCell}
+	Verify Column According to Order			${PhoneNumberAscendingButtonImage}		${AscendingLetters}			${headerName[4]}
+	Verify Column According to Order			${PhoneNumberDescendingButtonImage}		${letters}					${headerName[4]}
 
 Verify ExtNo Column According to Ascending and Descending
-	Verify Column According to Order			${ExtNoAscendingButtonImage}		${AscendingLetters}			${ExtNoTableCell}
-	Verify Column According to Order			${ExtNoDescendingButtonImage}		${letters}					${ExtNoTableCell}
+	Verify Column According to Order			${ExtNoAscendingButtonImage}		${AscendingLetters}			${headerName[5]}
+	Verify Column According to Order			${ExtNoDescendingButtonImage}		${letters}					${headerName[5]}
