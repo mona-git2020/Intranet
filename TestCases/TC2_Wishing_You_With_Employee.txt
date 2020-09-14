@@ -9,20 +9,22 @@ Suite Teardown	Logout And Close Browser
 
 
 *** Test Cases ***
-Check Wishing You Section For Employees Birthday or Anniversary
+Get Data From Wishing You... Section
 	Wait Until Element Is Visible		${HomeButton}
-	@{List}=		Create List
+	@{WishingYouSectionData}=		Create List
 	${totalBirthdayList}=		Get Element Count		${BirthdayEmployeeList}
 	: FOR		${numBirthday}		IN RANGE		1		${totalBirthdayList}+1
 	\	${num}=		Convert To String		${numBirthday}
-	\	${date}=		Get Time		day
 	\	Wait Until Element Is Visible		${BirthdayEmployeeName}		timeout=3s	
 	\	${name}=		Get Text		${BirthdayEmployeeName}		
-	\	Append To List			${List}			${name}
-	\	Log		${List}	
+	\	Append To List			${WishingYouSectionData}			${name}
+	\	Log		${WishingYouSectionData}	
 	\	Wait Until Element Is Not Visible		Link=${name}
+	Set Suite Variable		@{WishingYouSectionData}
 	
-	: FOR		${name}		IN		@{List}
+Click On Perticulay Employee Name And Verify It Is Birthday or Anniversary From Employee Details
+	${date}=		Get Time		day	
+	: FOR		${name}		IN		@{WishingYouSectionData}
 	\	Wait Until Element Is Visible			Link=${name}			timeout=10s
 	\	Click Element			${BirthdayEmployeeName}
 	\	Wait Until Element Is Visible		${EmployeeDetailBox}

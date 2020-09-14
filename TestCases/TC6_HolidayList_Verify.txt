@@ -9,7 +9,7 @@ Suite Teardown	Logout And Close Browser
 
 
 *** Test Cases ***
-Open Holiday List Select Year, Month, Branch and Verify 
+Select Holiday List From Home Menu And Select Year, Month, Branch 
 	Wait Until Element Is Visible		${HomeButton}
 	Mouse Over		${HomeButton}
 	Wait Until Element Is Visible		${HolidayListMenu}
@@ -17,18 +17,23 @@ Open Holiday List Select Year, Month, Branch and Verify
 	Wait Until Element Is Visible		${TableRows}
 	Click Element			${SelectYear}
 	${yearValue}=		Get Value		${SelectYearOption}
+	Set Suite Variable		${yearValue}
 	Click Element			${SelectYearOption}
 	Click Element			${SelectBranch}
 	Click Element			${SelectBranchOption}
 	${branchValue}=		Get Text		${SelectBranchOption}
+	Set Suite Variable		${branchValue}
 	Click Element			${SelectMonth}
 	${monthValue}=		Get Value		${SelectMonthOption}
-	${monthValue}=		Evaluate	${monthValue}+1
+	${monthValue}=		Evaluate		${monthValue}+1
 	${monthValue}=		Convert To String		${monthValue}
+	Set Suite Variable		${monthValue}
 	Click Element			${SelectMonthOption}
 	Click Element			${SubmitButton}
 	Wait Until Element Is Visible		${TableRows}
 	
+
+Verify Holiday List According To Selected Year, Month, Branch 	
 	${totalRowsNum}=		Get Element Count		${TableRows}
 	: FOR		${row}		IN RANGE		1	${totalRowsNum}+1
 	\	${rowNumber}=		Convert To String		${row}

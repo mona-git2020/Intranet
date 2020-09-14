@@ -9,13 +9,16 @@ Suite Teardown	Logout And Close Browser
 
 
 *** Test Cases ***
-Open Anniversary And Verify Employee Anniversary Date
+Select Birthday From elPulse Menu 
 	Wait Until Element Is Visible		${ElPulseButton}		timeout=15s
 	Mouse Over		${ElPulseButton}
 	Wait Until Element Is Visible		${BirthdayButtonMenu}
 	${buttonValue}=		Get Text		${BirthdayButtonMenu}
+	Set Suite Variable		${buttonValue}
 	Click Element	${BirthdayButtonMenu}
 	Wait Until Element Is Visible		${TableRows}
+	
+Verify Employee Birthday Date For All Rows		
 	Verify All Dates Of This Month		${buttonValue}
 	Select Date From Options And Verify		${buttonValue}
 

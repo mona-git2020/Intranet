@@ -9,9 +9,9 @@ Suite Teardown	Logout And Close Browser
 
 
 *** Test Cases ***
-Check Congratulations Section And Verify
+Get Data From Congratulations! Section
 	Wait Until Element Is Visible		${HomeButton}
-	&{CongratulationsSectionData}=		Create Dictionary
+	&{CongratulationsSectionData}=		Create Dictionary	
 	${totalCongratulationsList}=		Get Element Count		${CongratulationsEmployeeList}
 	: FOR		${numCongratulations}		IN RANGE		1		${totalCongratulationsList}
 	\	${num}=		Convert To String		${numCongratulations}
@@ -21,7 +21,9 @@ Check Congratulations Section And Verify
 	\	Set To Dictionary			${CongratulationsSectionData}			${name}		${Detail}
 	\	Log		${CongratulationsSectionData}	
 	\	Wait Until Element Is Not Visible		Link=${name}
-	
+	Set Suite Variable		&{CongratulationsSectionData}
+
+Click On Perticulay Employee Name And Verify According To Experience or Certification From Employee Details	
 	${year}=		Get Time		Year
 	${year}=		Evaluate		${year}-7
 	${year}=		Convert To String		${year}	

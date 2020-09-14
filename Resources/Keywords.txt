@@ -8,6 +8,7 @@ Open Intranet and Login
 	Click Element		${LoginButton}
 	
 Logout And Close Browser
+	Wait Until Element Is Visible		${LogoutLink}
 	Click Element		${LogoutLink}
 	Close Browser
 	
