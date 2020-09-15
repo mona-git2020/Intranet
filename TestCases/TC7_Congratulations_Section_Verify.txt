@@ -20,10 +20,12 @@ Get Data From Congratulations! Section
 	\	${Detail}=		Get Text		${CongratulationsEmployeeDetail}
 	\	Set To Dictionary			${CongratulationsSectionData}			${name}		${Detail}
 	\	Log		${CongratulationsSectionData}	
-	\	Wait Until Element Is Not Visible		Link=${name}
+	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${name}
+	\	Wait Until Element Is Not Visible		${EmployeeNameLink}
+	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME
 	Set Suite Variable		&{CongratulationsSectionData}
 
-Click On Perticulay Employee Name And Verify According To Experience or Certification From Employee Details	
+Click On Perticular Employee Name And Verify According To Experience or Certification From Employee Profile	
 	${year}=		Get Time		Year
 	${year}=		Evaluate		${year}-7
 	${year}=		Convert To String		${year}	
@@ -31,8 +33,9 @@ Click On Perticulay Employee Name And Verify According To Experience or Certific
 
 	: FOR		${key}		IN		@{keys}
 	\	Log		${key}
-	\	Wait Until Element Is Visible			Link=${key}			timeout=60s	
-	\	Click Element		Link=${key}
+	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${key}	
+	\	Wait Until Element Is Visible			${EmployeeNameLink}			timeout=60s	
+	\	Click Element		${EmployeeNameLink}
 	\	Wait Until Element Is Visible		${EmployeeDetailBox}
 	\	${status}=		Run Keyword And Return Status		Should Contain Any			${CongratulationsSectionData['${key}']}		5
 	\	Run Keyword If		${status}==True			Element Should Contain			${CongratulationsJoiningDate}			${year}
@@ -43,5 +46,5 @@ Click On Perticulay Employee Name And Verify According To Experience or Certific
 	\	...										Wait Until Element Is Visible		${EmployeeDetailBox}
 	\	Go Back
 	\	Wait Until Element Is Visible		${CongratulationsEmployeeName}	
-	
+	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${key}		NAME	
 	

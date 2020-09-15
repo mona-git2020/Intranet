@@ -1,6 +1,6 @@
 *** Keywords ***
 Open Intranet and Login
-	Open Browser	${urlOfIntranet}		${browser}		remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
+	Open Browser	${urlOfIntranet}		${browser}		#remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
 	Maximize Browser Window
 	Wait Until Element Is Visible		${EnterUsername}
 	Input Text			${EnterUsername}		${username}
@@ -10,6 +10,7 @@ Open Intranet and Login
 Logout And Close Browser
 	Wait Until Element Is Visible		${LogoutLink}
 	Click Element		${LogoutLink}
+	Wait Until Element Is Visible		${EnterUsername}
 	Close Browser
 	
 Verify Column According to Order		

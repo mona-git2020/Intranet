@@ -16,7 +16,7 @@ Select Phonebook From Home Menu
 	Click Element	${PhonebookButton}
 	Wait Until Element Is Visible		${TableRows}
 	
-Click On Eye Icon And Verify All Eployee Details From Employee Profile 	
+Click On Eye Icon And Verify All Employee Details From Employee Profile 	
 	: For		${page}		IN RANGE		500	
 	\	Verify All Columns Data From Employee Details For all Rows		
 	\	${status}=		Run Keyword And Return Status		Wait Until Element Is Visible		${NextButtonLink}
