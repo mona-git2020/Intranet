@@ -18,8 +18,10 @@ Select Anniversary From elPulse Menu
 	Click Element	${AnniversaryButtonMenu}
 	Wait Until Element Is Visible		${TableRows}
 	
-Verify Employee Anniversary Date For All Rows	
+Verify Employee Anniversary Coming In This Month 
 	Verify All Dates Of This Month		${buttonValue}
+	
+Verify Employee Anniversary For Perticular Date	
 	Select Date From Options And Verify		${buttonValue}
 
 

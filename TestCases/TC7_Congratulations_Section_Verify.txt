@@ -39,11 +39,11 @@ Click On Perticular Employee Name And Verify According To Experience or Certific
 	\	Wait Until Element Is Visible		${EmployeeDetailBox}
 	\	${status}=		Run Keyword And Return Status		Should Contain Any			${CongratulationsSectionData['${key}']}		5
 	\	Run Keyword If		${status}==True			Element Should Contain			${CongratulationsJoiningDate}			${year}
-	\	...			ELSE	Run Keywords		Click Element			${CongratulationsCertification}
-	\	...										Wait Until Element Is Visible		${CertifivationTable}
-	\	...										Element Should Contain			${CertifivationTable}		Certified
-	\	...										Click Element			${CloseButton}
-	\	...										Wait Until Element Is Visible		${EmployeeDetailBox}
+	\	...			ELSE	Run Keywords		Click Element			${CongratulationsCertification}		AND	
+	\	...										Wait Until Element Is Visible		${CertifivationTable}		AND	
+	\	...										Element Should Contain			${CertifivationTable}		Certified		AND	
+	\	...										Click Element			${CloseButton}		AND	
+	\	...										Wait Until Element Is Visible		${EmployeeDetailBox}		
 	\	Go Back
 	\	Wait Until Element Is Visible		${CongratulationsEmployeeName}	
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${key}		NAME	
