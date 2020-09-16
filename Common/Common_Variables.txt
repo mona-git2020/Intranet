@@ -30,6 +30,8 @@ ${LocatonDescendingButtonImage}=		css=tr th:nth-child(10) img[src*="sort_down.pn
 ${LocatonAscendingButtonImage}=		css=tr th:nth-child(10) img[src*="sort_top.png"]
 ${SkillsDescendingButtonImage}=		css=tr th:nth-child(11) img[src*="sort_down.png"]
 ${SkillsAscendingButtonImage}=		css=tr th:nth-child(11) img[src*="sort_top.png"]
+${SortDownPressedButton}=			css=img[src*='sort_down_press']
+${SortTopPressedButton}=			css=img[src*='sort_top_press']
 
 ${TableHeaders}=		css=table[class*="table"] tr th
 ${TableRows}=			css=table[class*="table"] tbody tr

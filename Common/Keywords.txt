@@ -1,0 +1,186 @@
+*** Keywords ***
+Open Intranet and Login
+	Open Browser	${urlOfIntranet}		${browser}		remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
+	Maximize Browser Window
+	Wait Until Element Is Visible		${EnterUsername}
+	Input Text			${EnterUsername}		${username}
+	Input Text			${EnterPassword}		${password}	
+	Click Element		${LoginButton}
+	
+Logout And Close Browser
+	Wait Until Element Is Visible		${LogoutLink}
+	Click Element		${LogoutLink}
+	Wait Until Element Is Visible		${EnterUsername}
+	Close Browser
+	
+Verify Column According to Order		
+	[Arguments]			${OrderButtonImage}			${SortPressedButton}		${letterList}		${headerTitle}
+	${TableCellValues}=			Replace String			${TableCellValues}		VALUE		${headerTitle}		
+	Wait Until Element Is Visible		${OrderButtonImage}
+	Click Element		${OrderButtonImage}
+	Wait Until Element Is Visible		${SortPressedButton}
+	Wait Until Element Is Visible		${TableRows}	
+	${index}=	Set Variable	${0}	
+	: For		${page}		IN RANGE		500
+	\	Log			${index}
+	\	${index}=		Verify Ascending And Descending For All Rows		${index}		${letterList}		${TableCellValues}
+	\	${status}=		Run Keyword And Return Status		Wait Until Element Is Visible		${NextButtonLink}
+	\	Run Keyword If		${status}==True			Click Element		${NextButtonLink}
+	\	...		ELSE		Exit For Loop
+	\	Wait Until Element Is Visible		${TableRows}
+	\	${page}=		Evaluate		${page}+1
+	${TableCellValues}=			Replace String			${TableCellValues}		${headerTitle}		VALUE
+
+
+Verify Ascending And Descending For All Rows	
+	[Arguments]			${index}		${letterList}		${TableCellValues}
+	Log			${index}
+	${TotalRows}=		Get Element Count		${TableRows}
+	: FOR		${row}		IN RANGE		1		${TotalRows}+1
+	\	${rowNumber}=		Convert To String		${row}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		ROW			${rowNumber}
+	\	${CellValue}=		Get Text		${TableCellValues}
+	\	${CellValue}=		Split String	${CellValue}		@
+	\	${length}=		Get Length		${CellValue}
+	\	Continue For Loop If		${length}==0			
+	\	${result}    ${newValue}=    Run Keyword And Ignore Error    Convert To Number    ${CellValue[0]}
+	\	log		${CellValue}
+	\	${statusString}=		Run Keyword And Return Status    Should Be Equal As Numbers    ${CellValue[0]}    ${newValue}
+	\	Log			${newValue}
+	\	${index}=		Run Keyword If		${statusString}==False		Verify Ascending And Descending For Strings			${CellValue}		${letterList}		${index}	
+	\	Run Keyword If		${statusString}==True		Verify Ascending And Descending For Integers		${newValue}		${index}		${row}		${rowNumber}		${TableCellValues}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		${rowNumber}		ROW		
+	Return From Keyword    	${index}
+	
+
+Verify Ascending And Descending For Strings
+	[Arguments]			${CellValue}		${letterList}		${index}
+	${cellValue}=		Convert To Lowercase		${CellValue[0]}
+	@{firstCharactor}=		Split String To Characters		${cellValue}
+	: FOR		${char}		IN RANGE		10		
+	\	${status}=		Run Keyword And Return Status		Should Be Equal		${firstCharactor[0]}	${letterList[${index}]}
+	\	Run Keyword If    ${status}==True	    Return From Keyword    	${index}	
+	\	${index} =    Set Variable    ${index + 1}
+	Return From Keyword    	${index}
+	
+Verify Ascending And Descending For Integers
+	[Arguments]			${newValue}		${index}		${row}		${rowNumber}		${TableCellValues}
+	${previousRowNum}=		Evaluate		${row}-1
+	Run Keyword If		${previousRowNum}==0		Return From Keyword			${TableCellValues}	
+	${previousRowNum}=		Convert To String		${previousRowNum}
+	${TableCellValues}=		Replace String			${TableCellValues}		${rowNumber}		ROW		count=1
+	${previousRow}=		Replace String		${TableCellValues}		ROW			${previousRowNum}
+	${previousCellValue}=		Get Text		${previousRow}
+	Run Keyword If		'${newValue}'==' '		Return From Keyword			${TableCellValues}	
+	Run Keyword If		'${previousCellValue}'==' '		Return From Keyword			${TableCellValues}	
+	${previousCellValue}=		Convert To Number		${previousCellValue}
+	Log			${previousCellValue}
+#	${statusLength}=		Run Keyword And Return Status		Length Should Be		${previousCellValue}		0		
+	${statusSortTop}=		Run Keyword And Return Status		Element Should Be Visible		${SortTopPressedButton}
+	${statusSortDown}=		Run Keyword And Return Status		Element Should Be Visible		${SortDownPressedButton}
+	Run Keyword If			${statusSortTop}==True			Should Be True		${previousCellValue}<=${newValue}
+	Run Keyword If			${statusSortDown}==True			Should Be True		${previousCellValue}>=${newValue}
+	${previousRow}=		Replace String		${TableCellValues}		${previousRowNum}			ROW			count=1
+	${TableCellValues}=		Replace String			${TableCellValues}		ROW			${rowNumber}
+	[Return]		${TableCellValues}
+
+Verify All Dates Of This Month
+	[Arguments]			${buttonValue}
+	${DateList}=		Verify Details For All Pages		${buttonValue}
+	: For		${item}		IN		@{DateList}
+	\	Should Be True		'${item}'>='01'
+	\	Should Be True		'${item}'<='31'
+	
+Select Date From Options And Verify
+	[Arguments]			${buttonValue}
+	Click Element		${SearchDateList}
+	Wait Until Element Is Visible		${SelectDateOptionSuggestions}
+	${totalSuggestions}=		Get Element Count		${SelectDateOptionSuggestions}
+	: FOR		${suggestionNum}		IN RANGE		2		${totalSuggestions}+1
+	\	Click Element		${SearchDateList}
+	\	Wait Until Element Is Visible		${SelectDateOptionSuggestions}
+	\	${num}=		Convert To String		${suggestionNum}
+	\	${SelectDateOption}=		Replace String			${SelectDateOption}		NUM			${num}
+	\	${dateValue}=		Get Value		${SelectDateOption}
+	\	Click Element		${SelectDateOption}
+	\	Wait Until Element Is Visible		${TableRows}
+	\	${DateList}=	Verify Details For All Pages		${buttonValue}
+	\	${SelectDateOption}=		Replace String			${SelectDateOption}		${num}		NUM	
+	\	Continue For Loop If		${DateList}==[]
+	\	Verify All Date According to Selected Date			${DateList}			${dateValue}
+	
+	
+Verify Details For All Pages	
+	[Arguments]			${buttonValue}
+	: For		${page}		IN RANGE		500	
+	\	${DateList}=		Verify Date For all Rows		${buttonValue}
+	\	${status}=		Run Keyword And Return Status		Wait Until Element Is Visible		${NextButtonLink}
+	\	Run Keyword If		${status}==True			Click Element		${NextButtonLink}
+	\	...		ELSE		Exit For Loop
+	\	Wait Until Element Is Visible		${TableRows}
+	\	${page}=		Evaluate		${page}+1
+	Return From Keyword			${DateList}
+
+Verify Date For all Rows
+	[Arguments]			${buttonValue}
+	@{DateList}=	Create List
+	${TotalRows}=		Get Element Count		${TableRows}
+	: FOR		${row}		IN RANGE		2		${TotalRows}+1
+	\	Wait Until Element Is Visible		${TableRows}
+	\	${rowNumber}=		Convert To String		${row}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		ROW			${rowNumber}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		VALUE		${buttonValue}
+	\	${statusRow}=		Run Keyword And Return Status		Element Should Be Visible		${TableCellValues}
+	\	Run Keyword If		${statusRow}==False			Exit For Loop	
+	\	${date}		${month}=		Get Time		day and month
+	\	${CellValue}=		Get Text		${TableCellValues}
+	\	${CellValue}=		Split String		${CellValue}		${SPACE}
+	\	Append To List		${DateList}			${CellValue[0]}
+	\	Log			${DateList}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		${rowNumber}		ROW		
+	\	${TableCellValues}=		Replace String			${TableCellValues}		${buttonValue}		VALUE
+	Return From Keyword			${DateList}	
+	
+	
+Verify All Date According to Selected Date
+	[Arguments]			${DateList}			${dateValue}
+	: For	${item}		IN		@{DateList}	
+	\	Should Be Equal			${item}		${dateValue}
+
+Verify All Columns Data From Employee Details For All Rows
+	${TotalRows}=		Get Element Count		${TableRows}
+	: FOR		${row}		IN RANGE		1		${TotalRows}+1
+	\	${rowNumber}=		Convert To String		${row}
+	\	Get Data From All Columns And Verify		${TableCellValues}		${rowNumber}
+	\	Wait Until Element Is Visible		${TableRows}
+
+
+Get Data From All Columns And Verify
+	[Arguments]			${TableCellValues}		${rowNumber}
+	${EyeIcon}=		Replace String			${EyeIcon}		ROW			${rowNumber}
+	${TableCellValues}=		Replace String			${TableCellValues}		ROW			${rowNumber}
+	&{columnsDict}=		Create Dictionary
+	Log		${columnsDict}	
+	${length}=		Get Length		${headerName}	
+	: FOR		${col}		IN RANGE		${length}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		VALUE			${headerName[${col}]}
+	\	${cellValue}=		Get Text		${TableCellValues}
+	\	Set To Dictionary			${columnsDict}		${headerName[${col}]}		${cellValue}
+	\	Log				${columnsDict}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		${headerName[${col}]}		VALUE
+	Click Element		${EyeIcon}
+	Wait Until Element Is Visible		${EmployeeDetailBox}
+	: FOR		${num}		IN RANGE		${length}	
+	\	${status}=		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${columnsDict['${headerName[${num}]}']}
+	\	${splitList}=		Split String		${columnsDict['${headerName[${num}]}']}			${SPACE}
+	\	${status1}=		Run Keyword If		${status}==False		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${splitList[0]}	
+	\	${splitList1}=		Split String		${columnsDict['${headerName[${num}]}']}			.
+	\	${status2}=		Run Keyword If		${status}==False and ${status1}==False		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${splitList1[0]}
+	\	${splitList2}=		Split String		${columnsDict['${headerName[${num}]}']}			\n
+	\	${status3}=		Run Keyword If		${status}==False and ${status1}==False and ${status2}==False		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${splitList2[0]}
+	\	${splitList3}=		Split String		${columnsDict['${headerName[${num}]}']}			,
+	\	Run Keyword If		${status}==False and ${status1}==False and ${status2}==False and ${status3}==False		Element Should Contain			${EmployeeDetailBox}		${splitList3[0]}
+	Go Back
+	Wait Until Element Is Visible		${TableRows}
+	${EyeIcon}=		Replace String			${EyeIcon}		${rowNumber}		ROW	
+	${TableCellValues}=		Replace String			${TableCellValues}		${rowNumber}		ROW
