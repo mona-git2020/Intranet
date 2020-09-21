@@ -5,6 +5,8 @@ ${EnterPassword}=		css=#password
 ${LoginButton}=			css=button[class*="submit"]
 ${HomeButton}=			Link=Home
 ${ElPulseButton}=			css=a[href*="HR-Newsletter/"]
+${ClassifiedButton}=		css=li[class*='main'] a[href*="classified"]
+${DocumentsButton}=		css=li[class*='main'] a[href*="documents"] 
 ${PhonebookButton}=		css=li.subMenuBtn a[href*="phonebook"]
 ${HolidayListMenu}=		css=li.subMenuBtn a[href*="holidaylist"]
 ${AnniversaryButtonMenu}=		css=li.subMenuBtn a[href*="anniversary"]
@@ -74,3 +76,20 @@ ${CongratulationsCertification}=			css=a[onclick*="certification"]
 ${CertifivationTable}=			css=table[class*='table'] tbody
 ${CloseButton}=					css=#cboxClose
 
+
+${QAFundamentalsMainDownloadButton}			css=div[id="checklist"]
+${DocumentsQALink}=				css=a[href*="documents/qa"]
+${QAFundamentalsFile}=			css=a[id='14']
+${TotalQAFundamentalFiles}=		css=div#div_14>div
+${QAFundamentalsDownloadButton}=		css=div#div_14>div:nth-child(NUM) span[class="plus_show2"]
+${QAFundamentalsFileName}=		css=div#div_14>div:nth-child(NUM)  h3>a.show_detail
+${ByDefaultAllAds}=			css=ul#menu>li.active
+
+${ClassifiedAllMenuButtons}=		css=ul#menu>li
+${ClassifiedMenuButtons}=			css=ul#menu>li:nth-child(NUM)		
+${CityAscendingButtonImage}=		css=tr th:nth-child(3) img[src*="sort_top.png"]
+${CityDescendingButtonImage}=		css=tr th:nth-child(3) img[src*="sort_down.png"]
+${DateAscendingButtonImage}=		css=tr th:nth-child(4) img[src*="sort_top.png"]
+${DateDescendingButtonImage}=		css=tr th:nth-child(4) img[src*="sort_down.png"]
+${CityTableCell}=		css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(3)
+${DateTableCellAdds}=		css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(4)

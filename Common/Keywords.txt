@@ -184,3 +184,97 @@ Get Data From All Columns And Verify
 	Wait Until Element Is Visible		${TableRows}
 	${EyeIcon}=		Replace String			${EyeIcon}		${rowNumber}		ROW	
 	${TableCellValues}=		Replace String			${TableCellValues}		${rowNumber}		ROW
+	
+	
+Verify Ascending Sortng of City
+	Click Element			${CityAscendingButtonImage}
+	Wait Until Element Is Visible		${TableRows}		timeout=15s
+	@{CityValues}=			Create List
+	${CityValues}=		Verify Sorting For All Pages		${CityValues}		${CityTableCell}
+	${newValuesList}=		Copy List		${CityValues}
+	Sort List		${CityValues}
+	Log		${CityValues}
+	Log		${newValuesList}
+	${statusEquality}=		Run Keyword And Return Status		Should Be Equal		${newValuesList}		${CityValues}
+
+Verify Descending Sortng of City
+	Wait Until Element Is Visible		${TableRows}		timeout=15s
+	Click Element			${CityDescendingButtonImage}
+	Wait Until Element Is Visible		${TableRows}		timeout=15s
+	@{CityValues}=			Create List
+	${CityValues}=		Verify Sorting For All Pages		${CityValues}		${CityTableCell}
+	${newValuesList}=		Copy List		${CityValues}
+	Log		${CityValues}
+	Sort List		${CityValues}
+	Log		${CityValues}
+	Reverse List		${CityValues}
+	Log		${CityValues}
+	Log		${newValuesList}
+	${statusEquality}=		Run Keyword And Return Status		Should Be Equal		${newValuesList}		${CityValues}
+
+
+
+Verify Ascending Sorting of Date
+	Wait Until Element Is Visible		${TableRows}		timeout=15s
+	Click Element			${DateAscendingButtonImage}
+	Wait Until Element Is Visible		${TableRows}		timeout=15s
+	@{DateValues}=			Create List
+	${DateValues}=		Verify Sorting For All Pages		${DateValues}		${DateTableCellAdds}
+	Log			${DateValues}
+	${length}=		Get Length		${DateValues}
+	: FOR		${num}		IN RANGE		0	${length}
+	\	${date1}=		Split String		${DateValues[${num}]}			-
+	\	${newNum}=		Evaluate		${num}+1
+	\	Exit For Loop If		${newNum}>=${length}
+	\	${date2}=		Split String		${DateValues[${newNum}]}			-
+	\	${status}=		Run Keyword And Return Status		Should Be True		'${date1[0]}'<'${date2[0]}'	
+	\	${status1}=		Run Keyword If			'${date1[0]}'=='${date2[0]}'		Run Keyword And Return Status		Should Be True		'${date1[1]}'<'${date2[1]}'	
+	\	${status2}=		Run Keyword If			'${date1[1]}'=='${date2[1]}' and '${date1[0]}'=='${date2[0]}'		Run Keyword And Return Status		Should Be True		${date1[2]}<=${date2[2]}
+
+
+Verify Descending Sorting of Date
+	Wait Until Element Is Visible		${TableRows}		timeout=15s
+	Click Element			${DateDescendingButtonImage}
+	Wait Until Element Is Visible		${TableRows}		timeout=15s
+	@{DateValues}=			Create List
+	${DateValues}=		Verify Sorting For All Pages		${DateValues}		${DateTableCellAdds}
+	Log			${DateValues}
+	${length}=		Get Length		${DateValues}
+	: FOR		${num}		IN RANGE		0	${length}
+	\	${date1}=		Split String		${DateValues[${num}]}			-
+	\	${newNum}=		Evaluate		${num}+1
+	\	Exit For Loop If		${newNum}>=${length}
+	\	${date2}=		Split String		${DateValues[${newNum}]}			-
+	\	${status}=		Run Keyword And Return Status		Should Be True		'${date1[0]}'>'${date2[0]}'
+	\	${status1}=		Run Keyword If			'${date1[0]}'=='${date2[0]}'		Run Keyword And Return Status		Should Be True		'${date1[1]}'>'${date2[1]}'	
+	\	${status2}=		Run Keyword If			'${date1[1]}'=='${date2[1]}' and '${date1[0]}'=='${date2[0]}'		Run Keyword And Return Status		Should Be True		'${date1[2]}'>='${date2[2]}'
+
+	
+
+Verify Sorting For All Pages
+	[Arguments]		${ColumnValues}			${CellValue}
+	: For		${page}		IN RANGE		500	
+	\	${ColumnValues}=		Veriy Sorting of City		${ColumnValues}			${CellValue}
+	\	${status}=		Run Keyword And Return Status		Wait Until Element Is Visible		${NextButtonLink}
+	\	Run Keyword If		${status}==True			Click Element		${NextButtonLink}
+	\	...		ELSE		Exit For Loop
+	\	Wait Until Element Is Visible		${TableRows}
+	\	${page}=		Evaluate		${page}+1
+	Log		${ColumnValues}
+	Return From Keyword			${ColumnValues}
+	${categoryName}=		Get Text		${ClassifiedMenuButtons}
+
+Veriy Sorting of City
+	[Arguments]		${ColumnValues}		${CellValue}
+	${totalRows}=		Get Element Count		${TableRows}
+	: For		${row}		IN RANGE		1		${totalRows}
+	\	${rowNum}=		Convert To String		${row}
+	\	${CellValue}=		Replace String			${CellValue}		ROW		${rowNum}
+	\	${value}=		Get Text			${CellValue}
+	\	${value}=		Convert To Lowercase		${value}
+	\	${value}=		Split String		${value}		\n
+	\	Append To List		${ColumnValues}			${value[0]}
+	\	Log		${ColumnValues}
+	\	${CellValue}=		Replace String			${CellValue}		${rowNum}		ROW		count=1	
+	Return From Keyword			${ColumnValues}
+		

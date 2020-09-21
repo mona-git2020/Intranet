@@ -1,0 +1,55 @@
+*** Settings ***
+Library		Selenium2Library	
+Library		String
+Library		Collections	
+Library		OperatingSystem
+Resource	../Common/Common_Variables.txt
+Resource	../Common/Keywords.txt	
+Suite Setup		Open Intranet and Login
+Suite Teardown	Logout And Close Browser
+
+*** Test Cases ***
+Select QA Fundamentals From Documents Toolbar Menu 
+	Wait Until Element Is Visible		${DocumentsButton}		timeout=15s
+	Click Element		${DocumentsButton}
+	Wait Until Element Is Visible		${DocumentsQALink}		timeout=15s
+	Click Element		${DocumentsQALink}	
+
+	
+Download The Files From QA Fundamentals
+	Switch Window		NEW
+	Wait Until Element Is Visible		${QAFundamentalsFile}		timeout=15s
+	Click Element			${QAFundamentalsFile}
+	${totalFiles}=		Get Element Count		${TotalQAFundamentalFiles}
+	: For		${file}		IN RANGE		1		${totalFiles}+1
+	\	${fileNum}=		Convert To String		${file}
+	\	${QAFundamentalsDownloadButton}=		Replace String			${QAFundamentalsDownloadButton}		NUM			${fileNum}
+	\	${QAFundamentalsFileName}=		Replace String			${QAFundamentalsFileName}		NUM			${fileNum}
+	\	${fileName}=		Get Text	${QAFundamentalsFileName}	
+	\	Wait Until Element Is Visible		${QAFundamentalsDownloadButton}
+	\	Click Element		${QAFundamentalsDownloadButton}
+	\	Wait Until Created			C:\Users\AMAN\Downloads\${fileName}.pdf			timeout=15s
+	\	Run Keyword And Return Status		File Should Be Exist		C:\Users\AMAN\Downloads\${fileName}.pdf
+	\	${QAFundamentalsFileName}=		Replace String			${QAFundamentalsFileName}		${fileNum}			NUM	
+	\	${QAFundamentalsDownloadButton}=		Replace String			${QAFundamentalsDownloadButton}		${fileNum}			NUM	
+	
+
+Download All The Files Together From QA Fundamentals 
+	@{filesList}=		Create List		
+	: For		${file}		IN RANGE		1		${totalFiles}+1
+	\	${fileNum}=		Convert To String		${file}
+	\	${QAFundamentalsFileName}=		Replace String			${QAFundamentalsFileName}		NUM			${fileNum}
+	\	${fileName}=		Get Text	${QAFundamentalsFileName}	
+	\	Append To List		${filesList}		${fileName}
+	\	Wait Until Element Is Visible		${QAFundamentalsDownloadButton}
+	\	${QAFundamentalsFileName}=		Replace String			${QAFundamentalsFileName}		${fileNum}			NUM	
+	Click Element			${QAFundamentalsMainDownloadButton}
+	: FOR		${fileName}		IN 		@{filesList}
+	\	Wait Until Created			C:\Users\AMAN\Downloads\${fileName}.pdf			timeout=15s
+	\	Run Keyword And Return Status		File Should Be Exist		C:\Users\AMAN\Downloads\${fileName}.pdf
+	
+
+
+
+
+ 
