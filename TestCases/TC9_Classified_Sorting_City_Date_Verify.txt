@@ -17,10 +17,18 @@ Verify All Ads Menu Selected By Default
 	${statusByDefaultButton}=		Run Keyword And Return Status			Element Should Contain			${ByDefaultAllAds}		All Ads
 
 Verify Sorting of City And Date From Classified Menu
-	Verify Ascending Sortng of City		
-	Verify Descending Sortng of City	
-	Verify Ascending Sorting of Date		
-	Verify Descending Sorting of Date		
+	Click Element			${CityAscendingButtonImage}
+	${CityAscendingValues}=			Get Data From Columns			${CityTableCell}
+	Verify Column According To Ascending Sorting		${CityAscendingValues}
+	Click Element			${CityDescendingButtonImage}
+	${CityDescendingValues}=		Get Data From Columns			${CityTableCell}
+	Verify Column According To Descending Sorting		${CityDescendingValues}
+	Click Element			${DateAscendingButtonImage}
+	${DateAscendingValues}=		Get Data From Columns				${DateTableCellAdds}
+	Verify Column According To Ascending Sorting		${DateAscendingValues}
+	Click Element			${DateDescendingButtonImage}
+	${DateDescendingValues}=		Get Data From Columns			${DateTableCellAdds}
+	Verify Column According To Descending Sorting		${DateDescendingValues}
 	
 	
 Select All Menu Button From Category And Verify
@@ -32,10 +40,7 @@ Select All Menu Button From Category And Verify
 	\	Click Element		${ClassifiedMenuButtons}
 	\	Wait Until Element Is Visible		${TableRows}		timeout=15s
 	\	Element Should Contain			${ByDefaultAllAds}		${categoryName}
-	\	Verify Ascending Sortng of City
-	\	Verify Descending Sortng of City
-	\	Verify Ascending Sorting of Date		
-	\	Verify Descending Sorting of Date		
+	\	${status}=		Run Keyword And Return Status		Element Should Be Visible		${TableRows}
 	\	${ClassifiedMenuButtons}=		Replace String		${ClassifiedMenuButtons}		${menuNum}		NUM
 
  

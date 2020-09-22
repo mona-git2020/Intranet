@@ -37,6 +37,16 @@ ${SortTopPressedButton}=			css=img[src*='sort_top_press']
 
 ${TableHeaders}=		css=table[class*="table"] tr th
 ${TableRows}=			css=table[class*="table"] tbody tr
+${NameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Name"]
+${RATableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Reporting"]
+${DesignationTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Destination"]
+${ExperienceTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Experience"]
+${PhoneNumberTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Phone Number"]
+${ExtNoTableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Ex. No."]
+${DepartmentTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Department"]
+${EmailIdTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Email Id"]
+${LocatonTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Location"]
+${SkillsTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Skills"]
 ${TableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="VALUE"]
 ${NextButtonLink}=		Link=Next >>
 
@@ -53,6 +63,7 @@ ${SearchDateList}=			css=select[class*="input-small"]
 ${SelectDateOptionSuggestions}=		css=select[class*="input-small"] option
 ${SelectDateOption}=			css=select[class*="input-small"] option:nth-child(NUM)
 ${AnniversaryDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Anniversary"]
+${BirthDayDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Birthdate"]
 
 ${SelectYear}=			css=#holiday_year
 ${SelectBranch}=		css=#branch_id
@@ -76,15 +87,16 @@ ${CongratulationsCertification}=			css=a[onclick*="certification"]
 ${CertifivationTable}=			css=table[class*='table'] tbody
 ${CloseButton}=					css=#cboxClose
 
-
-${QAFundamentalsMainDownloadButton}			css=div[id="checklist"]
+${QAFundamentalsMainDownloadButton}			css=div[id="download"]
+${QAFundamentalsMainDownloadSelectList}			css=div[id="checklist"]
 ${DocumentsQALink}=				css=a[href*="documents/qa"]
 ${QAFundamentalsFile}=			css=a[id='14']
 ${TotalQAFundamentalFiles}=		css=div#div_14>div
-${QAFundamentalsDownloadButton}=		css=div#div_14>div:nth-child(NUM) span[class="plus_show2"]
-${QAFundamentalsFileName}=		css=div#div_14>div:nth-child(NUM)  h3>a.show_detail
+${QAFundamentalsDownloadButton}=		css=div[id*='div']>div:nth-child(NUM) span[class="plus_show2"]
+${QAFundamentalsFileName}=		css=div[id*='div']>div:nth-child(NUM) h3>a.show_detail
+${QAFundamentalsFileFrame}=		css=div[id*='div']>div:nth-child(NUM)
 ${ByDefaultAllAds}=			css=ul#menu>li.active
-
+${SelectAllButton}=			css=#selectall
 ${ClassifiedAllMenuButtons}=		css=ul#menu>li
 ${ClassifiedMenuButtons}=			css=ul#menu>li:nth-child(NUM)		
 ${CityAscendingButtonImage}=		css=tr th:nth-child(3) img[src*="sort_top.png"]

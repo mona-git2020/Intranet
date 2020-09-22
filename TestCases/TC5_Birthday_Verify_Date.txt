@@ -19,10 +19,11 @@ Select Birthday From elPulse Menu
 	Wait Until Element Is Visible		${TableRows}
 	
 Verify Employee Birthday Coming In This Month	
-	Verify All Dates Of This Month		${buttonValue}
+	${BirthdayDateValue}=		Get Data From Columns		${BirthDayDateCell}
+	Verify All Dates Of This Month		${BirthdayDateValue}
 
 Verify Employee Birthday For Particular Date	
-	Select Date From Options And Verify		${buttonValue}
-
+	Select Date From Options And Verify		${BirthDayDateCell}
+	
 
 
