@@ -8,9 +8,9 @@ Open Intranet and Login
 	Click Element		${LoginButton}
 	
 Logout And Close Browser
-	Wait Until Element Is Visible		${LogoutLink}
+	Wait Until Element Is Visible		${LogoutLink}	timeout=10s
 	Click Element		${LogoutLink}
-	Wait Until Element Is Visible		${EnterUsername}
+	Wait Until Element Is Visible		${EnterUsername}	timeout=10s
 	Close Browser
 	
 

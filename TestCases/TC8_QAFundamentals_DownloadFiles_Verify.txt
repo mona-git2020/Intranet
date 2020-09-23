@@ -3,6 +3,7 @@ Library		Selenium2Library
 Library		String
 Library		Collections	
 Library		OperatingSystem
+Library		../Variables/WebElement.py
 Resource	../Common/Common_Variables.txt
 Resource	../Common/Keywords.txt	
 Suite Setup		Open Intranet and Login
@@ -17,26 +18,24 @@ Select QA Fundamentals From Documents Toolbar Menu
 	Switch Window		NEW
 	Wait Until Element Is Visible		${QAFundamentalsFile}		timeout=15s
 	Click Element			${QAFundamentalsFile}
+	Wait Until Element Is Visible		${TotalQAFundamentalFiles}		timeout=15s
+	Click Element		${LeftSideSectionClosedButton}
+	Wait Until Element Is Visible		${TotalQAFundamentalFiles}		timeout=15s
+	
+	
 	
 Download The Files From QA Fundamentals
-	Switch Window		NEW
-	Wait Until Element Is Visible		${QAFundamentalsFile}		timeout=15s
-	Click Element			${QAFundamentalsFile}
 	${totalFiles}=		Get Element Count		${TotalQAFundamentalFiles}
-	: For		${file}		IN RANGE		1		${totalFiles}+1
+	: For		${file}		IN RANGE		2		${totalFiles}+1
 	\	${fileNum}=		Convert To String		${file}
 	\	${QAFundamentalsDownloadButton}=		Replace String			${QAFundamentalsDownloadButton}		NUM			${fileNum}
 	\	${QAFundamentalsFileName}=		Replace String			${QAFundamentalsFileName}		NUM			${fileNum}
 	\	${QAFundamentalsFileFrame}=		Replace String			${QAFundamentalsFileFrame}		NUM			${fileNum}
 	\	${fileName}=		Get Text	${QAFundamentalsFileName}	
-	\	Wait Until Element Is Visible		${QAFundamentalsDownloadButton}		timeout=15s
-	\	Click Element		${QAFundamentalsFileFrame}
-	\	Click Element		${QAFundamentalsFileName}
+	\	${fileName}=		Split String		${fileName}		${SPACE}
 	\	Click Element		${QAFundamentalsDownloadButton}
-	\	Switch Window		NEW
-	\	Handle Alert		action=ACCEPT
-	\	Wait Until Created			C:\Users\AMAN\Downloads\${fileName}.pdf			timeout=15s
-	\	Run Keyword And Return Status		File Should Be Exist		C:\Users\AMAN\Downloads\${fileName}.pdf
+	\	Wait Until Created			C:/Users/AMAN/Downloads/*${fileName[4]}.pdf			timeout=90s
+	\	${status}=		Run Keyword And Return Status		File Should Exist		C:/Users/AMAN/Downloads/*${fileName[4]}.pdf
 	\	${QAFundamentalsFileFrame}=		Replace String			${QAFundamentalsFileFrame}		${fileNum}			NUM		count=1	
 	\	${QAFundamentalsFileName}=		Replace String			${QAFundamentalsFileName}		${fileNum}			NUM		count=1	
 	\	${QAFundamentalsDownloadButton}=		Replace String			${QAFundamentalsDownloadButton}		${fileNum}			NUM		count=1	
@@ -45,25 +44,25 @@ Download The Files From QA Fundamentals
 Download All The Files Together From QA Fundamentals 
 	@{filesList}=		Create List		
 	${totalFiles}=		Get Element Count		${TotalQAFundamentalFiles}	
-	: For		${file}		IN RANGE		1		${totalFiles}+1
+	: For		${file}		IN RANGE		2		${totalFiles}+1
 	\	${fileNum}=		Convert To String		${file}
 	\	${QAFundamentalsFileName}=		Replace String			${QAFundamentalsFileName}		NUM			${fileNum}
-	\	${fileName}=		Get Text	${QAFundamentalsFileName}	
-	\	Append To List		${filesList}		${fileName}
+	\	${fileName}=		Get Text	${QAFundamentalsFileName}
+	\	${fileName}=		Split String		${fileName}		${SPACE}
+	\	Append To List		${filesList}		${fileName[4]}
 	\	Wait Until Element Is Visible		${TotalQAFundamentalFiles}
 	\	${QAFundamentalsFileName}=		Replace String			${QAFundamentalsFileName}		${fileNum}			NUM		count=1	
+	Wait Until Element Is Visible			${QAFundamentalsMainDownloadSelectList}
 	Click Element			${QAFundamentalsMainDownloadSelectList}
 	Click Element			${SelectAllButton}
 	Click Element			${QAFundamentalsMainDownloadButton}	
-	Switch Window		NEW
-	Mouse Down		css=input[type="radio"]
-	Mouse up		css=input[type="radio"]
-	Select Radio Button		Save File	
-	Handle Alert		action=ACCEPT
+	Wait Until Created			C:/Users/AMAN/Downloads/*.zip			timeout=100s
+	Wait Until Keyword Succeeds			1 min		30 sec		File Should Exist		C:/Users/AMAN/Downloads/*.pdf			
+	log		${filesList}
+	${status}=		Run Keyword And Return Status		File Should Exist		C:/Users/AMAN/Downloads/*.zip
+	${countFiles}=		Count Files In Directory		C:/Users/AMAN/Downloads/
 	: FOR		${fileName}		IN 		@{filesList}
-	\	Wait Until Created			C:\Users\AMAN\Downloads\${fileName}.pdf			timeout=15s
-	\	Run Keyword And Return Status		File Should Be Exist		C:\Users\AMAN\Downloads\${fileName}.pdf
-	
+	\	${status}=		Run Keyword And Return Status		File Should Exist		C:/Users/AMAN/Downloads/*${fileName}.pdf
 
 
 

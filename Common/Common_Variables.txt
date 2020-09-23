@@ -86,7 +86,7 @@ ${CongratulationsJoiningDateTilte}=			css=div.span4:nth-child(2) dl dt
 ${CongratulationsCertification}=			css=a[onclick*="certification"]
 ${CertifivationTable}=			css=table[class*='table'] tbody
 ${CloseButton}=					css=#cboxClose
-
+${LeftSideSectionClosedButton}=		css=#west-closer
 ${QAFundamentalsMainDownloadButton}			css=div[id="download"]
 ${QAFundamentalsMainDownloadSelectList}			css=div[id="checklist"]
 ${DocumentsQALink}=				css=a[href*="documents/qa"]
