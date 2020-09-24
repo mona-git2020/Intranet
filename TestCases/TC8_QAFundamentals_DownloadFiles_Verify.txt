@@ -14,17 +14,18 @@ Select QA Fundamentals From Documents Toolbar Menu
 	Wait Until Element Is Visible		${DocumentsButton}		timeout=15s
 	Click Element		${DocumentsButton}
 	Wait Until Element Is Visible		${DocumentsQALink}		timeout=15s
-	Click Element		${DocumentsQALink}	
+	Click Element		${DocumentsQALink}
 	Switch Window		NEW
 	Wait Until Element Is Visible		${QAFundamentalsFile}		timeout=15s
 	Click Element			${QAFundamentalsFile}
-	Wait Until Element Is Visible		${TotalQAFundamentalFiles}		timeout=15s
+	Wait Until Element Is Visible		${LeftSideSectionClosedButton}		timeout=15s
 	Click Element		${LeftSideSectionClosedButton}
 	Wait Until Element Is Visible		${TotalQAFundamentalFiles}		timeout=15s
 	
 	
 	
 Download The Files From QA Fundamentals
+	${downloadDir}=		create_ff_profile		${downloadDir}
 	${totalFiles}=		Get Element Count		${TotalQAFundamentalFiles}
 	: For		${file}		IN RANGE		2		${totalFiles}+1
 	\	${fileNum}=		Convert To String		${file}
@@ -33,6 +34,7 @@ Download The Files From QA Fundamentals
 	\	${QAFundamentalsFileFrame}=		Replace String			${QAFundamentalsFileFrame}		NUM			${fileNum}
 	\	${fileName}=		Get Text	${QAFundamentalsFileName}	
 	\	${fileName}=		Split String		${fileName}		${SPACE}
+	\	Wait Until Element Is Visible		${TotalQAFundamentalFiles}
 	\	Click Element		${QAFundamentalsDownloadButton}
 	\	Wait Until Created			C:/Users/AMAN/Downloads/*${fileName[4]}.pdf			timeout=90s
 	\	${status}=		Run Keyword And Return Status		File Should Exist		C:/Users/AMAN/Downloads/*${fileName[4]}.pdf
