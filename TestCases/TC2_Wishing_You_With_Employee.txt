@@ -2,6 +2,7 @@
 Library		Selenium2Library	
 Library		String
 Library		Collections	
+Library		../Variables/WebElement.py
 Resource	../Common/Common_Variables.txt
 Resource	../Common/Keywords.txt	
 Suite Setup		Open Intranet and Login
@@ -28,11 +29,11 @@ Click On Particular Employee Name And Verify It Is Birthday or Anniversary From 
 	${date}=		Get Time		day	
 	: FOR		${name}		IN		@{WishingYouSectionData}
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${name}
-	\	Wait Until Element Is Visible			${EmployeeNameLink}			timeout=10s
+	\	Wait Until Element Is Visible			${EmployeeNameLink}			timeout=60s
 	\	Click Element			${EmployeeNameLink}
-	\	Wait Until Element Is Visible		${EmployeeDetailBox}
-	\	${status}=		Run Keyword And Return Status		Element Should Contain			${EmployeeBirthdayTilte}		Birthdate
-	\	Run Keyword If		${status}==True			Element Should Contain			${EmployeeBirthday}			${date}
+	\	Wait Until Element Is Visible		${EmployeeBirthdayDateBox}		timeout=15s
+	\	${status}=		Run Keyword And Return Status		Element Should Contain			${EmployeeBirthdayDateBox}		Birthdate
+	\	Run Keyword If		${status}==True			Element Should Contain			${EmployeeBirthdayDateBox}			${date}
 	\	Go Back
 	\	Wait Until Element Is Visible		${BirthdayEmployeeName}	
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME

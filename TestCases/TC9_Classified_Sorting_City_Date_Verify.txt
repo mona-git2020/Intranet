@@ -2,6 +2,7 @@
 Library		Selenium2Library	
 Library		String
 Library		Collections		
+Library		../Variables/WebElement.py
 Resource	../Common/Common_Variables.txt
 Resource	../Common/Keywords.txt	
 Suite Setup		Open Intranet and Login

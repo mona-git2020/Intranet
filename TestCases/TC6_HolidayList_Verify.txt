@@ -2,6 +2,7 @@
 Library		Selenium2Library	
 Library		String
 Library		Collections	
+Library		../Variables/WebElement.py
 Resource	../Common/Common_Variables.txt
 Resource	../Common/Keywords.txt	
 Suite Setup		Open Intranet and Login
@@ -20,12 +21,12 @@ Select Holiday List From Home Menu And Select Year, Month, Branch
 	Set Suite Variable		${yearValue}
 	Click Element			${SelectYearOption}
 	Click Element			${SelectBranch}
+	${branchValue}=		Get Value		${SelectBranchOption}
 	Click Element			${SelectBranchOption}
-	${branchValue}=		Get Text		${SelectBranchOption}
 	Set Suite Variable		${branchValue}
 	Click Element			${SelectMonth}
 	${monthValue}=		Get Value		${SelectMonthOption}
-	${monthValue}=		Evaluate		${monthValue}+1
+	${monthValue}=		Run Keyword If			'${monthValue}'=='October'		Set Variable		10
 	${monthValue}=		Convert To String		${monthValue}
 	Set Suite Variable		${monthValue}
 	Click Element			${SelectMonthOption}

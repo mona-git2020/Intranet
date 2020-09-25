@@ -1,7 +1,6 @@
 *** Keywords ***
 Open Intranet and Login	
 	${profile}=		create_ff_profile		${profileAddress}
-	Log			${profile}
 	Open Browser	${urlOfIntranet}		${browser}		ff_profile_dir=${profile}		remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
 	Maximize Browser Window
 	Wait Until Element Is Visible		${EnterUsername}
@@ -61,27 +60,33 @@ Get Data From All Columns And Verify
 	[Arguments]			${TableCellValues}		${rowNumber}
 	${EyeIcon}=		Replace String			${EyeIcon}		ROW			${rowNumber}
 	${TableCellValues}=		Replace String			${TableCellValues}		ROW			${rowNumber}
+	${ColumnsList}=		Replace String			${ColumnsList}		ROW			${rowNumber}
 	&{columnsDict}=		Create Dictionary
 	Log		${columnsDict}	
-	${length}=		Get Length		${headerName}	
-	: FOR		${col}		IN RANGE		${length}
-	\	${TableCellValues}=		Replace String			${TableCellValues}		VALUE			${headerName[${col}]}
-	\	${cellValue}=		Get Text		${TableCellValues}
-	\	Set To Dictionary			${columnsDict}		${headerName[${col}]}		${cellValue}
+#	${headerNameList}=		Get WebElements		${TableHeaders}			
+	${columnCellValueList}=		Get WebElements		${ColumnsList}
+	${length}=		Get Length		${headerName}
+	: FOR		${column}		IN RANGE		1		${length}
+	\	${columnNum}=		Convert To String		${column}
+	\	${TableCellValues}=		Replace String			${TableCellValues}		NUM			${columnNum}
+	\	${cellValue}=		Get Text		${columnCellValueList[${column}]}
+	\	Set To Dictionary			${columnsDict}		${headerName[${column}-1]}		${cellValue}
 	\	Log				${columnsDict}
-	\	${TableCellValues}=		Replace String			${TableCellValues}		${headerName[${col}]}		VALUE
+	\	${TableCellValues}=		Replace String			${TableCellValues}		${columnNum}		NUM
 	Click Element		${EyeIcon}
-	Wait Until Element Is Visible		${EmployeeDetailBox}
-	: FOR		${num}		IN RANGE		${length}	
-	\	${status}=		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${columnsDict['${headerName[${num}]}']}
-	\	${splitList}=		Split String		${columnsDict['${headerName[${num}]}']}			${SPACE}
-	\	${status1}=		Run Keyword If		${status}==False		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${splitList[0]}	
-	\	${splitList1}=		Split String		${columnsDict['${headerName[${num}]}']}			.
-	\	${status2}=		Run Keyword If		${status}==False and ${status1}==False		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${splitList1[0]}
-	\	${splitList2}=		Split String		${columnsDict['${headerName[${num}]}']}			\n
-	\	${status3}=		Run Keyword If		${status}==False and ${status1}==False and ${status2}==False		Run Keyword And Return Status		Element Should Contain			${EmployeeDetailBox}		${splitList2[0]}
-	\	${splitList3}=		Split String		${columnsDict['${headerName[${num}]}']}			,
-	\	Run Keyword If		${status}==False and ${status1}==False and ${status2}==False and ${status3}==False		Element Should Contain			${EmployeeDetailBox}		${splitList3[0]}
+	Wait Until Element Is Visible		${EmployeeBirthdayDateBox}		timeout=15s
+	${statusName}=				Run Keyword And Return Status			Element Should Contain			${EmployeeNameBox}				${columnsDict["${headerName[0]}"]}
+	${statusRAName}=			Run Keyword And Return Status			Element Should Contain			${EmployeeRANameBox}			${columnsDict["${headerName[1]}"]}
+	${statusDesignation}=		Run Keyword And Return Status			Element Should Contain			${EmployeeDesignationBox}		${columnsDict["${headerName[2]}"]}
+	${experience}=		Split String			${columnsDict["${headerName[3]}"]}			.	
+	${statusExperienceYear}=		Run Keyword And Return Status			Element Should Contain			${EmployeeExperienceBox}		${experience[0]}
+	${statusExperienceMonth}=		Run Keyword And Return Status			Element Should Contain			${EmployeeExperienceBox}		${experience[1]}
+	${statusMobileNo}=			Run Keyword And Return Status			Element Should Contain			${EmployeeMobileNoBox}			${columnsDict["${headerName[4]}"]}
+	${statusExtension}=			Run Keyword And Return Status			Element Should Contain			${EmployeeExtensionBox}			${columnsDict["${headerName[5]}"]}
+	${statusDepartment}=		Run Keyword And Return Status			Element Should Contain			${EmployeeDepartmentBox}		${columnsDict["${headerName[7]}"]}
+	${statusEmailId}=			Run Keyword And Return Status			Element Should Contain			${EmployeeEmailIdBox}			${columnsDict["${headerName[6]}"]}
+	${statusLocation}=			Run Keyword And Return Status			Element Should Contain			${EmployeeLocationBox}			${columnsDict["${headerName[8]}"]}
+	
 	Go Back
 	Wait Until Element Is Visible		${TableRows}
 	${EyeIcon}=		Replace String			${EyeIcon}		${rowNumber}		ROW	
@@ -116,9 +121,9 @@ Get Data From All Rows
 	\	${value}=		Get Text			${TableCell}
 	\	${TableCell}=		Replace String			${TableCell}		${rowNum}		ROW		count=1	
 	\	${value}=		Convert To Lowercase		${value}
-	\	${value}=		Split String		${value}		${SPACE}
-	\	${value}=		Split String		${value[0]}		\n
-	\	${value}=		Split String		${value[0]}		.
+#	\	${value}=		Split String		${value}		${SPACE}
+	\	${value}=		Split String		${value}		\n
+#	\	${value}=		Split String		${value[0]}		.
 	\	${status}=		Run Keyword And Return Status		List Should Contain Value		${value}		all	
 	\	Continue For Loop If		${status}==True
 	\	Append To List		${ColumnValues}			${value[0]}

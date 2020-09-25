@@ -1,17 +1,17 @@
 *** Variables ***
 
-${EnterUsername}=		css=#username
-${EnterPassword}=		css=#password
-${LoginButton}=			css=button[class*="submit"]
+${EnterUsername}=		css=input[name="username"]	
+${EnterPassword}=		css=input[name="password"]  
+${LoginButton}=			css=button[name="Submit"]
 ${HomeButton}=			Link=Home
-${ElPulseButton}=			css=a[href*="HR-Newsletter/"]
-${ClassifiedButton}=		css=li[class*='main'] a[href*="classified"]
-${DocumentsButton}=		css=li[class*='main'] a[href*="documents"] 
-${PhonebookButton}=		css=li.subMenuBtn a[href*="phonebook"]
-${HolidayListMenu}=		css=li.subMenuBtn a[href*="holidaylist"]
-${AnniversaryButtonMenu}=		css=li.subMenuBtn a[href*="anniversary"]
-${BirthdayButtonMenu}=		css=li.subMenuBtn a[href*="birthday"]
-${LogoutLink}=			Link=Logout	
+${ElPulseButton}=			css=a[href*="newsletter"]
+${ClassifiedButton}=		css=a[href*="classified"]
+${DocumentsButton}=		css=a[href*="documents"] 
+${PhonebookButton}=		css=li>a[href*="phonebook"]						
+${HolidayListMenu}=		css=li>a[href*="holidaylist"]					
+${AnniversaryButtonMenu}=		css=li>a[href*="anniversary"]			
+${BirthdayButtonMenu}=		css=li>a[href*="birthday"]					
+${LogoutLink}=			css=a[href*="logout"]	
 ${NameDescendingButtonImage}=		css=tr th:nth-child(2) img[src*="sort_down.png"]
 ${NameAscendingButtonImage}=		css=tr th:nth-child(2) img[src*="sort_top.png"]
 ${RANameDescendingButtonImage}=		css=tr th:nth-child(3) img[src*="sort_down.png"]
@@ -37,27 +37,38 @@ ${SortTopPressedButton}=			css=img[src*='sort_top_press']
 
 ${TableHeaders}=		css=table[class*="table"] tr th
 ${TableRows}=			css=table[class*="table"] tbody tr
-${NameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Name"]
-${RATableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Reporting"]
-${DesignationTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Destination"]
-${ExperienceTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Experience"]
-${PhoneNumberTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Phone Number"]
-${ExtNoTableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Ex. No."]
-${DepartmentTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Department"]
-${EmailIdTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Email Id"]
-${LocatonTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Location"]
-${SkillsTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Skills"]
-${TableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="VALUE"]
+${NameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(2)
+${RANameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(3)
+${DesignationTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(4)
+${ExperienceTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(5)
+${PhoneNumberTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(6)
+${ExtNoTableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(7)
+${DepartmentTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(8)
+${EmailIdTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(9)
+${LocatonTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(10)
+${SkillsTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(11)
+${ColumnsList}=				css=table[class*="table"] tbody tr:nth-child(ROW) td
+${TableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(NUM)	
 ${NextButtonLink}=		Link=Next >>
 
-${BirthdayEmployeeList}=		css=div.panel-body ul.demo1 li
-${WishingYouSection}=			css=div[id*='s5_right']:nth-child(5)
-${BirthdayEmployeeName}=		css=ul[class*='demo'] li:nth-child(1) tr:nth-child(1) td span
+${BirthdayEmployeeList}=		css=ul[class*="bday"]>li
+${WishingYouSection}=			css=div[class="card"]:nth-child(3)
+${BirthdayEmployeeName}=		css=ul[class*="bday"]>li:nth-child(1) div[class="usr-name"]
 ${BirthdayEmployeePhoto}=		css=ul[class*='demo'] li:nth-child(NUM) tr:nth-child(2) td:nth-child(2) span
+${EmployeeBirthdayDateBox}=		css=li[class*="emp_birth"]
+${EmployeeNameBox}=				css=li[class*="emp_name"]
+${EmployeeDesignationBox}=		css=li[class*="emp_des"]
+${EmployeeExtensionBox}=		css=li[class*="emp_ext"]
+${EmployeeMobileNoBox}=			css=li[class*="emp_mobile"]
+${EmployeeExperienceBox}=		css=li[class*="emp_exp"]
+${EmployeeLocationBox}=			css=li[class*="emp_loc"]
+${EmployeeDepartmentBox}=		css=li[class*="emp_dept"]
+${EmployeeRANameBox}=			css=li[class*="emp_ra"]
+${EmployeeEmailIdBox}=			css=li[class*="emp_addr"]
 ${EmployeeBirthdayTilte}=		css=div.span4:nth-child(4) dl dt
 ${EmployeeBirthday}=			css=div.span4:nth-child(4) dl dd:nth-child(2)
-${EmployeeDetailBox}=			css=div[id='s5_component_wrap_inner']
-${EyeIcon}=					css=table[class*="table"] tbody tr:nth-child(ROW) span[class*="eye"]
+${EmployeeDetailBox}=			css=div[id='users-profile-core']
+${EyeIcon}=					css=table[class*="table"] tbody tr:nth-child(ROW) img[class*="eye"]
 ${EmployeeNameLink}=		Link=NAME
 ${SearchDateList}=			css=select[class*="input-small"]
 ${SelectDateOptionSuggestions}=		css=select[class*="input-small"] option
@@ -72,8 +83,8 @@ ${SubmitButton}=		css=button[id*='submit']
 ${TotalPagePagination}=			css=ul[class*="pagination"]>li
 ${SinglePagePagination}=		css=ul[class*="pagination"]>li:nth-child(1)>a  
 ${SelectYearOption}=			css=option[value="2020"]
-${SelectBranchOption}=			css=option[value="AHM"]
-${SelectMonthOption}=			css=option[value="9"]
+${SelectBranchOption}=			css=option[value="Ahmedabad"]
+${SelectMonthOption}=			css=option[value="October"]
 ${BranchNameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Brabch Name"]
 ${DateTableCell}=				css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Date"]
 
@@ -81,7 +92,7 @@ ${DateTableCell}=				css=table[class*="table"] tbody tr:nth-child(ROW) td[data-t
 ${CongratulationsEmployeeList}=			css=ul[class='demo'] li
 ${CongratulationsEmployeeName}=			css=ul[class='demo'] li:nth-child(1) tr:nth-child(1) td:nth-child(2) a
 ${CongratulationsEmployeeDetail}=		css=ul[class='demo'] li:nth-child(1) tr:nth-child(1) td:nth-child(2) p
-${CongratulationsJoiningDate}=			css=div.span4:nth-child(2) dl dd:nth-child(2)
+${CongratulationsJoiningDate}=			css=li[class*="emp_birth"]			
 ${CongratulationsJoiningDateTilte}=			css=div.span4:nth-child(2) dl dt
 ${CongratulationsCertification}=			css=a[onclick*="certification"]
 ${CertifivationTable}=			css=table[class*='table'] tbody

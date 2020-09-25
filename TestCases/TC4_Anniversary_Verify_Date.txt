@@ -2,6 +2,7 @@
 Library		Selenium2Library	
 Library		String
 Library		Collections	
+Library		../Variables/WebElement.py
 Resource	../Common/Common_Variables.txt
 Resource	../Common/Keywords.txt	
 Suite Setup		Open Intranet and Login
@@ -10,8 +11,8 @@ Suite Teardown	Logout And Close Browser
 
 *** Test Cases ***
 Select Anniversary From elPulse Menu 
-	Wait Until Element Is Visible		${ElPulseButton}		timeout=15s
-	Mouse Over		${ElPulseButton}
+	Wait Until Element Is Visible		${HomeButton}		timeout=15s
+	Mouse Over		${HomeButton}
 	Wait Until Element Is Visible		${AnniversaryButtonMenu}
 	${buttonValue}=		Get Text		${AnniversaryButtonMenu}
 	Set Suite Variable		${buttonValue}
