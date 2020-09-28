@@ -66,13 +66,10 @@ Get Data From All Columns And Verify
 #	${headerNameList}=		Get WebElements		${TableHeaders}			
 	${columnCellValueList}=		Get WebElements		${ColumnsList}
 	${length}=		Get Length		${headerName}
-	: FOR		${column}		IN RANGE		1		${length}
-	\	${columnNum}=		Convert To String		${column}
-	\	${TableCellValues}=		Replace String			${TableCellValues}		NUM			${columnNum}
+	: FOR		${column}		IN RANGE		1		${length}+1
 	\	${cellValue}=		Get Text		${columnCellValueList[${column}]}
 	\	Set To Dictionary			${columnsDict}		${headerName[${column}-1]}		${cellValue}
 	\	Log				${columnsDict}
-	\	${TableCellValues}=		Replace String			${TableCellValues}		${columnNum}		NUM
 	Click Element		${EyeIcon}
 	Wait Until Element Is Visible		${EmployeeBirthdayDateBox}		timeout=15s
 	${statusName}=				Run Keyword And Return Status			Element Should Contain			${EmployeeNameBox}				${columnsDict["${headerName[0]}"]}
@@ -82,10 +79,9 @@ Get Data From All Columns And Verify
 	${statusExperienceYear}=		Run Keyword And Return Status			Element Should Contain			${EmployeeExperienceBox}		${experience[0]}
 	${statusExperienceMonth}=		Run Keyword And Return Status			Element Should Contain			${EmployeeExperienceBox}		${experience[1]}
 	${statusMobileNo}=			Run Keyword And Return Status			Element Should Contain			${EmployeeMobileNoBox}			${columnsDict["${headerName[4]}"]}
-	${statusExtension}=			Run Keyword And Return Status			Element Should Contain			${EmployeeExtensionBox}			${columnsDict["${headerName[5]}"]}
-	${statusDepartment}=		Run Keyword And Return Status			Element Should Contain			${EmployeeDepartmentBox}		${columnsDict["${headerName[7]}"]}
+	${statusDepartment}=		Run Keyword And Return Status			Element Should Contain			${EmployeeDepartmentBox}		${columnsDict["${headerName[5]}"]}
 	${statusEmailId}=			Run Keyword And Return Status			Element Should Contain			${EmployeeEmailIdBox}			${columnsDict["${headerName[6]}"]}
-	${statusLocation}=			Run Keyword And Return Status			Element Should Contain			${EmployeeLocationBox}			${columnsDict["${headerName[8]}"]}
+	${statusLocation}=			Run Keyword And Return Status			Element Should Contain			${EmployeeLocationBox}			${columnsDict["${headerName[7]}"]}
 	
 	Go Back
 	Wait Until Element Is Visible		${TableRows}
@@ -106,7 +102,7 @@ Get Data From All Pages
 	\	${status}=		Run Keyword And Return Status		Wait Until Element Is Visible		${NextButtonLink}
 	\	Run Keyword If		${status}==True			Click Element		${NextButtonLink}
 	\	...		ELSE		Exit For Loop
-	\	Wait Until Element Is Visible		${TableRows}
+	\	Wait Until Element Is Visible		${TableRows}		timeout=25s
 	\	${page}=		Evaluate		${page}+1
 	Log		${ColumnValues}
 	Return From Keyword			${ColumnValues}
@@ -137,7 +133,7 @@ Verify Column According To Ascending Sorting
 	Sort List		${ColumnValues}
 	Log		${ColumnValues}
 	Log		${newValuesList}
-	${statusEquality}=		Run Keyword And Return Status		Should Be Equal		${newValuesList}		${ColumnValues}
+	${statusEquality}=		Run Keyword And Return Status		Lists Should Be Equal		${newValuesList}		${ColumnValues}
 
 Verify Column According To Descending Sorting
 	[Arguments]		${ColumnValues}
@@ -148,21 +144,30 @@ Verify Column According To Descending Sorting
 	Reverse List		${ColumnValues}
 	Log		${ColumnValues}
 	Log		${newValuesList}
-	${statusEquality}=		Run Keyword And Return Status		Should Be Equal		${newValuesList}		${ColumnValues}
+	${statusEquality}=		Run Keyword And Return Status		Lists Should Be Equal		${newValuesList}		${ColumnValues}
 
 Verify Ascending And Descending Sorting For Numbers
 	[Arguments]		${ColumnValues}
 	Log			${ColumnValues}
+	${mainList}=		Copy List		${ColumnValues}
+	Sort List		${ColumnValues}
+	Log		${ColumnValues}
+	Log		${mainList}
+	${statusEquality}=		Run Keyword And Return Status		Should Be Equal		${mainList}			${ColumnValues}		
 	${status1}=			Run Keyword And Return Status			Element Should Be Visible		${SortTopPressedButton}
 	${status2}=			Run Keyword And Return Status			Element Should Be Visible		${SortDownPressedButton}	
 	${length}=		Get Length		${ColumnValues}
 	: FOR		${num}		IN RANGE	0		${length}
 	\	${value1}=		Set Variable	${ColumnValues[${num}]}
+	\	Continue For Loop If		'${value1}'==''
+	\	${value1}=		Convert To Number		${value1}
 	\	${newNum}=		Evaluate	${num}+1
 	\	Exit For Loop If		${newNum}>=${length}	
 	\	${value2}=		Set Variable	${ColumnValues[${newNum}]}
-	\	Run Keyword If		${status1}==True		Should Be True		'${value1}'<='${value2}'
-	\	Run Keyword If		${status2}==True		Should Be True		'${value1}'>='${value2}'
+	\	Continue For Loop If		'${value2}'==''
+	\	${value2}=		Convert To Number		${value2}
+	\	Run Keyword If		${status1}==True		Should Be True		${value1}<=${value2}
+	\	Run Keyword If		${status2}==True		Should Be True		${value1}>=${value2}
 	
 
 Verify Ascending Sorting For Date

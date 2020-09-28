@@ -22,16 +22,16 @@ ${ExperienceDescendingButtonImage}=		css=tr th:nth-child(5) img[src*="sort_down.
 ${ExperienceAscendingButtonImage}=		css=tr th:nth-child(5) img[src*="sort_top.png"]
 ${PhoneNumberDescendingButtonImage}=		css=tr th:nth-child(6) img[src*="sort_down.png"]
 ${PhoneNumberAscendingButtonImage}=		css=tr th:nth-child(6) img[src*="sort_top.png"]
-${ExtNoDescendingButtonImage}=		css=tr th:nth-child(7) img[src*="sort_down.png"]
-${ExtNoAscendingButtonImage}=		css=tr th:nth-child(7) img[src*="sort_top.png"]
-${DepartmentDescendingButtonImage}=		css=tr th:nth-child(8) img[src*="sort_down.png"]
-${DepartmentAscendingButtonImage}=		css=tr th:nth-child(8) img[src*="sort_top.png"]
-${EmailIdDescendingButtonImage}=		css=tr th:nth-child(9) img[src*="sort_down.png"]
-${EmailIdAscendingButtonImage}=		css=tr th:nth-child(9) img[src*="sort_top.png"]
-${LocatonDescendingButtonImage}=		css=tr th:nth-child(10) img[src*="sort_down.png"]
-${LocatonAscendingButtonImage}=		css=tr th:nth-child(10) img[src*="sort_top.png"]
-${SkillsDescendingButtonImage}=		css=tr th:nth-child(11) img[src*="sort_down.png"]
-${SkillsAscendingButtonImage}=		css=tr th:nth-child(11) img[src*="sort_top.png"]
+#${ExtNoDescendingButtonImage}=		css=tr th:nth-child(7) img[src*="sort_down.png"]
+#${ExtNoAscendingButtonImage}=		css=tr th:nth-child(7) img[src*="sort_top.png"]
+${DepartmentDescendingButtonImage}=		css=tr th:nth-child(7) img[src*="sort_down.png"]
+${DepartmentAscendingButtonImage}=		css=tr th:nth-child(7) img[src*="sort_top.png"]
+${EmailIdDescendingButtonImage}=		css=tr th:nth-child(8) img[src*="sort_down.png"]
+${EmailIdAscendingButtonImage}=		css=tr th:nth-child(8) img[src*="sort_top.png"]
+${LocatonDescendingButtonImage}=		css=tr th:nth-child(9) img[src*="sort_down.png"]
+${LocatonAscendingButtonImage}=		css=tr th:nth-child(9) img[src*="sort_top.png"]
+#${SkillsDescendingButtonImage}=		css=tr th:nth-child(11) img[src*="sort_down.png"]
+#${SkillsAscendingButtonImage}=		css=tr th:nth-child(11) img[src*="sort_top.png"]
 ${SortDownPressedButton}=			css=img[src*='sort_down_press']
 ${SortTopPressedButton}=			css=img[src*='sort_top_press']
 
@@ -42,11 +42,11 @@ ${RANameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-c
 ${DesignationTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(4)
 ${ExperienceTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(5)
 ${PhoneNumberTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(6)
-${ExtNoTableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(7)
-${DepartmentTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(8)
-${EmailIdTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(9)
-${LocatonTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(10)
-${SkillsTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(11)
+#${ExtNoTableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(7)
+${DepartmentTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(7)
+${EmailIdTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(8)
+${LocatonTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(9)
+#${SkillsTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(11)
 ${ColumnsList}=				css=table[class*="table"] tbody tr:nth-child(ROW) td
 ${TableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(NUM)	
 ${NextButtonLink}=		Link=Next >>
@@ -92,7 +92,7 @@ ${DateTableCell}=				css=table[class*="table"] tbody tr:nth-child(ROW) td[data-t
 ${CongratulationsEmployeeList}=			css=ul[class='demo'] li
 ${CongratulationsEmployeeName}=			css=ul[class='demo'] li:nth-child(1) tr:nth-child(1) td:nth-child(2) a
 ${CongratulationsEmployeeDetail}=		css=ul[class='demo'] li:nth-child(1) tr:nth-child(1) td:nth-child(2) p
-${CongratulationsJoiningDate}=			css=li[class*="emp_birth"]			
+${CongratulationsJoiningDate}=			css=li[class*="emp_joining"]		
 ${CongratulationsJoiningDateTilte}=			css=div.span4:nth-child(2) dl dt
 ${CongratulationsCertification}=			css=a[onclick*="certification"]
 ${CertifivationTable}=			css=table[class*='table'] tbody

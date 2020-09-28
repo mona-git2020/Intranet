@@ -37,7 +37,7 @@ Click On Particular Employee Name And Verify According To Experience or Certific
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${key}	
 	\	Wait Until Element Is Visible			${EmployeeNameLink}			timeout=60s	
 	\	Click Element		${EmployeeNameLink}
-	\	Wait Until Element Is Visible		${EmployeeDetailBox}		timeout=15s
+	\	Wait Until Element Is Visible		${EmployeeExperienceBox}		timeout=15s
 	\	${status}=		Run Keyword And Return Status		Should Contain Any			${CongratulationsSectionData['${key}']}		5
 	\	Run Keyword If		${status}==True			Element Should Contain			${CongratulationsJoiningDate}			${year}
 	\	...			ELSE	Run Keywords		Click Element			${CongratulationsCertification}		AND	
