@@ -1,0 +1,34 @@
+*** Settings ***
+Library		Selenium2Library	
+Library		String
+Library		Collections	
+Library		../Variables/WebElement.py
+Resource	../Common/Common_Variables.txt
+Resource	../Common/Keywords.txt	
+Suite Setup		Open Intranet and Login
+Suite Teardown	Logout And Close Browser
+
+
+*** Test Cases ***
+Select Anniversary From Home Menu 
+	Wait Until Element Is Visible		${HomeButton}		timeout=15s
+	Mouse Over		${HomeButton}
+	Wait Until Element Is Visible		${AnniversaryButtonMenu}
+	${buttonValue}=		Get Text		${AnniversaryButtonMenu}
+	Set Suite Variable		${buttonValue}
+	Click Element	${AnniversaryButtonMenu}
+	Wait Until Element Is Visible		${TableRows}
+	
+	
+Verify Employee's Anniversary Coming In Today	
+	${employeeList}=		Verify Today's Date And Get Emplyoee's Name			${AnniversaryDateCell}
+	Set Suite Variable		${employeeList}
+	Log		${employeeList}
+
+	
+Verify Employee's Anniversary From Wishing You Section
+	${Greeting}=		Set Variable		Happy Anniversary
+	${status}=		Run Keyword And Return Status		Should Be Empty		${employeeList}
+	Run Keyword If		${status}==False		Verify Employee Name From Wishing You Section		${employeeList}		${Greeting}
+	
+	

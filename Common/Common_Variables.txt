@@ -72,9 +72,10 @@ ${EyeIcon}=					css=table[class*="table"] tbody tr:nth-child(ROW) img[class*="ey
 ${EmployeeNameLink}=		Link=NAME
 ${SearchDateList}=			css=select[class*="input-small"]
 ${SelectDateOptionSuggestions}=		css=select[class*="input-small"] option
-${SelectDateOption}=			css=select[class*="input-small"] option:nth-child(NUM)
+${SelectDateOption}=			css=select[class*="input-small"] option[value="NUM"]		#:nth-child(NUM)
 ${AnniversaryDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Anniversary"]
 ${BirthDayDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Birthdate"]
+${NameDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Name"]
 
 ${SelectYear}=			css=#holiday_year
 ${SelectBranch}=		css=#branch_id
