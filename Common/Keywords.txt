@@ -14,7 +14,13 @@ Logout And Close Browser
 	Wait Until Element Is Visible		${EnterUsername}	timeout=10s
 	Close Browser
 	
-
+Verify Valid & Invalid Login Credentials
+	[Arguments]		${username}		${password}
+	Wait Until Element Is Visible		${EnterUsername}
+	Input Text			${EnterUsername}		${username}
+	Input Text			${EnterPassword}		${password}	
+	Click Element		${LoginButton}
+	
 
 Verify All Dates Of This Month
 	[Arguments]			${DateValue}
@@ -27,7 +33,7 @@ Select Date From Options And Verify
 	Click Element		${SearchDateList}
 	Wait Until Element Is Visible		${SelectDateOptionSuggestions}
 	${totalSuggestions}=		Get Element Count		${SelectDateOptionSuggestions}
-	: FOR		${suggestionNum}		IN RANGE		2		${totalSuggestions}+1
+	: FOR		${suggestionNum}		IN RANGE		1		${totalSuggestions}
 	\	Click Element		${SearchDateList}
 	\	Wait Until Element Is Visible		${SelectDateOptionSuggestions}
 	\	${num}=		Convert To String		${suggestionNum}
@@ -46,7 +52,7 @@ Verify All Date According to Selected Date
 	: For	${item}		IN		@{DateList}	
 	\	Should Be Equal			${item}		${dateValue}
 
-Verify Today's Date And Get Emplyoee's Name
+Verify Today's Date And Get Employee's Name
 	[Arguments]		${DateCell}
 	${today'sDate}=		Get Time		day
 	Click Element		${SearchDateList}
@@ -151,9 +157,9 @@ Get Data From All Rows
 	\	${value}=		Get Text			${TableCell}
 	\	${TableCell}=		Replace String			${TableCell}		${rowNum}		ROW		count=1	
 	\	${value}=		Convert To Lowercase		${value}
-#	\	${value}=		Split String		${value}		${SPACE}
 	\	${value}=		Split String		${value}		\n
-#	\	${value}=		Split String		${value[0]}		.
+	\	${value}=		Split String		${value[0]}		${SPACE}
+	\	${value}=		Split String		${value[0]}		.
 	\	${status}=		Run Keyword And Return Status		List Should Contain Value		${value}		all	
 	\	Continue For Loop If		${status}==True
 	\	Append To List		${ColumnValues}			${value[0]}

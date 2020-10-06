@@ -20,7 +20,7 @@ Select Birthday From Home Menu
 	Wait Until Element Is Visible		${TableRows}
 	
 Verify Employee's Birthday Coming In Today	
-	${employeeList}=		Verify Today's Date And Get Emplyoee's Name			${BirthDayDateCell}
+	${employeeList}=		Verify Today's Date And Get Employee's Name			${BirthDayDateCell}
 	Set Suite Variable		${employeeList}
 	Log		${employeeList}
 

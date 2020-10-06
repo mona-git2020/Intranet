@@ -21,13 +21,13 @@ Select Anniversary From Home Menu
 	
 	
 Verify Employee's Anniversary Coming In Today	
-	${employeeList}=		Verify Today's Date And Get Emplyoee's Name			${AnniversaryDateCell}
+	${employeeList}=		Verify Today's Date And Get Employee's Name			${AnniversaryDateCell}
 	Set Suite Variable		${employeeList}
 	Log		${employeeList}
 
 	
 Verify Employee's Anniversary From Wishing You Section
-	${Greeting}=		Set Variable		Happy Anniversary
+	${Greeting}=		Set Variable		Happy Marriage Anniversary
 	${status}=		Run Keyword And Return Status		Should Be Empty		${employeeList}
 	Run Keyword If		${status}==False		Verify Employee Name From Wishing You Section		${employeeList}		${Greeting}
 	
