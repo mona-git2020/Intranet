@@ -13,15 +13,7 @@ Logout And Close Browser
 	Click Element		${LogoutLink}
 	Wait Until Element Is Visible		${EnterUsername}	timeout=10s
 	Close Browser
-	
-Verify Valid & Invalid Login Credentials
-	[Arguments]		${username}		${password}
-	Wait Until Element Is Visible		${EnterUsername}
-	Input Text			${EnterUsername}		${username}
-	Input Text			${EnterPassword}		${password}	
-	Click Element		${LoginButton}
-	
-
+		
 Verify All Dates Of This Month
 	[Arguments]			${DateValue}
 	: For		${item}		IN		@{DateValue}
@@ -45,7 +37,6 @@ Select Date From Options And Verify
 	\	${SelectDateOption}=		Replace String			${SelectDateOption}		${num}		NUM	
 	\	Continue For Loop If		${ColumnValues}==[]
 	\	Verify All Date According to Selected Date			${ColumnValues}			${dateValue}
-	
 	
 Verify All Date According to Selected Date
 	[Arguments]			${DateList}			${dateValue}
@@ -87,14 +78,12 @@ Verify Employee Name From Wishing You Section
 	\	Element Should Contain		${WishingYouSection}		${Greeting}
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME
 
-
 Verify All Columns Data From Employee Details For All Rows
 	${TotalRows}=		Get Element Count		${TableRows}
 	: FOR		${row}		IN RANGE		1		${TotalRows}+1
 	\	${rowNumber}=		Convert To String		${row}
 	\	Get Data From All Columns And Verify		${TableCellValues}		${rowNumber}
 	\	Wait Until Element Is Visible		${TableRows}
-
 
 Get Data From All Columns And Verify
 	[Arguments]			${TableCellValues}		${rowNumber}
@@ -103,7 +92,6 @@ Get Data From All Columns And Verify
 	${ColumnsList}=		Replace String			${ColumnsList}		ROW			${rowNumber}
 	&{columnsDict}=		Create Dictionary
 	Log		${columnsDict}	
-#	${headerNameList}=		Get WebElements		${TableHeaders}			
 	${columnCellValueList}=		Get WebElements		${ColumnsList}
 	${length}=		Get Length		${headerName}
 	: FOR		${column}		IN RANGE		1		${length}+1
@@ -122,7 +110,6 @@ Get Data From All Columns And Verify
 	${statusDepartment}=		Run Keyword And Return Status			Element Should Contain			${EmployeeDepartmentBox}		${columnsDict["${headerName[5]}"]}
 	${statusEmailId}=			Run Keyword And Return Status			Element Should Contain			${EmployeeEmailIdBox}			${columnsDict["${headerName[6]}"]}
 	${statusLocation}=			Run Keyword And Return Status			Element Should Contain			${EmployeeLocationBox}			${columnsDict["${headerName[7]}"]}
-	
 	Go Back
 	Wait Until Element Is Visible		${TableRows}
 	${EyeIcon}=		Replace String			${EyeIcon}		${rowNumber}		ROW	
@@ -166,7 +153,6 @@ Get Data From All Rows
 	\	Log		${ColumnValues}
 	Return From Keyword			${ColumnValues}
 		
-		
 Verify Column According To Ascending Sorting   
 	[Arguments]		${ColumnValues}
 	${newValuesList}=		Copy List		${ColumnValues}
@@ -209,7 +195,6 @@ Verify Ascending And Descending Sorting For Numbers
 	\	Run Keyword If		${status1}==True		Should Be True		${value1}<=${value2}
 	\	Run Keyword If		${status2}==True		Should Be True		${value1}>=${value2}
 	
-
 Verify Ascending Sorting For Date
 	[Arguments]		${ColumnValues}
 	${length}=		Get Length		${ColumnValues}
@@ -221,7 +206,6 @@ Verify Ascending Sorting For Date
 	\	${status}=		Run Keyword And Return Status		Should Be True		'${date1[0]}'<='${date2[0]}'	
 	\	${status1}=		Run Keyword If			'${date1[0]}'=='${date2[0]}'		Run Keyword And Return Status		Should Be True		'${date1[1]}'<='${date2[1]}'	
 	\	${status2}=		Run Keyword If			'${date1[1]}'=='${date2[1]}' and '${date1[0]}'=='${date2[0]}'		Run Keyword And Return Status		Should Be True		${date1[2]}<=${date2[2]}
-
 
 Verify Descending Sorting For Date
 	[Arguments]		${ColumnValues}

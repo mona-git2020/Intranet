@@ -30,7 +30,6 @@ ${LocatonDescendingButtonImage}=		css=tr th:nth-child(9) img[src*="sort_down.png
 ${LocatonAscendingButtonImage}=		css=tr th:nth-child(9) img[src*="sort_top.png"]
 ${SortDownPressedButton}=			css=img[src*='sort_down_press']
 ${SortTopPressedButton}=			css=img[src*='sort_top_press']
-
 ${TableHeaders}=		css=table[class*="table"] tr th
 ${TableRows}=			css=table[class*="table"] tbody tr
 ${NameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(2)
@@ -44,7 +43,6 @@ ${LocatonTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-
 ${ColumnsList}=				css=table[class*="table"] tbody tr:nth-child(ROW) td
 ${TableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(NUM)	
 ${NextButtonLink}=		Link=Next >>
-
 ${BirthdayEmployeeList}=		css=ul[class*="bday"]>li
 ${WishingYouSection}=			css=div[class="card"]:nth-child(3)
 ${BirthdayEmployeeName}=		css=ul[class*="bday"]>li:nth-child(1) div[class="usr-name"]
@@ -70,7 +68,6 @@ ${SelectDateOption}=			css=select[class*="input-small"] option[value*="NUM"]
 ${AnniversaryDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Anniversary"]
 ${BirthDayDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Birthdate"]
 ${NameDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Name"]
-
 ${SelectYear}=			css=#holiday_year
 ${SelectBranch}=		css=#branch_id
 ${SelectMonth}=			css=#month_id
@@ -82,8 +79,6 @@ ${SelectBranchOption}=			css=option[value="Ahmedabad"]
 ${SelectMonthOption}=			css=option[value="October"]
 ${BranchNameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Brabch Name"]
 ${DateTableCell}=				css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Date"]
-
-
 ${CongratulationsEmployeeList}=			css=ul[class='demo'] li
 ${CongratulationsEmployeeName}=			css=ul[class='demo'] li:nth-child(1) tr:nth-child(1) td:nth-child(2) a
 ${CongratulationsEmployeeDetail}=		css=ul[class='demo'] li:nth-child(1) tr:nth-child(1) td:nth-child(2) p
@@ -111,7 +106,6 @@ ${DateAscendingButtonImage}=		css=tr th:nth-child(4) img[src*="sort_top.png"]
 ${DateDescendingButtonImage}=		css=tr th:nth-child(4) img[src*="sort_down.png"]
 ${CityTableCell}=		css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(3)
 ${DateTableCellAdds}=		css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(4)
-
 ${UsernameRequiredAlertMessage}=		css=div[class*="alert-validate"] input[name="username"]
 ${PasswordRequiredAlertMessage}=		css=div[class*="alert-validate"] input[name="password"]
 
