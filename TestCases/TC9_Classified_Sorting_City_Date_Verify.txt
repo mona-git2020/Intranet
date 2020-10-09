@@ -17,20 +17,25 @@ Select Classified Toolbar Menu
 Verify All Ads Menu Selected By Default
 	${statusByDefaultButton}=		Run Keyword And Return Status			Element Should Contain			${ByDefaultAllAds}		All Ads
 
-Verify Sorting of City And Date From Classified Menu
+Verify Ascending Sorting of City From Classified Menu
 	Click Element			${CityAscendingButtonImage}
 	${CityAscendingValues}=			Get Data From Columns			${CityTableCell}
 	Verify Column According To Ascending Sorting		${CityAscendingValues}
+
+Verify Descending Sorting of City From Classified Menu
 	Click Element			${CityDescendingButtonImage}
 	${CityDescendingValues}=		Get Data From Columns			${CityTableCell}
 	Verify Column According To Descending Sorting		${CityDescendingValues}
+
+Verify Ascending Sorting of Date From Classified Menu
 	Click Element			${DateAscendingButtonImage}
 	${DateAscendingValues}=		Get Data From Columns				${DateTableCellAdds}
 	Verify Column According To Ascending Sorting		${DateAscendingValues}
+
+Verify Descending Sorting of Date From Classified Menu
 	Click Element			${DateDescendingButtonImage}
 	${DateDescendingValues}=		Get Data From Columns			${DateTableCellAdds}
 	Verify Column According To Descending Sorting		${DateDescendingValues}
-	
 	
 Select All Menu Button From Category And Verify
 	${totalCategory}=		Get Element Count		${ClassifiedAllMenuButtons}

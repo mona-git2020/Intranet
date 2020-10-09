@@ -18,85 +18,102 @@ Open Phonebook And Verify All Columns According to Ascending and Descending
 	Wait Until Element Is Visible		${TableRows}
 	Log			${ascendingLetters}
 	Log			${letters}
-
 	
-Verify Name Column According to Ascending and Descending
+Select Ascending Button of Name Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${NameAscendingButtonImage}		timeout=10s
 	Click Element			${NameAscendingButtonImage}			
 	${NameAscendingValues}=			Get Data From Columns			${NameTableCell}
 	Verify Column According To Ascending Sorting		${NameAscendingValues}
+
+Select Descending Button of Name Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${NameDescendingButtonImage}		timeout=10s
-	Click Element			${NameDescendingButtonImage}		
+	Click Element			${NameDescendingButtonImage}	
+	${status}=		Run Keyword and Return Status		Wait Until Element Should Is Visible		${SortDownPressedButton}				
+	Run Keyword If		${status}==False		Click Element			${NameDescendingButtonImage}
 	${NameDescendingValues}=		Get Data From Columns			${NameTableCell}
 	Verify Column According To Descending Sorting		${NameDescendingValues}
 
-
-Verify RA Name Column According to Ascending and Descending
-	Wait Until Element Is Visible		${RANameDescendingButtonImage}		timeout=10s
-	Click Element			${RANameDescendingButtonImage}		
+Select Ascending Button of RAName Column From Phonebook And Verify Sorting
+	Wait Until Element Is Visible		${RANameAscendingButtonImage}		timeout=10s
+	Click Element			${RANameAscendingButtonImage}		
 	${RANameAscendingValues}=			Get Data From Columns			${RANameTableCell}
 	Verify Column According To Ascending Sorting		${RANameAscendingValues}
+
+Select Descending Button of RAName Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${RANameDescendingButtonImage}		timeout=10s
 	Click Element			${RANameDescendingButtonImage}		
+	${status}=		Run Keyword and Return Status		Wait Until Element Should Is Visible		${SortDownPressedButton}				
+	Run Keyword If		${status}==False		Click Element			${RANameDescendingButtonImage}
 	${RANameDescendingValues}=		Get Data From Columns				${RANameTableCell}
 	Verify Column According To Descending Sorting		${RANameDescendingValues}
 
-Verify Designation Column According to Ascending and Descending	
+Select Ascending Button of Designation Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${DesignationAscendingButtonImage}		timeout=10s
 	Click Element			${DesignationAscendingButtonImage}		
 	${DesignationAscendingValues}=			Get Data From Columns		${DesignationTableCell}
 	Verify Column According To Ascending Sorting		${DesignationAscendingValues}
+
+Select Descending Button of Designation Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${DesignationDescendingButtonImage}		timeout=10s
 	Click Element			${DesignationDescendingButtonImage}		
 	${DesignationDescendingValues}=		Get Data From Columns			${DesignationTableCell}
 	Verify Column According To Descending Sorting		${DesignationDescendingValues}
 
-Verify Experience Column According to Ascending and Descending
+Select Ascending Button of Experience Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${ExperienceAscendingButtonImage}		timeout=10s
 	Click Element			${ExperienceAscendingButtonImage}		
 	${ExperienceAscendingValues}=			Get Data From Columns		${ExperienceTableCell}
 	Verify Ascending And Descending Sorting For Numbers		${ExperienceAscendingValues}
+
+Select Descending Button of Experience Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${ExperienceDescendingButtonImage}		timeout=10s
 	Click Element			${ExperienceDescendingButtonImage}		
 	${ExperienceDescendingValues}=		Get Data From Columns			${ExperienceTableCell}
 	Verify Ascending And Descending Sorting For Numbers		${ExperienceDescendingValues}
 
-Verify PhoneNumber Column According to Ascending and Descending
+Select Ascending Button of PhoneNumber Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${PhoneNumberAscendingButtonImage}		timeout=10s
 	Click Element			${PhoneNumberAscendingButtonImage}		
 	${PhoneNumberAscendingValues}=			Get Data From Columns		${PhoneNumberTableCell}
 	Verify Column According To Ascending Sorting		${PhoneNumberAscendingValues}
+
+Select Descending Button of PhoneNumber Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${PhoneNumberDescendingButtonImage}		timeout=10s
 	Click Element			${PhoneNumberDescendingButtonImage}		
 	${PhoneNumberDescendingValues}=		Get Data From Columns			${PhoneNumberTableCell}
 	Verify Column According To Descending Sorting		${PhoneNumberDescendingValues}
 
-
-Verify Department Column According to Ascending and Descending	
+Select Ascending Button of Department Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${DepartmentAscendingButtonImage}		timeout=10s
 	Click Element			${DepartmentAscendingButtonImage}		
 	${DepartmentAscendingValues}=			Get Data From Columns		${DepartmentTableCell}
 	Verify Column According To Ascending Sorting		${DepartmentAscendingValues}
+
+Select Descending Button of Department Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${DepartmentDescendingButtonImage}		timeout=10s
 	Click Element			${DepartmentDescendingButtonImage}		
 	${DepartmentDescendingValues}=		Get Data From Columns			${DepartmentTableCell}
 	Verify Column According To Descending Sorting		${DepartmentDescendingValues}
 
-Verify EmailId Column According to Ascending and Descending	
+Select Ascending Button of EmailId Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${EmailIdAscendingButtonImage}		timeout=10s
 	Click Element			${EmailIdAscendingButtonImage}		
 	${EmailIdAscendingValues}=			Get Data From Columns			${EmailIdTableCell}
 	Verify Column According To Ascending Sorting		${EmailIdAscendingValues}
+
+Select Descending Button of EmailId Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${EmailIdDescendingButtonImage}		timeout=10s
 	Click Element			${EmailIdDescendingButtonImage}		
 	${EmailIdDescendingValues}=		Get Data From Columns				${EmailIdTableCell}
 	Verify Column According To Descending Sorting		${EmailIdDescendingValues}
 
-Verify Locaton Column According to Ascending and Descending	
+Select Ascending Button of Locaton Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${LocatonAscendingButtonImage}		timeout=10s
 	Click Element			${LocatonAscendingButtonImage}		
 	${LocatonAscendingValues}=			Get Data From Columns			${LocatonTableCell}
 	Verify Column According To Ascending Sorting		${LocatonAscendingValues}
+
+Select Descending Button of Locaton Column From Phonebook And Verify Sorting
 	Wait Until Element Is Visible		${LocatonDescendingButtonImage}		timeout=10s
 	Click Element			${LocatonDescendingButtonImage}		
 	${LocatonDescendingValues}=		Get Data From Columns				${LocatonTableCell}

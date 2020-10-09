@@ -1,7 +1,7 @@
 *** Keywords ***
 Open Intranet and Login	
 	${profile}=		create_ff_profile		${profileAddress}
-	Open Browser	${urlOfIntranet}		${browser}		ff_profile_dir=${profile}		remote_url=http://192.168.43.6:4444/wd/hub		desired_capabilities={"browserName":"firefox","platform":"WINDOWS"}
+	Open Browser	${urlOfIntranet}		${browser}		remote_url=http://localhost:4444/wd/hub		desired_capabilities={"browserName":"firefox", "platform":"WINDOWS"}		ff_profile_dir=${profile}		
 	Maximize Browser Window
 	Wait Until Element Is Visible		${EnterUsername}
 	Input Text			${EnterUsername}		${username}
