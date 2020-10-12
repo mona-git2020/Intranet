@@ -1,0 +1,146 @@
+*** Settings ***
+Library		Selenium2Library	
+Library		String
+Library		Collections		
+Library		../Variables/WebElement.py
+Resource	../Common/Common_Variables.txt
+Resource	../Common/Keywords.txt	
+Suite Setup		Open Intranet and Login
+Suite Teardown	Logout And Close Browser
+
+*** Test Cases ***
+Open New Joinees From Home Menu 
+	Wait Until Element Is Visible		${HomeButton}
+	Mouse Over		${HomeButton}
+	Wait Until Element Is Visible		${NewJoineesButtonMenu}
+	Click Element	${NewJoineesButtonMenu}
+	Wait Until Element Is Visible		${TableRows}
+	${location}=		Get Location
+	Set Suite Variable		${location}
+
+Select Ascending Button of Name Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${NameAscendingButtonImage}		timeout=10s
+	Click Element			${NameAscendingButtonImage}			
+	${NameAscendingValues}=			Get Data From All Rows			${ColumnValues}		${NewJoineeNameTableCell}
+	Verify Column According To Ascending Sorting		${NameAscendingValues}
+
+Select Descending Button of Name Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${NameDescendingButtonImage}		timeout=10s
+	Click Element			${NameDescendingButtonImage}	
+	${status}=		Run Keyword and Return Status		Wait Until Element Is Visible		${SortDownPressedButton}				
+	Run Keyword If		${status}==False		Click Element			${NameDescendingButtonImage}
+	${NameDescendingValues}=		Get Data From All Rows			${ColumnValues}		${NewJoineeNameTableCell}
+	Verify Column According To Descending Sorting		${NameDescendingValues}
+
+Select Ascending Button of Joining Date Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${JoiningDateAscendingButtonImage}		timeout=10s
+	Click Element			${JoiningDateAscendingButtonImage}		
+	${JoiningDateAscendingValues}=			Get Data From All Rows		${ColumnValues}		${NewJoineeJoiningDateTableCell}
+	Verify Ascending Sorting For Date		${JoiningDateAscendingValues}
+
+Select Descending Button of Joining Date Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${JoiningDateDescendingButtonImage}		timeout=10s
+	Click Element			${JoiningDateDescendingButtonImage}		
+	${status}=		Run Keyword and Return Status		Wait Until Element Is Visible		${SortDownPressedButton}				
+	Run Keyword If		${status}==False		Click Element			${RANameDescendingButtonImage}
+	${JoiningDateDescendingValues}=		Get Data From All Rows			${ColumnValues}		${NewJoineeJoiningDateTableCell}
+	Verify Ascending Sorting For Date		${JoiningDateDescendingValues}
+
+Select Ascending Button of Designation Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${DesignationAscendingButtonImage}		timeout=10s
+	Click Element			${DesignationAscendingButtonImage}		
+	${DesignationAscendingValues}=			Get Data From All Rows		${ColumnValues}		${NewJoineeDesignationTableCell}
+	Verify Column According To Ascending Sorting		${DesignationAscendingValues}
+
+Select Descending Button of Designation Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${DesignationDescendingButtonImage}		timeout=10s
+	Click Element			${DesignationDescendingButtonImage}		
+	${status}=		Run Keyword and Return Status		Wait Until Element Is Visible		${SortDownPressedButton}				
+	Run Keyword If		${status}==False		Click Element			${RANameDescendingButtonImage}
+	${DesignationDescendingValues}=		Get Data From All Rows			${ColumnValues}		${NewJoineeDesignationTableCell}
+	Verify Column According To Descending Sorting		${DesignationDescendingValues}
+
+Select Ascending Button of Experience Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${ExperienceAscendingButtonImage}		timeout=10s
+	Click Element			${ExperienceAscendingButtonImage}		
+	${ExperienceAscendingValues}=			Get Data From All Rows		${ColumnValues}		${NewJoineeExperienceTableCell}
+	Verify Ascending And Descending Sorting For Numbers		${ExperienceAscendingValues}
+
+Select Descending Button of Experience Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${ExperienceDescendingButtonImage}		timeout=10s
+	Click Element			${ExperienceDescendingButtonImage}		
+	${status}=		Run Keyword and Return Status		Wait Until Element Is Visible		${SortDownPressedButton}				
+	Run Keyword If		${status}==False		Click Element			${RANameDescendingButtonImage}
+	${ExperienceDescendingValues}=		Get Data From All Rows			${ColumnValues}		${NewJoineeExperienceTableCell}
+	Verify Ascending And Descending Sorting For Numbers		${ExperienceDescendingValues}
+
+Select Ascending Button of Department Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${DepartmentAscendingButtonImage}		timeout=10s
+	Click Element			${DepartmentAscendingButtonImage}		
+	${DepartmentAscendingValues}=			Get Data From All Rows		${ColumnValues}		${NewJoineeDepartmentTableCell}
+	Verify Column According To Ascending Sorting		${DepartmentAscendingValues}
+
+Select Descending Button of Department Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${DepartmentDescendingButtonImage}		timeout=10s
+	Click Element			${DepartmentDescendingButtonImage}		
+	${status}=		Run Keyword and Return Status		Wait Until Element Is Visible		${SortDownPressedButton}				
+	Run Keyword If		${status}==False		Click Element			${RANameDescendingButtonImage}
+	${DepartmentDescendingValues}=		Get Data From All Rows			${ColumnValues}		${NewJoineeDepartmentTableCell}
+	Verify Column According To Descending Sorting		${DepartmentDescendingValues}
+
+Select Ascending Button of EmailId Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${EmailIdAscendingButtonImage}		timeout=10s
+	Click Element			${EmailIdAscendingButtonImage}		
+	${EmailIdAscendingValues}=			Get Data From All Rows		${ColumnValues}		${NewJoineeEmailIdTableCell}
+	Verify Column According To Ascending Sorting		${EmailIdAscendingValues}
+
+Select Descending Button of EmailId Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${EmailIdDescendingButtonImage}		timeout=10s
+	Click Element			${EmailIdDescendingButtonImage}		
+	${status}=		Run Keyword and Return Status		Wait Until Element Is Visible		${SortDownPressedButton}				
+	Run Keyword If		${status}==False		Click Element			${RANameDescendingButtonImage}
+	${EmailIdDescendingValues}=		Get Data From All Rows			${ColumnValues}		${NewJoineeEmailIdTableCell}
+	Verify Column According To Descending Sorting		${EmailIdDescendingValues}
+
+Select Ascending Button of Locaton Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${LocatonAscendingButtonImage}		timeout=10s
+	Click Element			${LocatonAscendingButtonImage}		
+	${LocatonAscendingValues}=			Get Data From All Rows			${ColumnValues}		${NewJoineeLocationTableCell}
+	Verify Column According To Ascending Sorting		${LocatonAscendingValues}
+
+Select Descending Button of Locaton Column From Phonebook And Verify Sorting
+	@{ColumnValues}=			Create List
+	Wait Until Element Is Visible		${LocatonDescendingButtonImage}		timeout=10s
+	Click Element			${LocatonDescendingButtonImage}		
+	${status}=		Run Keyword and Return Status		Wait Until Element Is Visible		${SortDownPressedButton}				
+	Run Keyword If		${status}==False		Click Element			${RANameDescendingButtonImage}
+	${LocatonDescendingValues}=		Get Data From All Rows				${ColumnValues}		${NewJoineeLocationTableCell}
+	Verify Column According To Descending Sorting		${LocatonDescendingValues}
+
+Get Emplyoee Name From New Joinees And Verify With Welcome Aboard
+	Go To		${location}
+	Wait Until Element Is Visible		${TableRows}
+	${NewJoineeEmployeeName}=			Get Data From Columns			${NewJoineeNameTableCell}
+	Wait Until Element Is Visible		${HomeButton}
+	Click Element		${HomeButton}
+	Wait Until Element Is Visible		${NewJoineesViewAllLink}
+	Click Element		${NewJoineesViewAllLink}
+	Wait Until Element Is Visible		${TableRows}
+	${NewJoineeNameFromWelcomeAboardSection}=			Get Data From Columns			${NewJoineeNameTableCell}
+	Should Be True		${NewJoineeNameFromWelcomeAboardSection}		${NewJoineeEmployeeName}
+
+
+
