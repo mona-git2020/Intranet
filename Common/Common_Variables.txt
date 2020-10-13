@@ -30,8 +30,8 @@ ${DepartmentDescendingButtonImage}=		css=a[href*="department"]>img[src*="sort_do
 ${DepartmentAscendingButtonImage}=		css=a[href*="department"]>img[src*="sort_top.png"]
 ${EmailIdDescendingButtonImage}=		css=a[href*="email_id"]>img[src*="sort_down.png"]
 ${EmailIdAscendingButtonImage}=		css=a[href*="email_id"]>img[src*="sort_top.png"]
-${LocatonDescendingButtonImage}=		css=a[href*="location_name"]>img[src*="sort_down.png"]
-${LocatonAscendingButtonImage}=		css=a[href*="location_name"]>img[src*="sort_top.png"]
+${LocationDescendingButtonImage}=		css=a[href*="location_name"]>img[src*="sort_down.png"]
+${LocationAscendingButtonImage}=		css=a[href*="location_name"]>img[src*="sort_top.png"]
 ${SortDownPressedButton}=			css=img[src*='sort_down_press']
 ${SortTopPressedButton}=			css=img[src*='sort_top_press']
 ${TableHeaders}=		css=table[class*="table"] tr th
@@ -43,7 +43,7 @@ ${ExperienceTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:n
 ${PhoneNumberTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(6)
 ${DepartmentTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(7)
 ${EmailIdTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(8)
-${LocatonTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(9)
+${LocationTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(9)
 ${ColumnsList}=				css=table[class*="table"] tbody tr:nth-child(ROW) td
 ${TableCellValues}=			css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(NUM)	
 ${NewJoineeNameTableCell}=		css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Name"]
@@ -98,7 +98,7 @@ ${CongratulationsEmployeeDetail}=		css=ul[class='demo'] li:nth-child(1) tr:nth-c
 ${CongratulationsJoiningDate}=			css=li[class*="emp_joining"]		
 ${CongratulationsJoiningDateTilte}=			css=div.span4:nth-child(2) dl dt
 ${CongratulationsCertification}=			css=a[onclick*="certification"]
-${CertifivationTable}=			css=table[class*='table'] tbody
+${CertificationTable}=			css=table[class*='table'] tbody
 ${CloseButton}=					css=#cboxClose
 ${LeftSideSectionClosedButton}=		css=#west-closer
 ${QAFundamentalsMainDownloadButton}			css=div[id="download"]
@@ -121,4 +121,3 @@ ${CityTableCell}=		css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-chil
 ${DateTableCellAdds}=		css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(4)
 ${UsernameRequiredAlertMessage}=		css=div[class*="alert-validate"] input[name="username"]
 ${PasswordRequiredAlertMessage}=		css=div[class*="alert-validate"] input[name="password"]
-

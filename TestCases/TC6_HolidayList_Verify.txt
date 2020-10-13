@@ -8,7 +8,6 @@ Resource	../Common/Keywords.txt
 Suite Setup		Open Intranet and Login
 Suite Teardown	Logout And Close Browser
 
-
 *** Test Cases ***
 Select Holiday List From Home Menu And Select Year, Month, Branch 
 	Wait Until Element Is Visible		${HomeButton}
@@ -33,7 +32,6 @@ Select Holiday List From Home Menu And Select Year, Month, Branch
 	Click Element			${SubmitButton}
 	Wait Until Element Is Visible		${TableRows}
 	
-
 Verify Holiday List According To Selected Year, Month, Branch 	
 	${totalRowsNum}=		Get Element Count		${TableRows}
 	: FOR		${row}		IN RANGE		1	${totalRowsNum}+1
@@ -45,6 +43,3 @@ Verify Holiday List According To Selected Year, Month, Branch
 	\	Element Should Contain			${DateTableCell}			${monthValue}	
 	\	${BranchNameTableCell}=		Replace String			${BranchNameTableCell}		${rowNumber}		ROW
 	\	${DateTableCell}=			Replace String			${DateTableCell}		${rowNumber}		ROW
-
-	
-	

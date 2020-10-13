@@ -48,5 +48,3 @@ Select All Menu Button From Category And Verify
 	\	Element Should Contain			${ByDefaultAllAds}		${categoryName}
 	\	${status}=		Run Keyword And Return Status		Element Should Be Visible		${TableRows}
 	\	${ClassifiedMenuButtons}=		Replace String		${ClassifiedMenuButtons}		${menuNum}		NUM
-
- 

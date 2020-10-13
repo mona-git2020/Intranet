@@ -25,6 +25,3 @@ Verify Employee Birthday Coming In This Month
 
 Verify Employee Birthday For Particular Date	
 	Select Date From Options And Verify		${BirthDayDateCell}
-	
-
-

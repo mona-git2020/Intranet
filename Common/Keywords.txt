@@ -175,10 +175,6 @@ Verify Column According To Descending Sorting
 Verify Ascending And Descending Sorting For Numbers
 	[Arguments]		${ColumnValues}
 	Log			${ColumnValues}
-	${mainList}=		Copy List		${ColumnValues}
-	Sort List		${ColumnValues}
-	Log		${ColumnValues}
-	Log		${mainList}
 	${statusEquality}=		Run Keyword And Return Status		Should Be Equal		${mainList}			${ColumnValues}		
 	${status1}=			Run Keyword And Return Status			Element Should Be Visible		${SortTopPressedButton}
 	${status2}=			Run Keyword And Return Status			Element Should Be Visible		${SortDownPressedButton}	
@@ -219,6 +215,3 @@ Verify Descending Sorting For Date
 	\	${status}=		Run Keyword And Return Status		Should Be True		'${date1[0]}'>='${date2[0]}'
 	\	${status1}=		Run Keyword If			'${date1[0]}'=='${date2[0]}'		Run Keyword And Return Status		Should Be True		'${date1[1]}'>='${date2[1]}'	
 	\	${status2}=		Run Keyword If			'${date1[1]}'=='${date2[1]}' and '${date1[0]}'=='${date2[0]}'		Run Keyword And Return Status		Should Be True		'${date1[2]}'>='${date2[2]}'
-
-	
-

@@ -8,7 +8,6 @@ Resource	../Common/Keywords.txt
 Suite Setup		Open Intranet and Login
 Suite Teardown	Logout And Close Browser
 
-
 *** Test Cases ***
 Get Data From Wishing You... Section
 	Wait Until Element Is Visible		${HomeButton}

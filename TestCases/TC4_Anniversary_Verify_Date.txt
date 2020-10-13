@@ -8,7 +8,6 @@ Resource	../Common/Keywords.txt
 Suite Setup		Open Intranet and Login
 Suite Teardown	Logout And Close Browser
 
-
 *** Test Cases ***
 Select Anniversary From elPulse Menu 
 	Wait Until Element Is Visible		${HomeButton}		timeout=15s
@@ -25,5 +24,3 @@ Verify Employee Anniversary Coming In This Month
 	
 Verify Employee Anniversary For Particular Date	
 	Select Date From Options And Verify		${AnniversaryDateCell}
-
-
