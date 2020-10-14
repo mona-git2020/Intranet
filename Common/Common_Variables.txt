@@ -7,6 +7,7 @@ ${HomeButton}=			Link=Home
 ${ElPulseButton}=			css=a[href*="newsletter"]
 ${ClassifiedButton}=		css=a[href*="classified"]
 ${DocumentsButton}=		css=a[href*="documents"] 
+${OfficeAddressMenu}=		css=a[href*="address"]
 ${PhonebookButton}=		css=li>a[href*="phonebook"]						
 ${HolidayListMenu}=		css=li>a[href*="holidaylist"]					
 ${AnniversaryButtonMenu}=		css=li>a[href*="anniversary"]			
@@ -121,3 +122,37 @@ ${CityTableCell}=		css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-chil
 ${DateTableCellAdds}=		css=table[class*="table"] tbody tr:nth-child(ROW) td:nth-child(4)
 ${UsernameRequiredAlertMessage}=		css=div[class*="alert-validate"] input[name="username"]
 ${PasswordRequiredAlertMessage}=		css=div[class*="alert-validate"] input[name="password"]
+${ActiveCountryLink}=		css=a[class*="country_active"]
+${CountryINDIALink}=			css=a[id="INDIA"]
+${CountryUSALink}=			css=a[id="USA"]
+${CountryUKLink}=			css=a[id="UK"]
+${CountryJAPANLink}=		css=a[id="JAPAN"]
+${CountryCANADALink}=		css=a[id="CANADA"]
+${CityAhmedabadLink}=		Link=Ahmedabad
+${CityBangaloreLink}=		Link=Bangalore
+${CityNoidaLink}=		Link=Noida
+${CityPuneLink}=		Link=Pune
+${CityCaliforniaLink}=		Link=California
+${CityIllinoisLink}=		Link=Illinois
+${CityIowaLink}=		Link=Iowa
+${CityMassachusettsLink}=		Link=Massachusetts
+${CityNorthCarolinaLink}=		Link=North Carolina
+${CityOhioLink}=		Link=Ohio
+${CityTexasLink}=		Link=Texas
+${CityLondonLink}=		Link=London
+${CityTokyoLink}=		Link=Tokyo
+${CityTorontoLink}=		Link=Toronto
+${OfficeAddressContainers}=		css=div[id="container"]>div
+${TotalOfficeAddressesOfIndia}=		div[id="container"]>div[class*="INDIA"]
+${IconsSection}=		css=ul[class="tabs nobullet"]
+${ContainerHeading}=		css=div[id="container"]>div[class*="CITY"] div[class="heading"]
+${ContainerAddressButton}=		css=div[id="container"]>div[class*="CITY"] img[title="Address"]
+${ContainerITButton}=		css=div[id="container"]>div[class*="CITY"] img[title="IT"]
+${ContainerHRButton}=		css=div[id="container"]>div[class*="CITY"] img[title="HR"]
+${ContainerReceptionButton}=		css=div[id="container"]>div[class*="CITY"] img[title="Reception"]
+${ContainerMeetingButton}=		css=div[id="container"]>div[class*="CITY"] img[title="Meeting"]
+${AddressDetailsSection}=		css=div[id="container"]>div[class*="CITY"] div[id*="tab1"]		
+${ITDetailsSection}=		css=div[id="container"]>div[class*="CITY"] div[id*="tab2"]		
+${HRDetailsSection}=		css=div[id="container"]>div[class*="CITY"] div[id*="tab3"]		
+${ReceptionDetailsSection}=		css=div[id="container"]>div[class*="CITY"] div[id*="tab4"]		
+${MeetingDetailsSection}=		css=div[id="container"]>div[class*="CITY"] div[id*="tab5"]		

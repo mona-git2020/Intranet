@@ -1,0 +1,122 @@
+*** Settings ***
+Library		Selenium2Library	
+Library		String
+Library		Collections		
+Library		../Variables/WebElement.py
+Resource	../Common/Common_Variables.txt
+Resource	../Common/Keywords.txt	
+Suite Setup		Open Intranet and Login
+Suite Teardown	Logout And Close Browser
+
+*** Test Cases ***
+Open Office Address From Home Menu 
+	Wait Until Element Is Visible		${HomeButton}
+	Mouse Over		${HomeButton}
+	Wait Until Element Is Visible		${OfficeAddressMenu}
+	Click Element	${OfficeAddressMenu}
+
+Select India From Country List 
+	Wait Until Element Is Visible		${CountryINDIALink}
+	Click Element	${CountryINDIALink}
+	${cityName}=		Get Text	${CountryINDIALink}
+	&{countryIndiaOfficeDetails}=		Create Dictionary
+	${countryIndiaOfficeDetails}=		Get All Details From All Containers			${countryIndiaOfficeDetails}		${cityName}		
+	Select City From City List And Verify Office Details		${countryIndiaOfficeDetails}		${CityAhmedabadLink}
+	Select City From City List And Verify Office Details		${countryIndiaOfficeDetails}		${CityBangaloreLink}
+	Select City From City List And Verify Office Details		${countryIndiaOfficeDetails}		${CityNoidaLink}
+	Select City From City List And Verify Office Details		${countryIndiaOfficeDetails}		${CityPuneLink}
+
+Select USA From Country List 
+	Wait Until Element Is Visible		${CountryUSALink}
+	Click Element	${CountryUSALink}
+	${cityName}=		Get Text	${CountryUSALink}
+	&{countryUSAOfficeDetails}=		Create Dictionary
+	${countryUSAOfficeDetails}=		Get All Details From All Containers			${countryUSAOfficeDetails}		${cityName}	
+	Select City From City List And Verify Office Details		${countryUSAOfficeDetails}		${CityCaliforniaLink}
+	Select City From City List And Verify Office Details		${countryUSAOfficeDetails}		${CityIllinoisLink}
+	Select City From City List And Verify Office Details		${countryUSAOfficeDetails}		${CityIowaLink}
+	Select City From City List And Verify Office Details		${countryUSAOfficeDetails}		${CityMassachusettsLink}
+	Select City From City List And Verify Office Details		${countryUSAOfficeDetails}		${CityNorthCarolinaLink}
+	Select City From City List And Verify Office Details		${countryUSAOfficeDetails}		${CityOhioLink}
+	Select City From City List And Verify Office Details		${countryUSAOfficeDetails}		${CityTexasLink}
+		
+Select UK From Country List 
+	Wait Until Element Is Visible		${CountryUKLink}
+	Click Element	${CountryUKLink}
+	${cityName}=		Get Text	${CountryUKLink}
+	&{countryUKOfficeDetails}=		Create Dictionary
+	${countryUKOfficeDetails}=		Get All Details From All Containers			${countryUKOfficeDetails}		${cityName}		
+	Select City From City List And Verify Office Details		${countryUKOfficeDetails}		${CityLondonLink}
+	
+Select Japan From City List	
+	Wait Until Element Is Visible		${CountryJAPANLink}
+	Click Element	${CountryJAPANLink}
+	${cityName}=		Get Text	${CountryJAPANLink}
+	&{countryJapanOfficeDetails}=		Create Dictionary
+	${countryJapanOfficeDetails}=		Get All Details From All Containers				${countryJapanOfficeDetails}		${cityName}	
+	Select City From City List And Verify Office Details		${countryJapanOfficeDetails}		${CityTokyoLink}
+
+Select Canada From Country List 
+	Wait Until Element Is Visible		${CountryCANADALink}
+	Click Element	${CountryCANADALink}
+	${cityName}=		Get Text	${CountryCANADALink}
+	&{countryCanadaOfficeDetails}=		Create Dictionary
+	${countryCanadaOfficeDetails}=		Get All Details From All Containers		${countryCanadaOfficeDetails}		${cityName}	
+	Select City From City List And Verify Office Details		${countryCanadaOfficeDetails}		${CityTorontoLink}
+	
+*** Keywords ***
+Get All Details From All Containers	
+	[Arguments]		${countryOfficeDetails}		${cityName}	
+	${cityName}=		Split String	${cityName}		${SPACE}
+	${ContainerHeading}=		Replace String		${ContainerHeading}		CITY		${cityName[0]}
+	${ContainerAddressButton}=		Replace String		${ContainerAddressButton}		CITY		${cityName[0]}
+	${ContainerITButton}=		Replace String		${ContainerITButton}		CITY		${cityName[0]}
+	${ContainerHRButton}=		Replace String		${ContainerHRButton}		CITY		${cityName[0]}
+	${ContainerReceptionButton}=		Replace String		${ContainerReceptionButton}		CITY		${cityName[0]}
+	${ContainerMeetingButton}=		Replace String		${ContainerMeetingButton}		CITY		${cityName[0]}
+	${AddressDetailsSection}=		Replace String		${AddressDetailsSection}		CITY		${cityName[0]}
+	${ITDetailsSection}=		Replace String		${ITDetailsSection}		CITY		${cityName[0]}
+	${HRDetailsSection}=		Replace String		${HRDetailsSection}		CITY		${cityName[0]}
+	${ReceptionDetailsSection}=		Replace String		${ReceptionDetailsSection}		CITY		${cityName[0]}
+	${MeetingDetailsSection}=		Replace String		${MeetingDetailsSection}		CITY		${cityName[0]}
+	Wait Until Element Is Visible		${ContainerHeading}		timeout=10s
+	${headingElements}=		Get WebElements		${ContainerHeading}
+	${addressButtonElements}=		Get WebElements		${ContainerAddressButton}
+	${addressDetailsElements}=		Get WebElements		${AddressDetailsSection}
+	${ITButtonElements}=		Get WebElements		${ContainerITButton}
+	${ITDetailsElements}=		Get WebElements		${ITDetailsSection}
+	${HRButtonElements}=		Get WebElements		${ContainerHRButton}
+	${HRDetailsElements}=		Get WebElements		${HRDetailsSection}
+	${receptionButtonElements}=		Get WebElements		${ContainerReceptionButton}
+	${receptionDetailsElements}=		Get WebElements		${ReceptionDetailsSection}
+	${meetingButtonElements}=		Get WebElements		${ContainerMeetingButton}
+	${meetingDetailsElements}=		Get WebElements		${MeetingDetailsSection}
+	${length}=		Get Length		${headingElements}
+	: FOR		${num}		IN RANGE		${length}
+	\	${title}=		Get Text		${headingelements[${num}]}
+	\	Click Element		${addressButtonElements[${num}]}
+	\	${addressDetails}=		Get Text		${addressDetailsElements[${num}]}
+	\	Click Element		${ITButtonElements[${num}]}
+	\	${ITDetails}=		Get Text		${ITDetailsElements[${num}]}
+	\	Click Element		${HRButtonElements[${num}]}
+	\	${HRDetails}=		Get Text		${HRDetailsElements[${num}]}
+	\	Click Element		${receptionButtonElements[${num}]}
+	\	${receptionDetails}=		Get Text		${receptionDetailsElements[${num}]}
+	\	Click Element		${meetingButtonElements[${num}]}
+	\	${meetingsDetails}=		Get Text		${meetingDetailsElements[${num}]}
+	\	&{countryInnerDetails}=		Create Dictionary
+	\	Set To Dictionary		${countryInnerDetails}		Address=${addressDetails}		IT=${ITDetails}		HR=${HRDetails}		Reception=${receptionDetails}		Meetings=${meetingsDetails}
+	\	Set To Dictionary		${countryOfficeDetails}			${title}=${countryInnerDetails}
+	\	Log			${countryOfficeDetails}		
+	Return From Keyword		${countryOfficeDetails}
+
+Select City From City List And Verify Office Details	
+	[Arguments]		${countryOfficeDetails}			${CityLink}
+	Wait Until Element Is Visible		${CityLink}
+	Click Element	${CityLink}
+	${cityName}=		Get Text	${CityLink}
+	&{cityOfficeDetails}=		Create Dictionary
+	${cityOfficeDetails}=		Get All Details From All Containers			${cityOfficeDetails}		${cityName}
+	${allKeys}=		Get Dictionary Keys		${cityOfficeDetails}
+	: FOR	${keys}		IN		@{allKeys}
+	\	Should Be Equal		${countryOfficeDetails['${keys}']}		${cityOfficeDetails['${keys}']}

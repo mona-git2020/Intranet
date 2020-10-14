@@ -6,6 +6,6 @@ profileAddress = "C:/Users/AMAN/AppData/Roaming/Mozilla/Firefox/Profiles/90yqdr7
 downloadDir = "D:/MONU/Robotframework/Intranet/Downloads"
 
 validUsername =	"monalisha.prajapati"
-validPassword =	"mona16@intranet"
+validPassword =	"Oct2020@intranet"
 invalidUsername = "monalisha"
 invalidPassword = "mona16"
