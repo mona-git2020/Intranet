@@ -1,0 +1,63 @@
+*** Settings ***
+Library		Selenium2Library	
+Library		String
+Library		Collections		
+Library		../Variables/WebElement.py
+Resource	../Common/Common_Variables.txt
+Resource	../Common/Keywords.txt	
+Suite Setup		Open Intranet and Login
+Suite Teardown	Logout And Close Browser
+
+*** Test Cases ***
+Go To TimeSheets From PMS
+	Wait Until Element Is Visible		${PMSImageButton}
+	Click Element		${PMSImageButton}
+	Switch Window		NEW
+	Wait Until Element Is Visible		${TimeSheetButton}		timeout=25s
+	Click Element		${TimeSheetButton}
+	Wait Until Element Is Visible		${TimeSheetTableRows}
+	
+Select Last Month From Date Range
+	Click Element		${DateRangeFieldset}
+	Click Element		${DateRangeDropdown}
+	Click Element		${DateRangeLastMonthOption}
+	Wait Until Element Is Visible		${TimeSheetTableRows}
+	Get Hours From All Weeks And Verify
+
+Select Current Month From Date Range
+	Click Element		${DateRangeFieldset}
+	Click Element		${DateRangeDropdown}
+	Click Element		${DateRangeCurrentMonthOption}
+	Wait Until Element Is Visible		${TimeSheetTableRows}
+	Get Hours From All Weeks And Verify
+
+Select Last Week From Date Range
+	Click Element		${DateRangeFieldset}
+	Click Element		${DateRangeDropdown}
+	Click Element		${DateRangeLastWeekOption}
+	Wait Until Element Is Visible		${TimeSheetTableRows}
+	Get Hours From All Weeks And Verify
+
+Select Current Week From Date Range
+	Click Element		${DateRangeFieldset}
+	Click Element		${DateRangeDropdown}
+	Click Element		${DateRangeCurrentWeekOption}
+	Wait Until Element Is Visible		${TimeSheetTableRows}
+	Get Hours From All Weeks And Verify
+	Switch Window		MAIN
+
+*** Keywords ***
+Get Hours From All Weeks And Verify
+	${totalRows}=		Get Element Count		${TimeSheetTableRows}
+	: FOR		${row}		IN RANGE		1		${totalRows}+1
+	\	${rowNum}=		Convert To String		${row}
+	\	${TimeSheetHoursColumn}=		Replace String		${TimeSheetHoursColumn}		ROW		${rowNum}
+	\	${TimeSheetEditButton}=			Replace String		${TimeSheetEditButton}		ROW		${rowNum}
+	\	${hours}=		Get Text		${TimeSheetHoursColumn}
+	\	Click Element		${TimeSheetEditButton}
+	\	Wait Until Element Is Visible		${WeeklyTotalHours}
+	\	Element Should Contain		 ${WeeklyTotalHours}		${hours}
+	\	Click Element		${BackLink}
+	\	Wait Until Element Is Visible		${TimeSheetTableRows}
+	\	${TimeSheetHoursColumn}=		Replace String		${TimeSheetHoursColumn}		${rowNum}		ROW		count=1
+	\	${TimeSheetEditButton}=			Replace String		${TimeSheetEditButton}		${rowNum}		ROW	
