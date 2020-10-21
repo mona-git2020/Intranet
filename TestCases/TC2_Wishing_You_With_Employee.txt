@@ -29,10 +29,11 @@ Click On Particular Employee Name And Verify It Is Birthday or Anniversary From 
 	: FOR		${name}		IN		@{WishingYouSectionData}
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${name}
 	\	Wait Until Element Is Visible			${EmployeeNameLink}			timeout=60s
+	\	${statusWishes}=		Run Keyword And Return Status		Element Should Contain		${WishingYouSectionWishes}		Birthday
 	\	Click Element			${EmployeeNameLink}
 	\	Wait Until Element Is Visible		${EmployeeBirthdayDateBox}		timeout=15s
 	\	${status}=		Run Keyword And Return Status		Element Should Contain			${EmployeeBirthdayDateBox}		Birthdate
-	\	Run Keyword If		${status}==True			Element Should Contain			${EmployeeBirthdayDateBox}			${date}
+	\	Run Keyword If		${status}==True and ${statusWishes}==True			Element Should Contain			${EmployeeBirthdayDateBox}			${date}
 	\	Go Back
 	\	Wait Until Element Is Visible		${BirthdayEmployeeName}	
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME
