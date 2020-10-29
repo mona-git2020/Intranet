@@ -171,3 +171,8 @@ ${TimeSheetHoursColumn}=		css=table tr[class*="time-entry"]:nth-child(ROW) td:nt
 ${TimeSheetEditButton}=			css=table tr[class*="time-entry"]:nth-child(ROW) img[src*="edit"]	
 ${WeeklyTotalHours}=			css=span[id="total_hours"]
 ${BackLink}=		Link=Back	
+${ArrowEmailTitle}=		css=div[class="tile-container"]
+${ArrowEnterEmailID}=		css=input[type="email"]
+${ArrowEnterPassword}=		css=input[type="password"]
+${SignInButton}=		css=input[value="Sign in"]
+${SignInNextButton}=		css=input[type="submit"]

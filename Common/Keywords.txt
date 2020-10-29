@@ -1,7 +1,7 @@
 *** Keywords ***
 Open Intranet and Login	
 	${profile}=		create_ff_profile		${profileAddress}
-	Open Browser	${urlOfIntranet}		${browser}		remote_url=http://localhost:4444/wd/hub		desired_capabilities={"browserName":"firefox", "platform":"WINDOWS"}		ff_profile_dir=${profile}		
+	Open Browser	${urlOfIntranet}		${browser}		remote_url=http://192.168.137.1:4444/wd/hub		ff_profile_dir=${profile}
 	Maximize Browser Window
 	Wait Until Element Is Visible		${EnterUsername}
 	Input Text			${EnterUsername}		${username}
@@ -141,13 +141,13 @@ Get Data From All Rows
 	: For		${row}		IN RANGE		1		${totalRows}
 	\	${rowNum}=		Convert To String		${row}
 	\	${TableCell}=		Replace String			${TableCell}		ROW		${rowNum}
-	\	${value}=		Get Text			${TableCell}
+	\	${valueCol}=		Get Text			${TableCell}
 	\	${TableCell}=		Replace String			${TableCell}		${rowNum}		ROW		count=1	
-	\	${value}=		Convert To Lowercase		${value}
+	\	${value}=		Convert To Lowercase		${valueCol}
 	\	${value}=		Split String		${value}		\n
 	\	${value}=		Split String		${value[0]}		${SPACE}
 	\	${value}=		Split String		${value[0]}		.
-	\	${status}=		Run Keyword And Return Status		List Should Contain Value		${value}		all	
+	\	${status}=		Run Keyword And Return Status		List Should Contain Value		${valueCol}		all	
 	\	Continue For Loop If		${status}==True
 	\	Append To List		${ColumnValues}			${value[0]}
 	\	Log		${ColumnValues}

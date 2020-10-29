@@ -13,7 +13,15 @@ Go To TimeSheets From PMS
 	Wait Until Element Is Visible		${PMSImageButton}
 	Click Element		${PMSImageButton}
 	Switch Window		NEW
-	Wait Until Element Is Visible		${TimeSheetButton}		timeout=25s
+	${statusSignIn}=		Run Keyword And Return Status		Wait Until Element Is Visible		${ArrowEnterEmailID}		timeout=25s
+	Run Keyword If		${statusSignIn}==True		Run Keywords		Input Text		${ArrowEnterEmailID}		${arrowEmailId}		AND		
+	...			Click Element		${SignInNextButton}		AND		
+	...			Wait Until Element Is Visible		${ArrowEnterPassword}		AND		
+	...			Input Text		${ArrowEnterPassword}		${arrowPassword}		AND			
+	...			Click Element		${SignInButton}		AND
+	...			Wait Until Page Contains		Stay signed in?		timeout=20s		AND
+	...			Click Element		${SignInNextButton}
+	${statusPMS}=		Run Keyword And Return Status		Wait Until Element Is Visible		${TimeSheetButton}		timeout=25s
 	Click Element		${TimeSheetButton}
 	Wait Until Element Is Visible		${TimeSheetTableRows}
 	
@@ -47,6 +55,9 @@ Select Current Week From Date Range
 	Switch Window		MAIN
 
 *** Keywords ***
+Arrow SignIn
+	Input Text		
+
 Get Hours From All Weeks And Verify
 	${totalRows}=		Get Element Count		${TimeSheetTableRows}
 	: FOR		${row}		IN RANGE		1		${totalRows}+1
