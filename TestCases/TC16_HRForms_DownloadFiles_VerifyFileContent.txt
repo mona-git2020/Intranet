@@ -1,0 +1,76 @@
+*** Settings ***
+Library		Selenium2Library	
+Library		String
+Library		Collections	
+Library		OperatingSystem
+Library		../Variables/WebElement.py
+Library		../Variables/GetExcelSheetData.py
+Resource	../Common/Common_Variables.txt
+Resource	../Common/Keywords.txt	
+Suite Setup		Open Intranet and Login
+Suite Teardown	Logout And Close Browser
+
+*** Test Cases ***
+Select HR Forms From Documents Tool bar Menu 
+	Wait Until Element Is Visible		${DocumentsButton}		timeout=15s
+	Click Element		${DocumentsButton}
+	Wait Until Element Is Visible		${DocumentsHRLink}		timeout=15s
+	Click Element		${DocumentsHRLink}
+	Switch Window		NEW
+	Wait Until Element Is Visible		${HRFormsFile}		timeout=15s
+	Click Element			${HRFormsFile}
+	Wait Until Element Is Visible		${LeftSideSectionClosedButton}		timeout=15s
+	Click Element		${LeftSideSectionClosedButton}
+	Wait Until Element Is Visible		${TotalHRFormsFiles}		timeout=15s
+	
+Download The Files From HR Forms
+	${totalFiles}=		Get Element Count		${TotalHRFormsFiles}
+	Wait Until Element Is Visible		${TotalHRFormsFiles}
+	: For		${file}		IN RANGE		1		${totalFiles}+1
+	\	${fileNum}=		Convert To String		${file}
+	\	${HRFormsDownloadButton}=		Replace String			${HRFormsDownloadButton}		NUM			${fileNum}
+	\	${HRFormsFileName}=		Replace String			${HRFormsFileName}		NUM			${fileNum}
+	\	${HREcxelLogo}=		Replace String			${HREcxelLogo}		NUM			${fileNum}
+	\	${HRWordLogo}=		Replace String			${HRWordLogo}		NUM			${fileNum}
+	\	Wait Until Element Is Visible		${HRFormsDownloadButton}		timeout=10s
+	\	${fileTitle}=		Get Text	${HRFormsFileName}	
+ 	\	${fileName}=		Replace String		${fileTitle}		${SPACE}	_
+	\	${statusExcelFile}=		Run Keyword And Return Status		Element Should Be Visible		${HREcxelLogo}
+	\	${statusWordFile}=		Run Keyword And Return Status		Element Should Be Visible		${HRWordLogo}
+	\	Click Element		${HRFormsDownloadButton}
+	\	Run Keyword If		${statusExcelFile}==True		Wait Until Created			${downloadDir}${/}${fileName}.xlsx			timeout=90s
+	\	Run Keyword If		${statusWordFile}==True		Wait Until Created			${downloadDir}${/}${fileName}.docx			timeout=90s
+	\	${status1}=		Run Keyword If		${statusExcelFile}==True		Run Keyword And Return Status		File Should Exist		${downloadDir}${/}${fileName}.xlsx
+	\	${status2}=		Run Keyword If		${statusWordFile}==True			Run Keyword And Return Status		File Should Exist		${downloadDir}${/}${fileName}.docx
+	\	${fileContentExcel}=		Run Keyword If		${statusExcelFile}==True		excel_sheet_data		${downloadDir}${/}${fileName}.xlsx
+	\	log		${fileContentExcel}
+	\	${fileContentWord}=		Run Keyword If		${statusWordFile}==True		word_file_data		${downloadDir}${/}${fileName}.docx
+	\	log		${fileContentWord}
+	\	Run Keyword If		${statusExcelFile}==True		Verify File Content		${fileTitle}		${fileContentExcel}
+	\	Run Keyword If		${statusWordFile}==True		Verify File Content			${fileTitle}		${fileContentWord}		
+	\	${HRWordLogo}=		Replace String			${HRWordLogo}		${fileNum}			NUM		count=1	
+	\	${HREcxelLogo}=		Replace String			${HREcxelLogo}		${fileNum}			NUM		count=1	
+	\	${HRFormsFileName}=		Replace String			${HRFormsFileName}		${fileNum}			NUM		count=1	
+	\	${HRFormsDownloadButton}=		Replace String			${HRFormsDownloadButton}		${fileNum}			NUM		count=1	
+	Switch Window		MAIN
+	Wait Until Element Is Visible		${DocumentsHRLink}		timeout=15s	
+	
+*** Keywords ***	
+Verify File Content			
+	[Arguments]		${fileTitle}		${fileContent}	
+	${fileNameList}=		Split String		${fileTitle}		${SPACE}
+	${length}=		Get Length		${fileNameList}
+	@{valueList}		Create List			
+	: FOR		${num}		IN RANGE		${length}		
+	\	${lowerValue}=		Convert To Lowercase		${fileNameList[${num}]}
+	\	Append To List		${valueList}		${lowerValue}
+	: FOR		${value}	IN 		@{fileContent}	
+	\	${status1}=		Run Keyword And Return Status		Should Be Equal		${value}		${fileTitle}
+	\	${status2}=		Run Keyword And Return Status		Should Contain		${value}		${fileNameList[0]}
+	\	${status3}=		Run Keyword And Return Status		Should Contain		${value}		${fileNameList[1]}
+	\	${status4}=		Run Keyword And Return Status		Should Contain		${value}		${fileNameList[2]}
+	\	${status5}=		Run Keyword And Return Status		Should Contain		${value}		${fileNameList[3]}
+	\	${status6}=		Run Keyword And Return Status		Should Contain		${value}		${valueList[0]}
+	\	${status7}=		Run Keyword And Return Status		Should Contain		${value}		${valueList[1]}
+	\	${status8}=		Run Keyword And Return Status		Should Contain		${value}		${valueList[2]}
+	\	${status9}=		Run Keyword And Return Status		Should Contain		${value}		${valueList[3]}

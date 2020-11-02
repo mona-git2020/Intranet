@@ -176,3 +176,11 @@ ${ArrowEnterEmailID}=		css=input[type="email"]
 ${ArrowEnterPassword}=		css=input[type="password"]
 ${SignInButton}=		css=input[value="Sign in"]
 ${SignInNextButton}=		css=input[type="submit"]
+${DocumentsHRLink}=				css=a[href*="documents/hr"]
+${HRFormsFile}=			css=a[id='3']
+${TotalHRFormsFiles}=		css=div#div_3>div
+${HRFormsDownloadButton}=		css=div[id*='div']>div:nth-child(NUM) span[class="plus_show2"]
+${HRFormsFileName}=		css=div[id*='div']>div:nth-child(NUM) h3>a.show_detail
+${HREcxelLogo}=		css=div[id*='div']>div:nth-child(NUM) img[src*="xls.png"]
+${HRWordLogo}=		css=div[id*='div']>div:nth-child(NUM) img[src*="docx.png"]
+${HRFormsFileFrame}=		css=div[id*='div']>div:nth-child(NUM)

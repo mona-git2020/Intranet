@@ -22,8 +22,6 @@ Select QA Fundamentals From Documents Toolbar Menu
 	Click Element		${LeftSideSectionClosedButton}
 	Wait Until Element Is Visible		${TotalQAFundamentalFiles}		timeout=15s
 	
-	
-	
 Download The Files From QA Fundamentals
 	${downloadDir}=		create_ff_profile		${downloadDir}
 	${totalFiles}=		Get Element Count		${TotalQAFundamentalFiles}
@@ -41,7 +39,6 @@ Download The Files From QA Fundamentals
 	\	${QAFundamentalsFileFrame}=		Replace String			${QAFundamentalsFileFrame}		${fileNum}			NUM		count=1	
 	\	${QAFundamentalsFileName}=		Replace String			${QAFundamentalsFileName}		${fileNum}			NUM		count=1	
 	\	${QAFundamentalsDownloadButton}=		Replace String			${QAFundamentalsDownloadButton}		${fileNum}			NUM		count=1	
-	
 
 Download All The Files Together From QA Fundamentals 
 	@{filesList}=		Create List		
@@ -65,8 +62,3 @@ Download All The Files Together From QA Fundamentals
 	${countFiles}=		Count Files In Directory		C:/Users/AMAN/Downloads/
 	: FOR		${fileName}		IN 		@{filesList}
 	\	${status}=		Run Keyword And Return Status		File Should Exist		C:/Users/AMAN/Downloads/*${fileName}.pdf
-
-
-
-
- 

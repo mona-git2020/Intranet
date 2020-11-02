@@ -3,7 +3,7 @@ urlOfHomePage =	"https://intranet.einfochips.com/employee_intranet/portal/user/d
 
 headerName = ['Name', 'Reporting', 'Designation', 'Experience', 'Phone Number', 'Department', 'Email Id', 'Location']
 profileAddress = "C:/Users/AMAN/AppData/Roaming/Mozilla/Firefox/Profiles/90yqdr7b.default"
-downloadDir = "D:/MONU/Robotframework/Intranet/Downloads"
+downloadDir = "C:/Users/112207/Downloads"
 
 validUsername =	"monalisha.prajapati"
 validPassword =	"Oct2020@intranet"
