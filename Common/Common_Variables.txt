@@ -56,9 +56,9 @@ ${NewJoineeEmailIdTableCell}=		css=table[class*="table"] tbody tr:nth-child(ROW)
 ${NewJoineeLocationTableCell}=		css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Location"]
 ${NewEmployeeNameColumn}=		css=tr td[data-title="Name"]
 ${NextButtonLink}=		Link=Next >>
-${BirthdayEmployeeList}=		css=ul[class*="bday"]>li
+${WishingYouSectionEmployeeList}=		css=ul[class*="bday"]>li
 ${WishingYouSection}=			css=div[class="card"]:nth-child(3)
-${BirthdayEmployeeName}=		css=ul[class*="bday"]>li:nth-child(1) div[class="usr-name"]
+${WishingYouSectionEmployeeName}=		css=ul[class*="bday"]>li:nth-child(1) div[class="usr-name"]
 ${WishingYouSectionWishes}=		css=ul[class*="bday"]>li:nth-child(1) div[class="occ-ttl"]
 ${BirthdayEmployeePhoto}=		css=ul[class*='demo'] li:nth-child(NUM) tr:nth-child(2) td:nth-child(2) span
 ${EmployeeBirthdayDateBox}=		css=li[class*="emp_birth"]
@@ -88,11 +88,19 @@ ${SelectMonth}=			css=#month_id
 ${SubmitButton}=		css=button[id*='submit']
 ${TotalPagePagination}=			css=ul[class*="pagination"]>li
 ${SinglePagePagination}=		css=ul[class*="pagination"]>li:nth-child(1)>a  
-${SelectYearOption}=			css=option[value="2020"]
-${SelectBranchOption}=			css=option[value="Ahmedabad"]
+${SelectYearOption2020}=			css=option[value="2020"] 
+${SelectYearOption2019}=			css=option[value="2019"]
+${SelectBranchOptionAhmedabad}=			css=option[value="Ahmedabad"]
+${SelectBranchOptionPune}=			css=option[value="Pune"]
 ${SelectMonthOption}=			css=option[value="October"]
 ${BranchNameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Brabch Name"]
 ${DateTableCell}=				css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Date"]
+${DayTableCell}=				css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Day"]
+${DescriptionTableCell}=		css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Description"]:nth-child(4)
+${HolidayTypeTableCell}=		css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Description"]:nth-child(5)
+${TotalPages}=				css=ul[class*="pagination"]>li
+${SinglePage}=				css=ul[class*="pagination"]>li:nth-child(NUM)
+${ActivePage}=				css=ul[class*="pagination"]>li[class="active"]
 ${CongratulationsEmployeeList}=			css=ul[class='demo'] li
 ${CongratulationsEmployeeName}=			css=ul[class='demo'] li:nth-child(1) tr:nth-child(1) td:nth-child(2) a
 ${CongratulationsEmployeeDetail}=		css=ul[class='demo'] li:nth-child(1) tr:nth-child(1) td:nth-child(2) p
@@ -167,10 +175,12 @@ ${DateRangeCurrentMonthOption}=		css=option[value="current_month"]
 ${DateRangeLastWeekOption}=		css=option[value="last_week"]
 ${DateRangeCurrentWeekOption}=		css=option[value="current_week"]
 ${TimeSheetTableRows}=			css=table tr[class*="time-entry"]
+${TimeSheetDateColumn}=			css=table tr[class*="time-entry"]:nth-child(1) td[class="start_date"]
 ${TimeSheetHoursColumn}=		css=table tr[class*="time-entry"]:nth-child(ROW) td:nth-child(4) span[class*="int"]
 ${TimeSheetEditButton}=			css=table tr[class*="time-entry"]:nth-child(ROW) img[src*="edit"]	
 ${WeeklyTotalHours}=			css=span[id="total_hours"]
 ${BackLink}=		Link=Back	
+${PickAnAccountFromList}=		css=div[data-test-id="ARROWEMAILID"]
 ${ArrowEmailTitle}=		css=div[class="tile-container"]
 ${ArrowEnterEmailID}=		css=input[type="email"]
 ${ArrowEnterPassword}=		css=input[type="password"]
@@ -181,6 +191,6 @@ ${HRFormsFile}=			css=a[id='3']
 ${TotalHRFormsFiles}=		css=div#div_3>div
 ${HRFormsDownloadButton}=		css=div[id*='div']>div:nth-child(NUM) span[class="plus_show2"]
 ${HRFormsFileName}=		css=div[id*='div']>div:nth-child(NUM) h3>a.show_detail
-${HREcxelLogo}=		css=div[id*='div']>div:nth-child(NUM) img[src*="xls.png"]
+${HRExcelLogo}=		css=div[id*='div']>div:nth-child(NUM) img[src*="xls.png"]
 ${HRWordLogo}=		css=div[id*='div']>div:nth-child(NUM) img[src*="docx.png"]
 ${HRFormsFileFrame}=		css=div[id*='div']>div:nth-child(NUM)

@@ -1,7 +1,7 @@
 *** Keywords ***
 Open Intranet and Login	
-	${profile}=		create_ff_profile		${profileAddress}
-	Open Browser	${urlOfIntranet}		${browser}		remote_url=http://192.168.0.104:4444/wd/hub		ff_profile_dir=${profile}
+	${profile}=		create_ff_profile		${downloadDir}
+	Open Browser	${urlOfIntranet}		${browser}		remote_url=${remote_url}		ff_profile_dir=${profile}
 	Maximize Browser Window
 	Wait Until Element Is Visible		${EnterUsername}
 	Input Text			${EnterUsername}		${username}
@@ -32,7 +32,7 @@ Select Date From Options And Verify
 	\	${SelectDateOption}=		Replace String			${SelectDateOption}		NUM			${num}
 	\	${dateValue}=		Get Value		${SelectDateOption}
 	\	Click Element		${SelectDateOption}
-	\	Wait Until Element Is Visible		${TableRows}
+	\	Wait Until Element Is Visible		${TableRows}		timeout=10s
 	\	${ColumnValues}=	Get Data From Columns		${TableCell}
 	\	${SelectDateOption}=		Replace String			${SelectDateOption}		${num}		NUM	
 	\	Continue For Loop If		${ColumnValues}==[]
@@ -43,7 +43,7 @@ Verify All Date According to Selected Date
 	: For	${item}		IN		@{DateList}	
 	\	Should Be Equal			${item}		${dateValue}
 
-Verify Today's Date And Get Employee's Name
+Verify Today's Date And Get Employee's Name From All Pages
 	[Arguments]		${DateCell}
 	${today'sDate}=		Get Time		day
 	Click Element		${SearchDateList}
@@ -54,6 +54,15 @@ Verify Today's Date And Get Employee's Name
 	Click Element		${SelectDateOption}
 	Wait Until Element Is Visible		${TableRows}
 	@{employeeList}=		Create List
+	: FOR		${page}		IN RANGE		1		5
+	\	${employeeList}=		Verify Today's Date And Get Employee's Name		${employeeList}		${DateCell}			${today'sDate}
+	\	${statusNextLink}=		Run Keyword And Return Status		Element Should Be Visible		${NextButtonLink}
+	\	Run Keyword If		${statusNextLink}==True			Click Element		${NextButtonLink}
+	\	...			ELSE		Exit For Loop		
+	Return From Keyword			${employeeList}
+
+Verify Today's Date And Get Employee's Name	
+	[Arguments]		${employeeList}		${DateCell}		${today'sDate}
 	${totalRows}=		Get Element Count		${TableRows}
 	: FOR		${row}		IN RANGE		2	${totalRows}+1
 	\	${rowNum}=		Convert To String		${row}
@@ -66,18 +75,23 @@ Verify Today's Date And Get Employee's Name
 	\	${NameDateCell}=		Replace String			${NameDateCell}		${rowNum}		ROW		count=1	
 	Return From Keyword			${employeeList}
 
-Verify Employee Name From Wishing You Section
-	[Arguments]			${employeeList}		${Greeting}
-	Wait Until Element Is Visible		${HomeButton}		timeout=15s
-	Click Element		${HomeButton}
+Get Employee Name From Wishing You Section 
+	[Arguments]			${Greeting}
 	Wait Until Element Is Visible		${WishingYouSection}		timeout=15s
-	: FOR		${name}		IN		 @{employeeList}
+	@{WishingYouSectionData}=		Create List
+	${totalBirthdayList}=		Get Element Count		${WishingYouSectionEmployeeList}
+	: FOR		${numBirthday}		IN RANGE		1		${totalBirthdayList}+1
+	\	${num}=		Convert To String		${numBirthday}
+	\	Wait Until Element Is Visible		${WishingYouSectionEmployeeName}		timeout=3s	
+	\	${name}=		Get Text		${WishingYouSectionEmployeeName}	
+	\	${status}=		Run Keyword And Return Status		Element Should Contain		${WishingYouSection}		${Greeting}
+	\	Run Keyword If		${status}==True			Append To List			${WishingYouSectionData}			${name}
+	\	Log		${WishingYouSectionData}	
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${name}
-	\	Wait Until Element Is Visible			${EmployeeNameLink}			timeout=60s
-	\	Element Should Contain		${WishingYouSection}		${name}
-	\	Element Should Contain		${WishingYouSection}		${Greeting}
+	\	Wait Until Element Does Not Contain		${WishingYouSectionEmployeeName}		${name}		timeout=15s
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME
-
+	Return From Keyword			${WishingYouSectionData}
+	
 Verify All Columns Data From Employee Details For All Rows
 	${TotalRows}=		Get Element Count		${TableRows}
 	: FOR		${row}		IN RANGE		1		${TotalRows}+1
