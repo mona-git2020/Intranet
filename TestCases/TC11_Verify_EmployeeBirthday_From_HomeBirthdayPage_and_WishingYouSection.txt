@@ -5,6 +5,7 @@ Library		Collections
 Library		../Variables/WebElement.py
 Resource	../Common/Common_Variables.txt
 Resource	../Common/Keywords.txt	
+Resource	../Common/Labels.txt
 Suite Setup		Open Intranet and Login
 Suite Teardown	Logout And Close Browser
 
@@ -13,8 +14,7 @@ Select Birthday From Home Menu
 	Wait Until Element Is Visible		${HomeButton}		timeout=15s
 
 Verify Employee's Birthday From Wishing You Section
-	${Greeting}=		Set Variable		Happy Birthday
-	${employeeListFromHomePage}=		Get Employee Name From Wishing You Section		${Greeting}
+	${employeeListFromHomePage}=		Get Employee Name From Wishing You Section		${GreetingBirthday}
 	Set Suite Variable		${employeeListFromHomePage}
 		
 Verify Employee's Birthday Coming In Today	
@@ -28,7 +28,7 @@ Verify Employee's Birthday Coming In Today
 	Set Suite Variable		${employeeList}
 	Log		${employeeList}
 
-Verify Employee's Anniversary from Wishing You Section And 
+Verify Employee's Birthday From Wishing You Section And Birthday Menu
 	Sort List			${employeeListFromHomePage}
 	Sort List			${employeeList}
 	Should Be Equal			${employeeListFromHomePage}			${employeeList}

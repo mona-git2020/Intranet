@@ -45,30 +45,30 @@ Verify All Date According to Selected Date
 
 Verify Today's Date And Get Employee's Name From All Pages
 	[Arguments]		${DateCell}
-	${today'sDate}=		Get Time		day
+	${currentDate}=		Get Time		day
 	Click Element		${SearchDateList}
 	Wait Until Element Is Visible		${SelectDateOptionSuggestions}
-	${num}=		Convert To String		${today'sDate}
+	${num}=		Convert To String		${currentDate}
 	${SelectDateOption}=		Replace String			${SelectDateOption}		NUM			${num}
 	${dateValue}=		Get Value		${SelectDateOption}
 	Click Element		${SelectDateOption}
 	Wait Until Element Is Visible		${TableRows}
 	@{employeeList}=		Create List
 	: FOR		${page}		IN RANGE		1		5
-	\	${employeeList}=		Verify Today's Date And Get Employee's Name		${employeeList}		${DateCell}			${today'sDate}
+	\	${employeeList}=		Verify Today's Date And Get Employee's Name		${employeeList}		${DateCell}			${currentDate}
 	\	${statusNextLink}=		Run Keyword And Return Status		Element Should Be Visible		${NextButtonLink}
 	\	Run Keyword If		${statusNextLink}==True			Click Element		${NextButtonLink}
 	\	...			ELSE		Exit For Loop		
 	Return From Keyword			${employeeList}
 
 Verify Today's Date And Get Employee's Name	
-	[Arguments]		${employeeList}		${DateCell}		${today'sDate}
+	[Arguments]		${employeeList}		${DateCell}		${currentDate}
 	${totalRows}=		Get Element Count		${TableRows}
 	: FOR		${row}		IN RANGE		2	${totalRows}+1
 	\	${rowNum}=		Convert To String		${row}
 	\	${DateCell}=		Replace String			${DateCell}		ROW		${rowNum}
 	\	${NameDateCell}=		Replace String			${NameDateCell}		ROW		${rowNum}
-	\	Element Should Contain		${DateCell}		${today'sDate}
+	\	Element Should Contain		${DateCell}		${currentDate}
 	\	${employeeName}=		Get Text		${NameDateCell}
 	\	Append To List			${employeeList}		${employeeName}
 	\	${DateCell}=		Replace String			${DateCell}		${rowNum}		ROW		count=1	

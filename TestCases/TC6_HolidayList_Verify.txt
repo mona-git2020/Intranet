@@ -16,16 +16,21 @@ Select Holiday List From Home Menu And Select Year
 	Click Element	${HolidayListMenu}
 	Wait Until Element Is Visible		${TableRows}
 	Click Element			${SelectYear}
-	${yearValue}=		Get Value		${SelectYearOption2020}
-	Set Suite Variable		${yearValue}
-	Click Element			${SelectYearOption2020}
+	${currentYear}=		Get Time		year		
+	${SelectYearOption}=		Replace String		${SelectYearOption}		YEAR		${currentYear}
+	Set Suite Variable		${currentYear}
+	Click Element			${SelectYearOption}
+	${SelectYearOption}=		Replace String		${SelectYearOption}		${currentYear}		YEAR
 
 Select Ahmedabad Branch From Holiday List And Get All Holiday Details
+	${branchName}=		Set Variable	Ahmedabad
 	Click Element			${SelectBranch}
-	${branchAhmedabad}=		Get Value		${SelectBranchOptionAhmedabad}
-	Click Element			${SelectBranchOptionAhmedabad}
+	${SelectBranchOption}=		Replace String		${SelectBranchOption}		BRANCH		${branchName}
+	${branchAhmedabad}=		Get Value		${SelectBranchOption}
+	Click Element			${SelectBranchOption}
 	Set Suite Variable		${branchAhmedabad}
 	Click Element			${SubmitButton}
+	${SelectBranchOption}=		Replace String		${SelectBranchOption}		${branchName}		BRANCH
 	Wait Until Element Is Visible		${TableRows}
 	&{holidayListAhmedabad}=		Create Dictionary
 	${holidayListAhmedabad}=		Get All Holiday Details From All Pages			${holidayListAhmedabad}			${branchAhmedabad}
@@ -33,11 +38,14 @@ Select Ahmedabad Branch From Holiday List And Get All Holiday Details
 	Set Suite Variable		${holidayListAhmedabad}
 	
 Select Pune Branch From Holiday List And Get All Holiday Details
+	${branchName}=		Set Variable	Pune
 	Click Element			${SelectBranch}
-	${branchPune}=		Get Value		${SelectBranchOptionPune}
-	Click Element			${SelectBranchOptionPune}
+	${SelectBranchOption}=		Replace String		${SelectBranchOption}		BRANCH		${branchName}
+	${branchPune}=		Get Value		${SelectBranchOption}
+	Click Element			${SelectBranchOption}
 	Set Suite Variable		${branchPune}
 	Click Element			${SubmitButton}
+	${SelectBranchOption}=		Replace String		${SelectBranchOption}		${branchName}		BRANCH
 	Wait Until Element Is Visible		${TableRows}
 	&{holidayListPune}=		Create Dictionary
 	${holidayListPune}=		Get All Holiday Details From All Pages			${holidayListPune}			${branchPune}
@@ -45,20 +53,20 @@ Select Pune Branch From Holiday List And Get All Holiday Details
 	Set Suite Variable		${holidayListPune}	
 	
 Find Date And Description Which Are Given To Ahmedabad Branch 
-	&{AhmedabadBrachHolidays}=		Create Dictionary
+	&{AhmedabadBranchHolidays}=		Create Dictionary
 	${dateKeys}=		Get Dictionary Keys			${holidayListAhmedabad}
 	: For		${dateValue}		IN		@{dateKeys}
 	\	${descriptionValue}=	Get From Dictionary			${holidayListAhmedabad}		${dateValue}
-	\	Set To Dictionary		${AhmedabadBrachHolidays}		${dateValue}=${descriptionValue["Description"]}
-	Log			${AhmedabadBrachHolidays}
+	\	Set To Dictionary		${AhmedabadBranchHolidays}		${dateValue}=${descriptionValue["Description"]}
+	Log			${AhmedabadBranchHolidays}
 	
 Find Holiday Lists Which Are Given To Pune Branch Only
-	&{PuneBrachHolidays}=		Create Dictionary
+	&{PuneBranchHolidays}=		Create Dictionary
 	${dateKeys}=		Get Dictionary Keys			${holidayListPune}
 	: For		${dateValue}		IN		@{dateKeys}
 	\	${descriptionValue}=	Get From Dictionary			${holidayListPune}		${dateValue}
-	\	Set To Dictionary		${PuneBrachHolidays}		${dateValue}=${descriptionValue["Description"]}
-	Log			${PuneBrachHolidays}
+	\	Set To Dictionary		${PuneBranchHolidays}		${dateValue}=${descriptionValue["Description"]}
+	Log			${PuneBranchHolidays}
 	
 *** Keywords ***
 Get All Holiday Details From All Pages

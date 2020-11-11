@@ -88,10 +88,8 @@ ${SelectMonth}=			css=#month_id
 ${SubmitButton}=		css=button[id*='submit']
 ${TotalPagePagination}=			css=ul[class*="pagination"]>li
 ${SinglePagePagination}=		css=ul[class*="pagination"]>li:nth-child(1)>a  
-${SelectYearOption2020}=			css=option[value="2020"] 
-${SelectYearOption2019}=			css=option[value="2019"]
-${SelectBranchOptionAhmedabad}=			css=option[value="Ahmedabad"]
-${SelectBranchOptionPune}=			css=option[value="Pune"]
+${SelectYearOption}=			css=option[value="YEAR"] 
+${SelectBranchOption}=			css=option[value="BRANCH"]
 ${SelectMonthOption}=			css=option[value="October"]
 ${BranchNameTableCell}=			css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Brabch Name"]
 ${DateTableCell}=				css=table[class*="table"] tbody tr:nth-child(ROW) td[data-title="Date"]

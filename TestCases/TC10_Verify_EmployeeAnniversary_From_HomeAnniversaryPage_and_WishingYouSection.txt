@@ -4,7 +4,8 @@ Library		String
 Library		Collections	
 Library		../Variables/WebElement.py
 Resource	../Common/Common_Variables.txt
-Resource	../Common/Keywords.txt	
+Resource	../Common/Keywords.txt
+Resource	../Common/Labels.txt	
 Suite Setup		Open Intranet and Login
 Suite Teardown	Logout And Close Browser
 
@@ -13,8 +14,7 @@ Select Anniversary From Home Menu
 	Wait Until Element Is Visible		${HomeButton}		timeout=15s
 	
 Verify Employee's Anniversary From Wishing You Section
-	${Greeting}=		Set Variable		Happy Marriage Anniversary
-	${employeeListFromHomePage}=		Get Employee Name From Wishing You Section		${Greeting}
+	${employeeListFromHomePage}=		Get Employee Name From Wishing You Section		${GreetingAnniversary}
 	Set Suite Variable		${employeeListFromHomePage}
 	
 Verify Employee's Anniversary Coming In Today	
@@ -28,7 +28,7 @@ Verify Employee's Anniversary Coming In Today
 	Set Suite Variable		${employeeList}
 	Log		${employeeList}
 	
-Verify Employee's Anniversary from Wishing You Section And 
+Verify Employee's Anniversary from Wishing You Section And Anniversary Mune
 	Sort List			${employeeListFromHomePage}
 	Sort List			${employeeList}
 	Should Be Equal			${employeeListFromHomePage}			${employeeList}	

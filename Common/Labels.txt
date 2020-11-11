@@ -1,0 +1,4 @@
+*** Variables ***
+
+${GreetingAnniversary}=		Happy Marriage Anniversary
+${GreetingBirthday}=		Happy Birthday
