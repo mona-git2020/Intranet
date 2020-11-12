@@ -131,25 +131,8 @@ ${PasswordToolTip}=		css=div[class*="18 alert-validate"]
 ${UsernameRequiredAlertMessage}=		css=div[class*="alert-validate"] input[name="username"]
 ${PasswordRequiredAlertMessage}=		css=div[class*="alert-validate"] input[name="password"]
 ${ActiveCountryLink}=		css=a[class*="country_active"]
-${CountryINDIALink}=			css=a[id="INDIA"]
-${CountryUSALink}=			css=a[id="USA"]
-${CountryUKLink}=			css=a[id="UK"]
-${CountryJAPANLink}=		css=a[id="JAPAN"]
-${CountryCANADALink}=		css=a[id="CANADA"]
-${CityAhmedabadLink}=		Link=Ahmedabad
-${CityBangaloreLink}=		Link=Bangalore
-${CityNoidaLink}=		Link=Noida
-${CityPuneLink}=		Link=Pune
-${CityCaliforniaLink}=		Link=California
-${CityIllinoisLink}=		Link=Illinois
-${CityIowaLink}=		Link=Iowa
-${CityMassachusettsLink}=		Link=Massachusetts
-${CityNorthCarolinaLink}=		Link=North Carolina
-${CityOhioLink}=		Link=Ohio
-${CityTexasLink}=		Link=Texas
-${CityLondonLink}=		Link=London
-${CityTokyoLink}=		Link=Tokyo
-${CityTorontoLink}=		Link=Toronto
+${CountryLink}=		Link=COUNTRY
+${CityLink}=		Link=CITY
 ${OfficeAddressContainers}=		css=div[id="container"]>div
 ${TotalOfficeAddressesOfIndia}=		div[id="container"]>div[class*="INDIA"]
 ${IconsSection}=		css=ul[class="tabs nobullet"]
