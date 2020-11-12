@@ -5,6 +5,7 @@ Library		Collections
 Library		../Variables/WebElement.py
 Resource	../Common/Common_Variables.txt
 Resource	../Common/Keywords.txt	
+Resource	../Common/Labels.txt
 Suite Setup		Open Intranet and Login
 Suite Teardown	Logout And Close Browser
 
@@ -12,15 +13,15 @@ Suite Teardown	Logout And Close Browser
 Get Data From Wishing You... Section
 	Wait Until Element Is Visible		${HomeButton}
 	@{WishingYouSectionData}=		Create List
-	${totalBirthdayList}=		Get Element Count		${BirthdayEmployeeList}
+	${totalBirthdayList}=		Get Element Count		${WishingYouSectionEmployeeList}
 	: FOR		${numBirthday}		IN RANGE		1		${totalBirthdayList}+1
 	\	${num}=		Convert To String		${numBirthday}
-	\	Wait Until Element Is Visible		${BirthdayEmployeeName}		timeout=3s	
-	\	${name}=		Get Text		${BirthdayEmployeeName}		
+	\	Wait Until Element Is Visible		${WishingYouSectionEmployeeName}		timeout=3s	
+	\	${name}=		Get Text		${WishingYouSectionEmployeeName}		
 	\	Append To List			${WishingYouSectionData}			${name}
 	\	Log		${WishingYouSectionData}	
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${name}
-	\	Wait Until Element Does Not Contain		${BirthdayEmployeeName}		${name}		timeout=15s
+	\	Wait Until Element Does Not Contain		${WishingYouSectionEmployeeName}		${name}		timeout=15s
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME
 	Set Suite Variable		@{WishingYouSectionData}
 	
@@ -28,12 +29,12 @@ Click On Particular Employee Name And Verify It Is Birthday or Anniversary From 
 	${date}=		Get Time		day	
 	: FOR		${name}		IN		@{WishingYouSectionData}
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${name}
-	\	Wait Until Element Contains			${BirthdayEmployeeName}		${name}		timeout=60s
-	\	${statusWishes}=		Run Keyword And Return Status		Element Should Contain		${WishingYouSectionWishes}		Birthday
+	\	Wait Until Element Contains			${WishingYouSectionEmployeeName}		${name}		timeout=120s
+	\	${statusWishes}=		Run Keyword And Return Status		Element Should Contain		${WishingYouSectionWishes}		${GreetingBirthday}
 	\	Click Element			${EmployeeNameLink}
 	\	Wait Until Element Is Visible		${EmployeeBirthdayDateBox}		timeout=15s
 	\	${status}=		Run Keyword And Return Status		Element Should Contain			${EmployeeBirthdayDateBox}		Birthdate
 	\	Run Keyword If		${status}==True and ${statusWishes}==True			Element Should Contain			${EmployeeBirthdayDateBox}			${date}
 	\	Go Back
-	\	Wait Until Element Is Visible		${BirthdayEmployeeName}	
+	\	Wait Until Element Is Visible		${WishingYouSectionEmployeeName}	
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME
