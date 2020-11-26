@@ -60,7 +60,7 @@ Find Date And Description Which Are Given To Ahmedabad Branch
 	\	Set To Dictionary		${AhmedabadBranchHolidays}		${dateValue}=${descriptionValue["Description"]}
 	Log			${AhmedabadBranchHolidays}
 	
-Find Holiday Lists Which Are Given To Pune Branch Only
+Find Date And Description Which Are Given To Pune Branch
 	&{PuneBranchHolidays}=		Create Dictionary
 	${dateKeys}=		Get Dictionary Keys			${holidayListPune}
 	: For		${dateValue}		IN		@{dateKeys}

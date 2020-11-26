@@ -23,7 +23,7 @@ Verify Employee's Anniversary Coming In Today
 	${buttonValue}=		Get Text		${AnniversaryButtonMenu}
 	Set Suite Variable		${buttonValue}
 	Click Element	${AnniversaryButtonMenu}
-	Wait Until Element Is Visible		${TableRows}
+	Wait Until Element Is Visible		${TableRows}		timeout=15s
 	${employeeList}=		Verify Today's Date And Get Employee's Name From All Pages		${AnniversaryDateCell}
 	Set Suite Variable		${employeeList}
 	Log		${employeeList}

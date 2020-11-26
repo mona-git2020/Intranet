@@ -10,11 +10,11 @@ Suite Teardown	Logout And Close Browser
 
 *** Test Cases ***
 Open Office Address From Home Menu 
-	Wait Until Element Is Visible		${HomeButton}
+	Wait Until Element Is Visible		${HomeButton}		timeout=10s
 	Mouse Over		${HomeButton}
-	Wait Until Element Is Visible		${OfficeAddressMenu}
+	Wait Until Element Is Visible		${OfficeAddressMenu}		timeout=10s
 	Click Element	${OfficeAddressMenu}
-	Wait Until Element Is Visible		${CountryINDIALink}
+	Wait Until Element Is Visible		${OfficeAddressMainContainer}		timeout=10s
 	
 Select First Country And City From Office Address 
 	&{countryOfficeDetails}=		Create Dictionary

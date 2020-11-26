@@ -7,6 +7,7 @@ Open Intranet and Login
 	Input Text			${EnterUsername}		${username}
 	Input Text			${EnterPassword}		${password}	
 	Click Element		${LoginButton}
+	Wait Until Element Is Visible		${HomeButton}	timeout=10s
 	
 Logout And Close Browser
 	Wait Until Element Is Visible		${LogoutLink}	timeout=10s
@@ -82,13 +83,14 @@ Get Employee Name From Wishing You Section
 	${totalBirthdayList}=		Get Element Count		${WishingYouSectionEmployeeList}
 	: FOR		${numBirthday}		IN RANGE		1		${totalBirthdayList}+1
 	\	${num}=		Convert To String		${numBirthday}
-	\	Wait Until Element Is Visible		${WishingYouSectionEmployeeName}		timeout=3s	
+	\	Wait Until Element Is Visible		${WishingYouSectionEmployeeName}		timeout=25s	
 	\	${name}=		Get Text		${WishingYouSectionEmployeeName}	
 	\	${status}=		Run Keyword And Return Status		Element Should Contain		${WishingYouSection}		${Greeting}
-	\	Run Keyword If		${status}==True			Append To List			${WishingYouSectionData}			${name}
+	\	${statusList}=		Run Keyword And Return Status		List Should Contain Value		${WishingYouSectionData}		${name}
+	\	Run Keyword If		${status}==True and ${statusList}==False		Append To List			${WishingYouSectionData}			${name}
 	\	Log		${WishingYouSectionData}	
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${name}
-	\	Wait Until Element Does Not Contain		${WishingYouSectionEmployeeName}		${name}		timeout=15s
+	\	Wait Until Element Does Not Contain		${WishingYouSectionEmployeeName}		${name}		timeout=25s
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME
 	Return From Keyword			${WishingYouSectionData}
 	
