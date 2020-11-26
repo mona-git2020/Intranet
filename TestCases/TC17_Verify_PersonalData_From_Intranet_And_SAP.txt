@@ -36,23 +36,25 @@ Go To Personal Profile, Get All Personal Data
 	Log		${personalDataIntranet}
 	Set Suite Variable		${personalDataIntranet}
 	
-Go To SAP From Intranet Home Page, Get All Personal Data
-	${personalDataSAP}=		Create Dictionary
+Go To SAP From Intranet Home Page And Login Into SAP
 	Click Element		${HomeButton}
 	Wait Until Element Is Visible		${SAPButton}
 	Click Element		${SAPButton}
 	Switch Window		NEW
-	Wait Until Element Is Visible		${EnterSAPUserId}
-	Input Text		${EnterSAPUserId}		${sapUserId}
-	Input Text		${EnterSAPPassword}		${sapPassword}
+	Wait Until Element Is Visible		${SAPUserIDInput}
+	Input Text		${SAPUserIDInput}		${sapUserId}
+	Input Text		${SAPPasswordInput}		${sapPassword}
 	Wait Until Element Is Visible		${SAPLogonButton}
 	Click Element		${SAPLogonButton}
 	${statusContinueButton}=		Run Keyword And Return Status		Wait Until Element Is Visible		${SAPQueryContinueButton}
 	Run Keyword If		${statusContinueButton}==True		Click Element		${SAPQueryContinueButton}
-	Wait Until Element Is Visible		${SAPEmployeeSelfServiceButton}		timeout=10s
-	Click Element		${SAPEmployeeSelfServiceButton}
-	Wait Until Element Is Visible		${SAPPersonalInformation}		timeout=10s
-	Click Element		${SAPPersonalInformation}
+	Wait Until Element Is Visible		${SAPEmployeeSelfServiceLink}		timeout=10s
+	
+Get All Personal Data From SAP	
+	${personalDataSAP}=		Create Dictionary
+	Click Element		${SAPEmployeeSelfServiceLink}
+	Wait Until Element Is Visible		${SAPPersonalInformationLink}		timeout=10s
+	Click Element		${SAPPersonalInformationLink}
 	Select Frame			${SAPIFramePersonalData}
 	Wait Until Element Is Visible		${SAPFirstEmployeeName}		timeout=10s
 	${nameSAP}=		Get Text		${SAPFirstEmployeeName}
@@ -62,7 +64,7 @@ Go To SAP From Intranet Home Page, Get All Personal Data
 	Set To Dictionary		${personalDataSAP}		${personalData[2]}		${emailIdSAP}	
 	${mobileNoSAP}=		Get Text		${SAPMobileNumber}
 	Set To Dictionary		${personalDataSAP}		${personalData[3]}		${mobileNoSAP}	
-	${birthdateSAP}=		Get Text		${SAPBarthDate}
+	${birthdateSAP}=		Get Text		${SAPBirthDate}
 	${date}=		Split String		${birthdateSAP}			.
 	${birthdateSAP}=		Run Keyword If		'${date[1]}'=='10'		Set Variable		${date[0]}${SPACE}October	
 	Set To Dictionary		${personalDataSAP}		${personalData[4]}		${birthdateSAP}	
@@ -73,6 +75,7 @@ Go To SAP From Intranet Home Page, Get All Personal Data
 	Set To Dictionary		${personalDataSAP}		${personalData[5]}		${joiningDateSAP}
 	Log			${personalDataSAP}
 	Set Suite Variable		${personalDataSAP}
+	${dataPersonal}=		Get Text		${PersonalDataTextLocator} 	
 	Unselect Frame
 	Click Element		${SAPLogoffLink}
 	Select Frame			${SAPIFrameLogoffDialogBox}
@@ -80,6 +83,6 @@ Go To SAP From Intranet Home Page, Get All Personal Data
 	Click Element		${SAPLogoffOKButton}
 	Unselect Frame
 	Switch Window		MAIN
-	
+		
 Verify Personal Data From Intranet And SAP
-	${status}=		Run Keyword And Return Status		Should Be Equal			${personalDataIntranet}		${personalDataSAP}
+	Should Be Equal			${personalDataIntranet}		${personalDataSAP}

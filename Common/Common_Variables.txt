@@ -133,7 +133,7 @@ ${PasswordToolTip}=		css=div[class*="18 alert-validate"]
 ${UsernameRequiredAlertMessage}=		css=div[class*="alert-validate"] input[name="username"]
 ${PasswordRequiredAlertMessage}=		css=div[class*="alert-validate"] input[name="password"]
 ${ActiveCountryLink}=		css=a[class*="country_active"]
-${CountryINDIALink}=		Link=INDIA
+${OfficeAddressMainContainer}=		css=div[id="container"]
 ${CountryLink}=		Link=COUNTRY
 ${CityLink}=		Link=CITY
 ${OfficeAddressContainers}=		css=div[id="container"]>div
@@ -179,19 +179,19 @@ ${HRExcelLogo}=		css=div[id*='div']>div:nth-child(NUM) img[src*="xls.png"]
 ${HRWordLogo}=		css=div[id*='div']>div:nth-child(NUM) img[src*="docx.png"]
 ${HRFormsFileFrame}=		css=div[id*='div']>div:nth-child(NUM)
 ${SAPButton}=		css=img[title="SAP"]
-${EnterSAPUserId}=		css=input[id="sap-user"]
-${EnterSAPPassword}=		css=input[id="sap-password"]
-${SAPLogonButton}=		css=div[id="LOGON_BUTTON-cnt"]
+${SAPUserIDInput}=		css=input[id="sap-user"]
+${SAPPasswordInput}=		css=input[id="sap-password"]
+${SAPLogonButton}=		css=div[id="LOGON_BUTTON"]
 ${SAPQueryContinueButton}=		css=div[id="SESSION_QUERY_CONTINUE_BUTTON"]
 ${MyInformationLink}=		css=a[href*="myinfo"]
 ${SAPFirstEmployeeName}=		css=td[id="WD0101"] span[id="WD0102"]
-${SAPBarthDate}=		css=td[id="WD0106"]
+${SAPBirthDate}=		css=td[id="WD0106"]
 ${SAPGender}=		css=td[id="WD10E2"] input[id="WD02D7"]
 ${SAPMobileNumber}=		css=div[id="WDB9"]
 ${SAPEmailID}=		css=td[id="WDA5"]
 ${SAPJoiningDate}=		css=span[title="Valid From"]
-${SAPEmployeeSelfServiceButton}=		css=a[data-unique-id*="ESS_NEW:3"]
-${SAPPersonalInformation}=		css=a[data-unique-id*="ESS_NEW:69"]
+${SAPEmployeeSelfServiceLink}=		css=div[role="navigation"] ul[id="ul_nav_1"]>li:nth-child(2)
+${SAPPersonalInformationLink}=		css=div[role="navigation"] ul[id="ul_nav_2"]>li:nth-child(1)
 ${SAPLogoffLink}=		css=li[id="logoff_link"]
 ${SAPLogoffOKButton}=		css=li[id="buttonOK1"]
 ${SAPIFramePersonalData}=		css=iframe[id*="iFrameId"]

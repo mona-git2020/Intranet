@@ -15,4 +15,3 @@ cityNameList = ["Ahmedabad", "California", "Toronto"]
 locationNameList = ["Aryan Park", "Chicago", "San Jose", "Bangalore"]
 
 personalData = ["Employee Name", "Gender", "Email Address", "Mobile Number", "Birthdate", "Joining Date" ]
- 
