@@ -28,13 +28,15 @@ Get Data From Wishing You... Section
 Click On Particular Employee Name And Verify It Is Birthday or Anniversary From Employee Details
 	${date}=		Get Time		day	
 	: FOR		${name}		IN		@{WishingYouSectionData}
-	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${name}
+	\	${EmployeeNameLinkNew}=		Replace String		${EmployeeNameLink}		NAME	${name}
+	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME
 	\	Wait Until Element Contains			${WishingYouSectionEmployeeName}		${name}		timeout=120s
-	\	${statusWishes}=		Run Keyword And Return Status		Element Should Contain		${WishingYouSectionWishes}		${GreetingBirthday}
-	\	Click Element			${EmployeeNameLink}
+	\	${statusAnniversaryWishes}=		Run Keyword And Return Status		Element Should Contain		${WishingYouSectionWishes}		${GreetingAnniversary}
+	\	Continue For Loop If		${statusAnniversaryWishes}==True
+	\	${statusBirthdayWishes}=		Run Keyword And Return Status		Element Should Contain		${WishingYouSectionWishes}		${GreetingBirthday}
+	\	Click Element			${EmployeeNameLinkNew}
 	\	Wait Until Element Is Visible		${EmployeeBirthdayDateBox}		timeout=15s
 	\	${status}=		Run Keyword And Return Status		Element Should Contain			${EmployeeBirthdayDateBox}		Birthdate
-	\	Run Keyword If		${status}==True and ${statusWishes}==True			Element Should Contain			${EmployeeBirthdayDateBox}			${date}
+	\	Run Keyword If		${status}==True and ${statusBirthdayWishes}==True			Element Should Contain			${EmployeeBirthdayDateBox}			${date}
 	\	Go Back
 	\	Wait Until Element Is Visible		${WishingYouSectionEmployeeName}	
-	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME

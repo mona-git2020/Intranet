@@ -34,15 +34,18 @@ Select Date From Options And Verify
 	\	${dateValue}=		Get Value		${SelectDateOption}
 	\	Click Element		${SelectDateOption}
 	\	Wait Until Element Is Visible		${TableRows}		timeout=10s
-	\	${ColumnValues}=	Get Data From Columns		${TableCell}
 	\	${SelectDateOption}=		Replace String			${SelectDateOption}		${num}		NUM	
-	\	Continue For Loop If		${ColumnValues}==[]
-	\	Verify All Date According to Selected Date			${ColumnValues}			${dateValue}
+	\	Verify All Date According to Selected Date			${TableCell}			${dateValue}
+	\	${SelectDateOption}=		Replace String			${SelectDateOption}		${num}		NUM	
 	
 Verify All Date According to Selected Date
-	[Arguments]			${DateList}			${dateValue}
-	: For	${item}		IN		@{DateList}	
-	\	Should Be Equal			${item}		${dateValue}
+	[Arguments]			${TableCell}		${dateValue}
+	${totalRows}=		Get Element Count		${TableRows}
+	: For		${row}		IN RANGE		2		${totalRows}+1
+	\	${rowNum}=		Convert To String		${row}
+	\	${TableCell}=		Replace String			${TableCell}		ROW		${rowNum}
+	\	Element Should Contain		${TableCell}		${dateValue}
+	\	${TableCell}=		Replace String			${TableCell}		${rowNum}		ROW		count=1	
 
 Verify Today's Date And Get Employee's Name From All Pages
 	[Arguments]		${DateCell}

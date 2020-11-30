@@ -75,7 +75,6 @@ Get All Personal Data From SAP
 	Set To Dictionary		${personalDataSAP}		${personalData[5]}		${joiningDateSAP}
 	Log			${personalDataSAP}
 	Set Suite Variable		${personalDataSAP}
-	${dataPersonal}=		Get Text		${PersonalDataTextLocator} 	
 	Unselect Frame
 	Click Element		${SAPLogoffLink}
 	Select Frame			${SAPIFrameLogoffDialogBox}

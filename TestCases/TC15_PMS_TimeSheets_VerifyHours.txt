@@ -13,8 +13,8 @@ Go To TimeSheets From PMS
 	Wait Until Element Is Visible		${PMSImageButton}			timeout=10s
 	Click Element		${PMSImageButton}
 	Switch Window		NEW
-	${statusPickAccount}=		Run Keyword And Return Status		Wait Until Element Is Visible		${PickAnAccountFromList}		timeout=25s
 	${PickAnAccountFromList}=		Replace String		${PickAnAccountFromList}		ARROWEMAILID			${arrowEmailId}	
+	${statusPickAccount}=		Run Keyword And Return Status		Wait Until Element Is Visible		${PickAnAccountFromList}		timeout=25s
 	Run Keyword If		${statusPickAccount}==True		Click Element		${PickAnAccountFromList}
 	${statusSignIn}=		Run Keyword And Return Status		Wait Until Element Is Visible		${ArrowEnterEmailID}		timeout=25s
 	Run Keyword If		${statusSignIn}==True		Run Keywords		Input Text		${ArrowEnterEmailID}		${arrowEmailId}		AND		
@@ -22,7 +22,7 @@ Go To TimeSheets From PMS
 	...			Arrow SignIn	
 	${statusPMS}=		Run Keyword And Return Status		Wait Until Element Is Visible		${TimeSheetButton}		timeout=25s
 	Click Element		${TimeSheetButton}
-	Wait Until Element Is Visible		${TimeSheetTableRows}		timeout=10s
+	Wait Until Element Is Visible		${TimeSheetTableRows}		timeout=20s
 	${currentMonth}=		Get Time		month
 	Set Suite Variable		${currentMonth}
 	
@@ -30,34 +30,34 @@ Select Last Month From Date Range
 	Click Element		${DateRangeFieldset}
 	Click Element		${DateRangeDropdown}
 	Click Element		${DateRangeLastMonthOption}
-	Wait Until Element Is Visible		${TimeSheetTableRows}
+	Wait Until Element Is Visible		${TimeSheetTableRows}		timeout=10s
 	${lastMonth}=		Evaluate		${currentMonth}-1
 	${lastMonth}=		Convert To String		${lastMonth}
-	Wait Until Element Contains			${TimeSheetDateColumn}		${lastMonth}
+	Wait Until Element Contains			${TimeSheetDateColumn}		${lastMonth}		timeout=10s
 	Get Hours From All Weeks And Verify
 
 Select Current Month From Date Range
 	Click Element		${DateRangeFieldset}
 	Click Element		${DateRangeDropdown}
 	Click Element		${DateRangeCurrentMonthOption}
-	Wait Until Element Is Visible		${TimeSheetTableRows}
-	Wait Until Element Contains			${TimeSheetDateColumn}		${currentMonth}
+	Wait Until Element Is Visible		${TimeSheetTableRows}		timeout=10s
+	Wait Until Element Contains			${TimeSheetDateColumn}		${currentMonth}		timeout=10s
 	Get Hours From All Weeks And Verify
 
 Select Last Week From Date Range
 	Click Element		${DateRangeFieldset}
 	Click Element		${DateRangeDropdown}
 	Click Element		${DateRangeLastWeekOption}
-	Wait Until Element Is Visible		${TimeSheetTableRows}
-	Wait Until Element Contains			${TimeSheetDateColumn}		${currentMonth}
+	Wait Until Element Is Visible		${TimeSheetTableRows}		timeout=10s
+	Wait Until Element Contains			${TimeSheetDateColumn}		${currentMonth}		timeout=10s
 	Get Hours From All Weeks And Verify
 
 Select Current Week From Date Range
 	Click Element		${DateRangeFieldset}
 	Click Element		${DateRangeDropdown}
 	Click Element		${DateRangeCurrentWeekOption}
-	Wait Until Element Is Visible		${TimeSheetTableRows}
-	Wait Until Element Contains			${TimeSheetDateColumn}		${currentMonth}
+	Wait Until Element Is Visible		${TimeSheetTableRows}		timeout=10s
+	Wait Until Element Contains			${TimeSheetDateColumn}		${currentMonth}		timeout=10s
 	Get Hours From All Weeks And Verify
 	Switch Window		MAIN
 

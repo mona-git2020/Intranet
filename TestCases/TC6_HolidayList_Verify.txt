@@ -72,25 +72,21 @@ Find Date And Description Which Are Given To Pune Branch
 Get All Holiday Details From All Pages
 	[Arguments]			${holidayListDetails}		${branchValue}
 	${rowNum}=		Set Variable		1
-	${totalRowNum}=		Set Variable		11
 	${totalPagesNumber}=		Get Element Count		${TotalPages}
 	: FOR		${page}		IN RANGE		1	${totalPagesNumber}+1
 	\	${pageNumber}=		Convert To String		${page}
 	\	${SinglePage}=		Replace String			${SinglePage}		NUM			${pageNumber}
 	\	Click Element		${SinglePage} 
 	\	Element Should Contain		${ActivePage}		${pageNumber}
-	\	${totalRowsNum}=		Get Element Count		${TableRows}
-	\	log		${rowNum}
-	\	${holidayListDetails}=		Get All Holiday Details From All Columns		${holidayListDetails}		${branchValue}		${rowNum}		${totalRowNum}
+	\	${holidayListDetails}=		Get All Holiday Details From All Columns		${holidayListDetails}		${branchValue}		${rowNum}		#${totalRowNum}
 	\	${rowNum}=		Evaluate		${rowNum}+10
-	\	${totalRowNum}=		Evaluate		${totalRowNum}+10
 	\	${SinglePage}=		Replace String			${SinglePage}		${pageNumber}			NUM
 	Return From Keyword			${holidayListDetails}
 
 Get All Holiday Details From All Columns		
-	[Arguments]		${holidayListDetails}		${branchValue}		${rowNum}		${totalRowNum}
+	[Arguments]		${holidayListDetails}		${branchValue}		${rowNum}		#${totalRowNum}
 	${totalRowsNum}=		Get Element Count		${TableRows}
-	: FOR		${row}		IN RANGE		${rowNum}		${totalRowNum}
+	: FOR		${row}		IN RANGE		${rowNum}		${totalRowsNum}
 	\	${rowNumber}=		Convert To String		${row}
 	\	${BranchNameTableCell}=		Replace String			${BranchNameTableCell}		ROW			${rowNumber}
 	\	${DateTableCell}=			Replace String			${DateTableCell}		ROW			${rowNumber}
