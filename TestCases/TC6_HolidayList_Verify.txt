@@ -77,7 +77,7 @@ Get All Holiday Details From All Pages
 	\	${pageNumber}=		Convert To String		${page}
 	\	${SinglePage}=		Replace String			${SinglePage}		NUM			${pageNumber}
 	\	Click Element		${SinglePage} 
-	\	Element Should Contain		${ActivePage}		${pageNumber}
+	\	Wait Until Element Contains		${ActivePage}		${pageNumber}		timeout=10s
 	\	${holidayListDetails}=		Get All Holiday Details From All Columns		${holidayListDetails}		${branchValue}		${rowNum}		#${totalRowNum}
 	\	${rowNum}=		Evaluate		${rowNum}+10
 	\	${SinglePage}=		Replace String			${SinglePage}		${pageNumber}			NUM

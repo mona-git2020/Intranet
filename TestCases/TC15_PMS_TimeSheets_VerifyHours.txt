@@ -6,7 +6,7 @@ Library		../Variables/WebElement.py
 Resource	../Common/Common_Variables.txt
 Resource	../Common/Keywords.txt	
 Suite Setup		Open Intranet and Login
-Suite Teardown	Logout And Close Browser
+Suite Teardown	Run Keywords		Click Element		${PMSLogout}		AND		Close Browser
 
 *** Test Cases ***
 Go To TimeSheets From PMS
@@ -28,38 +28,41 @@ Go To TimeSheets From PMS
 	
 Select Last Month From Date Range
 	Click Element		${DateRangeFieldset}
-	Click Element		${DateRangeDropdown}
-	Click Element		${DateRangeLastMonthOption}
-	Wait Until Element Is Visible		${TimeSheetTableRows}		timeout=10s
+	${optionValue}=		Get Text		${DateRangeLastMonthOption}
+	Select From List By Label		${DateRangeDropdown}		${optionValue}
+	${status}=		Run Keyword And Return Status		Wait Until Element Is Not Visible		${TimeSheetTableRows}		timeout=5s
+	Click Element		${DateRangeFieldset}
+	Wait Until Element Contains			${DateRangeSelectedOption}		${optionValue}		timeout=15s
 	${lastMonth}=		Evaluate		${currentMonth}-1
 	${lastMonth}=		Convert To String		${lastMonth}
-	Wait Until Element Contains			${TimeSheetDateColumn}		${lastMonth}		timeout=10s
 	Get Hours From All Weeks And Verify
 
 Select Current Month From Date Range
 	Click Element		${DateRangeFieldset}
-	Click Element		${DateRangeDropdown}
-	Click Element		${DateRangeCurrentMonthOption}
-	Wait Until Element Is Visible		${TimeSheetTableRows}		timeout=10s
-	Wait Until Element Contains			${TimeSheetDateColumn}		${currentMonth}		timeout=10s
+	${optionValue}=		Get Text		${DateRangeCurrentMonthOption}
+	Select From List By Label		${DateRangeDropdown}		${optionValue}
+	${status}=		Run Keyword And Return Status		Wait Until Element Is Not Visible		${TimeSheetTableRows}		timeout=5s
+	Click Element		${DateRangeFieldset}
+	Wait Until Element Contains			${DateRangeSelectedOption}		${optionValue}		timeout=15s
 	Get Hours From All Weeks And Verify
 
 Select Last Week From Date Range
 	Click Element		${DateRangeFieldset}
-	Click Element		${DateRangeDropdown}
-	Click Element		${DateRangeLastWeekOption}
-	Wait Until Element Is Visible		${TimeSheetTableRows}		timeout=10s
-	Wait Until Element Contains			${TimeSheetDateColumn}		${currentMonth}		timeout=10s
+	${optionValue}=		Get Text		${DateRangeLastWeekOption}
+	Select From List By Label		${DateRangeDropdown}		${optionValue}
+	${status}=		Run Keyword And Return Status		Wait Until Element Is Not Visible		${TimeSheetTableRows}		timeout=5s
+	Click Element		${DateRangeFieldset}
+	Wait Until Element Contains			${DateRangeSelectedOption}		${optionValue}		timeout=15s
 	Get Hours From All Weeks And Verify
 
 Select Current Week From Date Range
 	Click Element		${DateRangeFieldset}
-	Click Element		${DateRangeDropdown}
-	Click Element		${DateRangeCurrentWeekOption}
-	Wait Until Element Is Visible		${TimeSheetTableRows}		timeout=10s
-	Wait Until Element Contains			${TimeSheetDateColumn}		${currentMonth}		timeout=10s
+	${optionValue}=		Get Text		${DateRangeCurrentWeekOption}
+	Select From List By Label		${DateRangeDropdown}		${optionValue}
+	${status}=		Run Keyword And Return Status		Wait Until Element Is Not Visible		${TimeSheetTableRows}		timeout=5s
+	Click Element		${DateRangeFieldset}
+	Wait Until Element Contains			${DateRangeSelectedOption}		${optionValue}		timeout=15s
 	Get Hours From All Weeks And Verify
-	Switch Window		MAIN
 
 *** Keywords ***
 Arrow SignIn

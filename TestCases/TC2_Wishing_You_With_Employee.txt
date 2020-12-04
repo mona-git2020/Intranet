@@ -15,14 +15,14 @@ Get Data From Wishing You... Section
 	@{WishingYouSectionData}=		Create List
 	${totalBirthdayList}=		Get Element Count		${WishingYouSectionEmployeeList}
 	: FOR		${numBirthday}		IN RANGE		1		${totalBirthdayList}+1
-	\	${num}=		Convert To String		${numBirthday}
 	\	Wait Until Element Is Visible		${WishingYouSectionEmployeeName}		timeout=3s	
-	\	${name}=		Get Text		${WishingYouSectionEmployeeName}		
+	\	${nameEmp}=		Get Text		${WishingYouSectionEmployeeName}
+	\	${name}=		Run Keyword If		'${nameEmp}'==''		Run Keywords		Wait Until Element Does Not Contain		${WishingYouSectionEmployeeName}		${name}		timeout=25s		AND		Get Text		${WishingYouSectionEmployeeName}
+	\	...		ELSE		Set Variable		${nameEmp}
 	\	Append To List			${WishingYouSectionData}			${name}
 	\	Log		${WishingYouSectionData}	
-	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${name}
+	\	Click Element		${WishingYouSectionNextButton}
 	\	Wait Until Element Does Not Contain		${WishingYouSectionEmployeeName}		${name}		timeout=15s
-	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME
 	Set Suite Variable		@{WishingYouSectionData}
 	
 Click On Particular Employee Name And Verify It Is Birthday or Anniversary From Employee Details
@@ -31,12 +31,12 @@ Click On Particular Employee Name And Verify It Is Birthday or Anniversary From 
 	\	${EmployeeNameLinkNew}=		Replace String		${EmployeeNameLink}		NAME	${name}
 	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME
 	\	Wait Until Element Contains			${WishingYouSectionEmployeeName}		${name}		timeout=120s
-	\	${statusAnniversaryWishes}=		Run Keyword And Return Status		Element Should Contain		${WishingYouSectionWishes}		${GreetingAnniversary}
-	\	Continue For Loop If		${statusAnniversaryWishes}==True
 	\	${statusBirthdayWishes}=		Run Keyword And Return Status		Element Should Contain		${WishingYouSectionWishes}		${GreetingBirthday}
+	\	Continue For Loop If		${statusBirthdayWishes}==False
 	\	Click Element			${EmployeeNameLinkNew}
 	\	Wait Until Element Is Visible		${EmployeeBirthdayDateBox}		timeout=15s
 	\	${status}=		Run Keyword And Return Status		Element Should Contain			${EmployeeBirthdayDateBox}		Birthdate
 	\	Run Keyword If		${status}==True and ${statusBirthdayWishes}==True			Element Should Contain			${EmployeeBirthdayDateBox}			${date}
 	\	Go Back
 	\	Wait Until Element Is Visible		${WishingYouSectionEmployeeName}	
+	\	Click Element		${WishingYouSectionNextButton}

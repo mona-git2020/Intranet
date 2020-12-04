@@ -27,16 +27,13 @@ Select Date From Options And Verify
 	Wait Until Element Is Visible		${SelectDateOptionSuggestions}
 	${totalSuggestions}=		Get Element Count		${SelectDateOptionSuggestions}
 	: FOR		${suggestionNum}		IN RANGE		1		${totalSuggestions}
-	\	Click Element		${SearchDateList}
-	\	Wait Until Element Is Visible		${SelectDateOptionSuggestions}
 	\	${num}=		Convert To String		${suggestionNum}
 	\	${SelectDateOption}=		Replace String			${SelectDateOption}		NUM			${num}
 	\	${dateValue}=		Get Value		${SelectDateOption}
-	\	Click Element		${SelectDateOption}
-	\	Wait Until Element Is Visible		${TableRows}		timeout=10s
+	\	Select From List By Value		${SearchDateList}		${dateValue}
+	\	${status}=		Run Keyword And Return Status		Wait Until Element Contains			${AnniversaryTableFirstRowColumn}		${dateValue}		timeout=5s
 	\	${SelectDateOption}=		Replace String			${SelectDateOption}		${num}		NUM	
 	\	Verify All Date According to Selected Date			${TableCell}			${dateValue}
-	\	${SelectDateOption}=		Replace String			${SelectDateOption}		${num}		NUM	
 	
 Verify All Date According to Selected Date
 	[Arguments]			${TableCell}		${dateValue}
@@ -50,13 +47,9 @@ Verify All Date According to Selected Date
 Verify Today's Date And Get Employee's Name From All Pages
 	[Arguments]		${DateCell}
 	${currentDate}=		Get Time		day
-	Click Element		${SearchDateList}
-	Wait Until Element Is Visible		${SelectDateOptionSuggestions}
-	${num}=		Convert To String		${currentDate}
-	${SelectDateOption}=		Replace String			${SelectDateOption}		NUM			${num}
-	${dateValue}=		Get Value		${SelectDateOption}
-	Click Element		${SelectDateOption}
-	Wait Until Element Is Visible		${TableRows}
+	Select From List By Value		${SearchDateList}		${currentDate}
+	${status}=		Run Keyword And Return Status		Wait Until Element Contains			${AnniversaryTableFirstRowColumn}		${currentDate}		timeout=5s
+	Wait Until Element Is Visible		${TableRows}		timeout=10s
 	@{employeeList}=		Create List
 	: FOR		${page}		IN RANGE		1		5
 	\	${employeeList}=		Verify Today's Date And Get Employee's Name		${employeeList}		${DateCell}			${currentDate}
@@ -84,17 +77,17 @@ Get Employee Name From Wishing You Section
 	Wait Until Element Is Visible		${WishingYouSection}		timeout=15s
 	@{WishingYouSectionData}=		Create List
 	${totalBirthdayList}=		Get Element Count		${WishingYouSectionEmployeeList}
+	${totalBirthdayList}=		Evaluate		${totalBirthdayList}*2
 	: FOR		${numBirthday}		IN RANGE		1		${totalBirthdayList}+1
-	\	${num}=		Convert To String		${numBirthday}
 	\	Wait Until Element Is Visible		${WishingYouSectionEmployeeName}		timeout=25s	
-	\	${name}=		Get Text		${WishingYouSectionEmployeeName}	
-	\	${status}=		Run Keyword And Return Status		Element Should Contain		${WishingYouSection}		${Greeting}
-	\	${statusList}=		Run Keyword And Return Status		List Should Contain Value		${WishingYouSectionData}		${name}
+	\	${name}=		Get Text		${WishingYouSectionEmployeeName}
+	\	${greetings}=		Get Text		${WishingYouSectionWishes}
+	\	${status}=		Run Keyword And Return Status		Should Be Equal		${greetings}		${Greeting}			
+	\	Continue For Loop If		'${name}'==''		
+	\	${statusList}=		Run Keyword And Return Status		List Should Contain Value		${WishingYouSectionData}		${name} 
 	\	Run Keyword If		${status}==True and ${statusList}==False		Append To List			${WishingYouSectionData}			${name}
 	\	Log		${WishingYouSectionData}	
-	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		NAME	${name}
 	\	Wait Until Element Does Not Contain		${WishingYouSectionEmployeeName}		${name}		timeout=25s
-	\	${EmployeeNameLink}=		Replace String		${EmployeeNameLink}		${name}		NAME
 	Return From Keyword			${WishingYouSectionData}
 	
 Verify All Columns Data From Employee Details For All Rows

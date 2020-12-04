@@ -58,6 +58,7 @@ ${NewEmployeeNameColumn}=		css=tr td[data-title="Name"]
 ${NextButtonLink}=		Link=Next >>
 ${WishingYouSectionEmployeeList}=		css=ul[class*="bday"]>li
 ${WishingYouSection}=			css=div[class="card"]:nth-child(3)
+${WishingYouSectionNextButton}=		css=div[class="card"]:nth-child(3) a[class="next"]
 ${WishingYouSectionEmployeeName}=		css=ul[class*="bday"]>li:nth-child(1) div[class="usr-name"]
 ${WishingYouSectionWishes}=		css=ul[class*="bday"]>li:nth-child(1) div[class="occ-ttl"]
 ${BirthdayEmployeePhoto}=		css=ul[class*='demo'] li:nth-child(NUM) tr:nth-child(2) td:nth-child(2) span
@@ -83,6 +84,7 @@ ${SelectDateOptionSuggestions}=		css=select[class*="input-small"] option
 ${SelectDateOption}=			css=select[class*="input-small"] option[value*="NUM"]				
 ${AnniversaryDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Anniversary"]
 ${BirthDayDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Birthdate"]
+${AnniversaryTableFirstRowColumn}		css=tr:nth-child(2) td[data-title="Anniversary"]
 ${NameDateCell}=			css=table tbody tr:nth-child(ROW) td[data-title="Name"]
 ${SelectYear}=			css=#holiday_year
 ${SelectBranch}=		css=#branch_id
@@ -158,12 +160,14 @@ ${DateRangeLastMonthOption}=		css=option[value="last_month"]
 ${DateRangeCurrentMonthOption}=		css=option[value="current_month"]
 ${DateRangeLastWeekOption}=		css=option[value="last_week"]
 ${DateRangeCurrentWeekOption}=		css=option[value="current_week"]
+${DateRangeSelectedOption}=		css=select[id="period"] option[selected="selected"]
 ${TimeSheetTableRows}=			css=table tr[class*="time-entry"]
 ${TimeSheetDateColumn}=			css=table tr[class*="time-entry"]:nth-child(1) td[class="start_date"]
 ${TimeSheetHoursColumn}=		css=table tr[class*="time-entry"]:nth-child(ROW) td:nth-child(4) span[class*="int"]
 ${TimeSheetEditButton}=			css=table tr[class*="time-entry"]:nth-child(ROW) img[src*="edit"]	
 ${WeeklyTotalHours}=			css=span[id="total_hours"]
 ${BackLink}=		Link=Back	
+${PMSLogout}=		css=a[class="logout"]
 ${PickAnAccountFromList}=		css=div[data-test-id="ARROWEMAILID"]
 ${ArrowEmailTitle}=		css=div[class="tile-container"]
 ${ArrowEnterEmailID}=		css=input[type="email"]

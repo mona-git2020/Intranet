@@ -54,7 +54,6 @@ Get All Personal Data From SAP
 	${personalDataSAP}=		Create Dictionary
 	Click Element		${SAPEmployeeSelfServiceLink}
 	Wait Until Element Is Visible		${SAPPersonalInformationLink}		timeout=10s
-	Click Element		${SAPPersonalInformationLink}
 	Select Frame			${SAPIFramePersonalData}
 	Wait Until Element Is Visible		${SAPFirstEmployeeName}		timeout=10s
 	${nameSAP}=		Get Text		${SAPFirstEmployeeName}
