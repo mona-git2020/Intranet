@@ -1,0 +1,40 @@
+*** Settings ***
+Library		Selenium2Library	
+Library		String
+Library		Collections	
+Library		OperatingSystem
+Library		../Variables/WebElement.py
+Library		../Variables/GetPDFFileData.py
+Resource	../Common/Common_Variables.txt
+Resource	../Common/Keywords.txt	
+Suite Setup		Open Intranet and Login
+Suite Teardown		Logout And Close Browser
+
+*** Test Cases ***
+Go To Employee Information From Workday Link
+	Wait Until Element Is Visible		${WorkdayInformationLink}
+	Click Element		${WorkdayInformationLink}
+	Select Window		NEW
+	Wait Until Element Is Visible		${WorkdayIndiaEmployeeFolder}
+	Click Element		${WorkdayIndiaEmployeeFolder}
+	Wait Until Element Is Visible		${WorkdayIndiaEmployeeDownloadButtton}
+
+Download The PDF File And Get The File Content
+	${fileTitle}=		Get Text	${WorkdayEmployeeInformationPDFFileName}
+	${fileName}=		Replace String		${fileTitle}		${SPACE}	_
+	Click Element		${WorkdayIndiaEmployeeDownloadButtton}
+	Wait Until Created		${downloadDir}${/}${fileName}.pdf		timeout=90s	
+	File Should Exist		${downloadDir}${/}${fileName}.pdf
+	${fileContentPDFFile}=		get_PDFfile_data		${downloadDir}${/}${fileName}.pdf
+	${fileContentPDFFile}=		Remove String		${fileContentPDFFile}		\n
+	${fileContentPDFFile}=		Remove String		${fileContentPDFFile}		4 Return to Top 
+	Set Suite Variable		${fileContentPDFFile}
+	Select Window		MAIN
+	
+Create New File And Store File Data Of PDF
+	create_new_file		${CURDIR}${/}FileContentOfPDF.txt		 ${fileContentPDFFile}
+	${fileContentOfNewFile}=		get_data_from_new_file		${CURDIR}${/}FileContentOfPDF.txt	
+	Set Suite Variable		${fileContentOfNewFile}
+	
+Verify PDF File Content With New File Content	
+	Should Be Equal			${fileContentPDFFile}		${fileContentOfNewFile}

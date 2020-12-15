@@ -201,3 +201,7 @@ ${SAPLogoffOKButton}=		css=li[id="buttonOK1"]
 ${SAPIFramePersonalData}=		css=iframe[id*="iFrameId"]
 ${SAPIFrameLogoffDialogBox}=		css=iframe[id="iframeLogoffMsgDialog"]
 ${SaveAndBackButton}=		css=img[src*="SaveAndBack.png"]+span
+${WorkdayInformationLink}=		css=a[href*="documents/arrow"] 
+${WorkdayIndiaEmployeeFolder}=		css=a[id='2']
+${WorkdayIndiaEmployeeDownloadButtton}=		css=a[id*="click"]>span[class="plus_show2"]
+${WorkdayEmployeeInformationPDFFileName}=		css=a[class="show_detail"]
