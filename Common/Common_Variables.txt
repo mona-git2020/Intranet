@@ -203,5 +203,16 @@ ${SAPIFrameLogoffDialogBox}=		css=iframe[id="iframeLogoffMsgDialog"]
 ${SaveAndBackButton}=		css=img[src*="SaveAndBack.png"]+span
 ${WorkdayInformationLink}=		css=a[href*="documents/arrow"] 
 ${WorkdayIndiaEmployeeFolder}=		css=a[id='2']
-${WorkdayIndiaEmployeeDownloadButtton}=		css=a[id*="click"]>span[class="plus_show2"]
+${WorkdayIndiaEmployeeDownloadBtn}=		css=a[id*="click"]>span[class="plus_show2"]
 ${WorkdayEmployeeInformationPDFFileName}=		css=a[class="show_detail"]
+${ServiceDeskBtnLink}=		css=a>img[alt="ServiceDesk"]
+${KnowledgebaseLink}=		Link=Knowledge Base
+${TableRows}=		css=div[class*="row"]
+${TitleLink}=		css=div[class*="row"]:nth-child(NUM) tr td:nth-child(4) a[id*="title"]
+${AttachmentsTable}=		css=table[id="Attachments_ecTable"]
+${AttachmentsDownloadBtn}=		css=table[id="attachments_summary"] tr:nth-child(2) a[id*="downAttach"]
+${AttachmentFileName}=		css=table[id="attachments_summary"] tr:nth-child(2) td:nth-child(1)
+${ServiceDeskUsernameInput}=		css=input[name="USER"]
+${ServiceDeskPasswordInput}=		css=input[name="PASSWORD"]
+${ServiceDeskLoginBtn}=		css=input[value="Login"]
+${BackBtn}=		css=a[title*="Back"]

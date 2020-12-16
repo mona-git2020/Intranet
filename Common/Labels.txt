@@ -2,3 +2,4 @@
 
 ${GreetingAnniversary}=		Happy Marriage Anniversary!!!
 ${GreetingBirthday}=		Happy Birthday!!!
+${TopicName}=		Workday Absence Management  		# FAQs

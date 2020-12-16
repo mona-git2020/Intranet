@@ -1,12 +1,5 @@
 *** Settings ***
-Library		Selenium2Library	
-Library		String
-Library		Collections	
-Library		OperatingSystem
-Library		../Variables/WebElement.py
-Library		../Variables/GetPDFFileData.py
-Resource	../Common/Common_Variables.txt
-Resource	../Common/Keywords.txt	
+Resource		../Resources/ResourceFile.txt
 Suite Setup		Open Intranet and Login
 Suite Teardown		Logout And Close Browser
 
@@ -17,23 +10,26 @@ Go To Employee Information From Workday Link
 	Select Window		NEW
 	Wait Until Element Is Visible		${WorkdayIndiaEmployeeFolder}
 	Click Element		${WorkdayIndiaEmployeeFolder}
-	Wait Until Element Is Visible		${WorkdayIndiaEmployeeDownloadButtton}
+	Wait Until Element Is Visible		${WorkdayIndiaEmployeeDownloadBtn}
 
 Download The PDF File And Get The File Content
 	${fileTitle}=		Get Text	${WorkdayEmployeeInformationPDFFileName}
 	${fileName}=		Replace String		${fileTitle}		${SPACE}	_
-	Click Element		${WorkdayIndiaEmployeeDownloadButtton}
+	Click Element		${WorkdayIndiaEmployeeDownloadBtn}
 	Wait Until Created		${downloadDir}${/}${fileName}.pdf		timeout=90s	
 	File Should Exist		${downloadDir}${/}${fileName}.pdf
-	${fileContentPDFFile}=		get_PDFfile_data		${downloadDir}${/}${fileName}.pdf
-	${fileContentPDFFile}=		Remove String		${fileContentPDFFile}		\n
-	${fileContentPDFFile}=		Remove String		${fileContentPDFFile}		4 Return to Top 
+	${fileContentPDF}=		Get PDFfile Data		${downloadDir}${/}${fileName}.pdf
+	${totalLength}=		Get Length		${fileContentPDF}
+	: FOR		${num}		IN RANGE		1		${totalLength}
+	\	${fileContentPDFFile}=		Remove String		${fileContentPDF[${num}]}		\n
+	\	${fileContentPDFFile}=		Remove String		${fileContentPDFFile}		Return to Top
+	\	${status}=		Run Keyword And Return Status		Should Contain		${fileContentPDFFile}		${TopicName}	
+	\	Run Keyword If		${status}==True		Exit For Loop
 	Set Suite Variable		${fileContentPDFFile}
 	Select Window		MAIN
 	
 Create New File And Store File Data Of PDF
-	create_new_file		${CURDIR}${/}FileContentOfPDF.txt		 ${fileContentPDFFile}
-	${fileContentOfNewFile}=		get_data_from_new_file		${CURDIR}${/}FileContentOfPDF.txt	
+	${fileContentOfNewFile}=		Create New File		${CURDIR}${/}FileContentOfPDF.txt		 ${fileContentPDFFile}
 	Set Suite Variable		${fileContentOfNewFile}
 	
 Verify PDF File Content With New File Content	

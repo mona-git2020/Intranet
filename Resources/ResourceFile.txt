@@ -1,0 +1,11 @@
+*** Settings ***
+Library		Selenium2Library	
+Library		String
+Library		Collections	
+Library		OperatingSystem
+Library		../Variables/WebElement.py
+Library		../Variables/Create_Read_File.py
+Library		../Variables/GetDataFromDifferentFileTypes.py
+Resource	../Common/Common_Variables.txt
+Resource	../Common/Keywords.txt	
+Resource	../Common/Labels.txt
