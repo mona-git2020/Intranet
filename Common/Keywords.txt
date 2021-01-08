@@ -1,6 +1,6 @@
 *** Keywords ***
 Open Intranet and Login	
-	${profile}=		create_ff_profile		${downloadDir}
+	${profile}=		Create FF Profile		${downloadDir}
 	Open Browser	${urlOfIntranet}		${browser}		remote_url=${remote_url}		ff_profile_dir=${profile}
 	Maximize Browser Window
 	Wait Until Element Is Visible		${EnterUsername}
@@ -15,6 +15,13 @@ Logout And Close Browser
 	Wait Until Element Is Visible		${EnterUsername}	timeout=10s
 	Close Browser
 		
+Arrow SignIn
+	Wait Until Element Is Visible		${ArrowEnterPassword}
+	Input Text		${ArrowEnterPassword}		${arrowPassword}
+	Click Element		${SignInButton}			
+	Wait Until Page Contains		Stay signed in?		timeout=20s		
+	Click Element		${SignInNextButton}	
+			
 Verify All Dates Of This Month
 	[Arguments]			${DateValue}
 	: For		${item}		IN		@{DateValue}

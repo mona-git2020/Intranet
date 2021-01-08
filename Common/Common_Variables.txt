@@ -73,6 +73,7 @@ ${EmployeeDepartmentBox}=		css=li[class*="emp_dept"]
 ${EmployeeRANameBox}=			css=li[class*="emp_ra"]
 ${EmployeeEmailIdBox}=			css=li[class*="emp_addr"]
 ${EmployeeGenderBox}=			css=li[class*="emp_gender"]
+${EmployeeArrowIDBox}=			css=li[class*="emp_arrow"]
 ${EmployeeJoiningDateBox}=			css=li[class*="emp_joining"]
 ${EmployeeBirthdayTilte}=		css=div.span4:nth-child(4) dl dt
 ${EmployeeBirthday}=			css=div.span4:nth-child(4) dl dd:nth-child(2)
@@ -216,3 +217,13 @@ ${ServiceDeskUsernameInput}=		css=input[name="USER"]
 ${ServiceDeskPasswordInput}=		css=input[name="PASSWORD"]
 ${ServiceDeskLoginBtn}=		css=input[value="Login"]
 ${BackBtn}=		css=a[title*="Back"]
+${WorkdayImage}= 		css=img[src*="workday"]
+${WorkdayPersonalInformationBtn}=		css=li[class*="workdayHome"]>div[title="Personal Information"]
+${WorkdayAboutMeLink}=		css=a[title="About Me"]
+${WorkdayEmployeeName}=		css=span[data-automation-id*="Name"]
+${WorkdayEmployeeDesignation}=		css=div[data-automation-id*="Subtitle"]
+${WorkdayEmployeeID}=		css=div[title="Employee ID"]+div
+${WorkdayRAName}=		css=div[title="Manager"]+div
+${WorkdayPersonalLink}=		css=li[role="listitem"] span[title="Personal"]
+${WorkdayEmployeeGender}=		css=div[data-automation-id="fieldSetContent"]>div>ul>li:nth-child(1) div[data-automation-id="decorationWrapper"]
+${WorkdayEmployeeBirthdate}=		css=div[data-automation-id="fieldSetContent"]>div>ul>li:nth-child(2) div[data-automation-id="decorationWrapper"] 

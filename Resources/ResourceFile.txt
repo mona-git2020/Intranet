@@ -3,6 +3,7 @@ Library		Selenium2Library
 Library		String
 Library		Collections	
 Library		OperatingSystem
+Library		DateTime
 Library		../Variables/WebElement.py
 Library		../Variables/Create_Read_File.py
 Library		../Variables/GetDataFromDifferentFileTypes.py

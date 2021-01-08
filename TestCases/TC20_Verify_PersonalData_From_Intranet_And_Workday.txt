@@ -1,0 +1,82 @@
+*** Settings ***
+Resource		../Resources/ResourceFile.txt
+Suite Setup		Open Intranet and Login
+Suite Teardown	Logout And Close Browser
+
+*** Test Cases ***
+Go To Personal Profile, Get All Personal Data
+	Click Element		${MyInformationLink}
+	Wait Until Element Is Visible		${EmployeeNameBox}
+	${personalDataIntranet}=		Create Dictionary
+	${employeeName}=		Get Text		${EmployeeNameBox}
+	${name}=		Remove String		${employeeName}		${personalDataWorkday[0]}
+	Set To Dictionary		${personalDataIntranet}		${personalDataWorkday[0]}		${name}
+	${arrowId}=		Get Text		${EmployeeArrowIDBox}
+	${arrowId}=		Remove String		${arrowId}		${personalDataWorkday[1]}
+	${arrowId}=		Strip String		${SPACE}${arrowId}${SPACE}
+	Set To Dictionary		${personalDataIntranet}		${personalDataWorkday[1]}		${arrowId}
+	${designation}=		Get Text		${EmployeeDesignationBox}
+	${designation}=		Remove String		${designation}		${personalDataWorkday[2]}
+	${designation}=		Strip String		${SPACE}${designation}${SPACE}
+	Set To Dictionary		${personalDataIntranet}		${personalDataWorkday[2]}		${designation}
+	${reportingAuthority}=		Get Text		${EmployeeRANameBox}
+	${reportingAuthority}=		Remove String		${reportingAuthority}		${personalDataWorkday[3]}
+	${reportingAuthority}=		Strip String		${SPACE}${reportingAuthority}${SPACE}
+	${reportingAuthority}=		Split String		${reportingAuthority}		(		
+	Set To Dictionary		${personalDataIntranet}		${personalDataWorkday[3]}		${reportingAuthority[0]}
+	${gender}=		Get Text		${EmployeeGenderBox}
+	${gender}=		Remove String		${gender}		${personalDataWorkday[4]}
+	${gender}=		Strip String		${SPACE}${gender}${SPACE}
+	Set To Dictionary		${personalDataIntranet}		${personalDataWorkday[4]}		${gender}
+	${birthDate}=		Get Text		${EmployeeBirthdayDateBox}
+	${birthDate}=		Remove String		${birthDate}		${personalDataWorkday[5]}
+	${birthDate}=		Strip String		${SPACE}${birthDate}${SPACE}
+	Set To Dictionary		${personalDataIntranet}		${personalDataWorkday[5]}		${birthDate}
+	Log		${personalDataIntranet}
+	Set Suite Variable		${personalDataIntranet}
+	
+Go To Workday From Intranet Home Page And Login Into Workday
+	Click Element		${HomeButton}
+	Wait Until Element Is Visible		${WorkdayImage}
+	Click Element		${WorkdayImage}
+	Switch Window		NEW
+	${PickAnAccountFromList}=		Replace String		${PickAnAccountFromList}		ARROWEMAILID			${arrowEmailId}	
+	${statusPickAccount}=		Run Keyword And Return Status		Wait Until Element Is Visible		${PickAnAccountFromList}		timeout=25s
+	Run Keyword If		${statusPickAccount}==True		Click Element		${PickAnAccountFromList}
+	${statusSignIn}=		Run Keyword And Return Status		Wait Until Element Is Visible		${ArrowEnterEmailID}		timeout=25s
+	Run Keyword If		${statusSignIn}==True		Run Keywords		Input Text		${ArrowEnterEmailID}		${arrowEmailId}		AND		
+	...			Click Element		${SignInNextButton}		AND	
+	...			Arrow SignIn	
+
+Get All Personal Data From Workday
+	${personalDataWorkdayDict}=		Create Dictionary
+	Wait Until Element Is Visible		${WorkdayPersonalInformationBtn}
+	Click Element		${WorkdayPersonalInformationBtn}
+	Wait Until Element Is Visible		${WorkdayAboutMeLink}
+	Click Element		${WorkdayAboutMeLink}
+	Wait Until Element Is Visible		${WorkdayPersonalLink}
+	${nameWorkday}=		Get Text		${WorkdayEmployeeName}
+	${nameWorkday}=		Split String	${nameWorkday}		(	
+	Set To Dictionary		${personalDataWorkdayDict}		${personalDataWorkday[0]}		${nameWorkday[0]}	
+	${arrowIdWorkday}=			Get Text		${WorkdayEmployeeID}
+	${arrowIdWorkday}=			Strip String		${SPACE}${arrowIdWorkday}${SPACE}		
+	Set To Dictionary		${personalDataWorkdayDict}		${personalDataWorkday[1]}		${arrowIdWorkday}	
+	${designationWorkday}=		Get Text		${WorkdayEmployeeDesignation}
+	Set To Dictionary		${personalDataWorkdayDict}		${personalDataWorkday[2]}		${designationWorkday}	
+	${raNameWorkday}=		Get Text		${WorkdayRAName}
+	${raNameWorkday}=		Split String	${raNameWorkday}		(	
+	Set To Dictionary		${personalDataWorkdayDict}		${personalDataWorkday[3]}		${raNameWorkday[0]}	
+	Click Element		${WorkdayPersonalLink}
+	Wait Until Element Is Visible		${WorkdayEmployeeGender}
+	${genderWorkday}=		Get Text		${WorkdayEmployeeGender}
+	Set To Dictionary		${personalDataWorkdayDict}		${personalDataWorkday[4]}		${genderWorkday}	
+	${birthdateWorkday}=		Get Text		${WorkdayEmployeeBirthdate}
+	${birthDateWorkday}=		Convert Date		${birthdateWorkday}		date_format=%m/%d/%Y		result_format=%d %B
+	Set To Dictionary		${personalDataWorkdayDict}		${personalDataWorkday[5]}		${birthdateWorkday}	
+	Set Suite Variable		${personalDataWorkdayDict}
+	Switch Window		MAIN
+	
+Verify Personal Data From Intranet And SAP
+	Should Be Equal			${personalDataIntranet}		${personalDataWorkdayDict}
+	
+	
